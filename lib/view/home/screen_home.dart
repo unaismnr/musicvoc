@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:musicvoc/core/const_colors.dart';
+import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/view/home/widgets/all_songs.dart';
 import 'package:musicvoc/view/home/widgets/favorites.dart';
 import 'package:musicvoc/view/home/widgets/playlist.dart';
@@ -18,7 +19,7 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 5, vsync: this);
     super.initState();
   }
 
@@ -31,23 +32,29 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
           TabBar(
             padding: const EdgeInsets.all(10),
             controller: _tabController,
-            // isScrollable: true,
-            // tabAlignment: TabAlignment.start,
-            labelColor: Colors.white,
-            labelPadding: EdgeInsets.symmetric(horizontal: 12.w),
+            isScrollable: true,
+            tabAlignment: TabAlignment.start,
+            labelColor: Theme.of(context).iconTheme.color,
+            labelPadding: const EdgeInsets.symmetric(horizontal: 3),
             overlayColor: const MaterialStatePropertyAll(
               Colors.transparent,
             ),
-            unselectedLabelColor: Colors.black,
+            unselectedLabelColor: Theme.of(context).iconTheme.color,
+            dividerColor: Colors.transparent,
             indicator: BoxDecoration(
-              gradient: const LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [
-                  kMainSkyBlueColor,
-                  kMainBlueColor,
-                ],
+              border: Border.all(
+                color: kMainBlueColor,
+                width: 1.5,
               ),
+
+              // gradient: const LinearGradient(
+              //   begin: Alignment.centerLeft,
+              //   end: Alignment.centerRight,
+              //   colors: [
+              //     kMainSkyBlueColor,
+              //     kMainBlueColor,
+              //   ],
+              // ),
               borderRadius: BorderRadius.circular(20),
             ),
             labelStyle: const TextStyle(
@@ -56,20 +63,35 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
             ),
             tabs: [
               customTabBar('Songs'),
-              customTabBar('Recent'),
+              customTabBar('Recently Played'),
+              customTabBar('Mostly Played'),
               customTabBar('Favorites'),
               customTabBar('Playlist'),
             ],
           ),
           Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: const [
-                AllSongs(),
-                RecentlyPlayed(),
-                Favorites(),
-                Playlist(),
-              ],
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20)),
+                  color: Theme.of(context).colorScheme.background,
+                ),
+                child: TabBarView(
+                  controller: _tabController,
+                  children: const [
+                    AllSongs(),
+                    RecentlyPlayed(),
+                    Favorites(),
+                    Playlist(),
+                    Playlist(),
+                  ],
+                ),
+              ),
             ),
           )
         ],
@@ -79,10 +101,11 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
 
   AppBar homeAppBar() {
     return AppBar(
-      // backgroundColor: Theme.of(context).colorScheme.background,
+      iconTheme: Theme.of(context).iconTheme,
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       elevation: 0,
       title: Image.asset(
-        'assets/musicvoclogo.png',
+        kAppLogo,
         height: 50.h,
         width: 130.w,
       ),
@@ -93,7 +116,6 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
           icon: const Icon(
             Icons.search,
             size: 28,
-            color: Colors.black,
           ),
         ),
         IconButton(
@@ -101,7 +123,6 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
           icon: const Icon(
             Icons.settings,
             size: 28,
-            color: Colors.black,
           ),
         ),
         SizedBox(width: 5.w)
@@ -111,38 +132,15 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
 
   Widget customTabBar(String title) {
     return SizedBox(
-      height: 35.h,
-      // width: ,
-      child: Center(
-        child: Tab(
-          text: title,
+      height: 28.h,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Center(
+          child: Tab(
+            text: title,
+          ),
         ),
       ),
     );
   }
 }
-
-
-
-// class CustomTabBar extends StatelessWidget {
-//   final String title;
-//   const CustomTabBar({super.key, required this.title});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return SizedBox(
-//       height: 35.h,
-//       width: 85.w,
-//       child: Center(
-//         child: Text(
-//           title,
-//           style: const TextStyle(
-//             fontSize: 16,
-//             fontWeight: FontWeight.bold,
-//             color: Colors.white,
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

@@ -17,8 +17,8 @@ class MyApp extends StatelessWidget {
       designSize: const Size(360, 690),
       child: MaterialApp(
         title: 'MusicVoc',
-        theme: lightMode,
-        darkTheme: darkMode,
+        theme: MyThemes.lightMode,
+        darkTheme: MyThemes.darkMode,
         home: const ScreenHome(),
       ),
     );
