@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:musicvoc/core/theme.dart';
 
 import 'view/home/screen_home.dart';
 
@@ -11,15 +13,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'MusicVoc',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
-        ),
-        useMaterial3: true,
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      child: MaterialApp(
+        title: 'MusicVoc',
+        theme: lightMode,
+        darkTheme: darkMode,
+        home: const ScreenHome(),
       ),
-      home: const ScreenHome(),
     );
   }
 }
