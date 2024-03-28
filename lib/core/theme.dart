@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:musicvoc/core/const_colors.dart';
 
 class MyThemes {
@@ -7,32 +8,50 @@ class MyThemes {
     brightness: Brightness.light,
     colorScheme: ColorScheme.light(
       background: Colors.grey.shade200,
-      primary: Colors.grey.shade300,
+      primary: Colors.grey.shade800,
       secondary: Colors.grey.shade300,
     ),
     iconTheme: const IconThemeData(
       color: kBlackColor,
-      opacity: 1,
     ),
     appBarTheme: AppBarTheme(
       color: Colors.grey.shade100,
     ),
+    textTheme: GoogleFonts.latoTextTheme().apply().copyWith(
+          bodyLarge: const TextStyle(
+            color: Colors.black,
+          ),
+          bodyMedium: const TextStyle(
+            color: Colors.grey,
+          ),
+        ),
+    fontFamily: GoogleFonts.lato().fontFamily,
+    cardColor: Colors.grey,
   );
 
   static final darkMode = ThemeData(
     scaffoldBackgroundColor: Colors.grey.shade900,
     brightness: Brightness.dark,
     colorScheme: ColorScheme.dark(
-      background: Colors.grey.withOpacity(0.1),
-      primary: Colors.grey.shade800,
+      background: Colors.grey.withOpacity(0.2),
+      primary: Colors.grey,
       secondary: Colors.grey.shade800,
     ),
     iconTheme: const IconThemeData(
       color: kWhiteColor,
-      opacity: 1,
     ),
     appBarTheme: AppBarTheme(
       color: Colors.grey.shade900,
     ),
+    textTheme: GoogleFonts.latoTextTheme().apply().copyWith(
+          bodyLarge: const TextStyle(
+            color: Colors.white,
+          ),
+          bodyMedium: const TextStyle(
+            color: Colors.grey,
+          ),
+        ),
+    fontFamily: GoogleFonts.lato().fontFamily,
+    cardColor: Colors.black,
   );
 }

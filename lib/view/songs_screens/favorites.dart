@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:musicvoc/view/home/widgets/songs_list_widget.dart';
+import 'package:musicvoc/view/common/songs_list_widget.dart';
 
-class AllSongs extends StatelessWidget {
-  const AllSongs({super.key});
+class Favorites extends StatelessWidget {
+  const Favorites({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,6 +11,8 @@ class AllSongs extends StatelessWidget {
       'Movie',
       () {},
       20,
+      () {},
+      true,
     );
   }
 }
