@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:musicvoc/core/theme.dart';
-import 'package:musicvoc/view/playing/screen_playing.dart';
+import 'package:get/get.dart';
 
 import 'view/home/screen_home.dart';
 
@@ -16,11 +16,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(360, 690),
-      child: MaterialApp(
+      child: GetMaterialApp(
         title: 'MusicVoc',
         theme: MyThemes.lightMode,
         darkTheme: MyThemes.darkMode,
-        home: const ScreenPlaying(),
+        home: const ScreenHome(),
         debugShowCheckedModeBanner: false,
       ),
     );

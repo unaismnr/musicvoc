@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:musicvoc/view/home/widgets/songs_list_widget.dart';
+import 'package:musicvoc/view/common/songs_list_widget.dart';
 
 class RecentlyPlayed extends StatelessWidget {
   const RecentlyPlayed({super.key});
@@ -12,6 +12,7 @@ class RecentlyPlayed extends StatelessWidget {
       () {},
       20,
       () {},
+      true,
     );
   }
 }

@@ -8,7 +8,7 @@ class MyThemes {
     brightness: Brightness.light,
     colorScheme: ColorScheme.light(
       background: Colors.grey.shade200,
-      primary: Colors.grey.shade500,
+      primary: Colors.grey.shade800,
       secondary: Colors.grey.shade300,
     ),
     iconTheme: const IconThemeData(
@@ -17,7 +17,7 @@ class MyThemes {
     appBarTheme: AppBarTheme(
       color: Colors.grey.shade100,
     ),
-    textTheme: GoogleFonts.montserratTextTheme().apply().copyWith(
+    textTheme: GoogleFonts.latoTextTheme().apply().copyWith(
           bodyLarge: const TextStyle(
             color: Colors.black,
           ),
@@ -25,14 +25,16 @@ class MyThemes {
             color: Colors.grey,
           ),
         ),
+    fontFamily: GoogleFonts.lato().fontFamily,
+    cardColor: Colors.grey,
   );
 
   static final darkMode = ThemeData(
     scaffoldBackgroundColor: Colors.grey.shade900,
     brightness: Brightness.dark,
     colorScheme: ColorScheme.dark(
-      background: Colors.grey.withOpacity(0.1),
-      primary: Colors.grey.shade800,
+      background: Colors.grey.withOpacity(0.2),
+      primary: Colors.grey,
       secondary: Colors.grey.shade800,
     ),
     iconTheme: const IconThemeData(
@@ -41,7 +43,7 @@ class MyThemes {
     appBarTheme: AppBarTheme(
       color: Colors.grey.shade900,
     ),
-    textTheme: GoogleFonts.montserratTextTheme().apply().copyWith(
+    textTheme: GoogleFonts.latoTextTheme().apply().copyWith(
           bodyLarge: const TextStyle(
             color: Colors.white,
           ),
@@ -49,5 +51,7 @@ class MyThemes {
             color: Colors.grey,
           ),
         ),
+    fontFamily: GoogleFonts.lato().fontFamily,
+    cardColor: Colors.black,
   );
 }

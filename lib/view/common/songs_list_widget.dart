@@ -5,9 +5,10 @@ import 'package:musicvoc/core/const_colors.dart';
 Widget songsListWidget(
   String title,
   String description,
-  VoidCallback moreButtton,
+  VoidCallback butttonOnpPress,
   int itemCount,
   VoidCallback onTap,
+  bool buttonDisplay,
 ) {
   return ListView.separated(
     itemBuilder: (context, index) => ListTile(
@@ -34,12 +35,19 @@ Widget songsListWidget(
           ),
         ],
       ),
-      trailing: IconButton(
-        onPressed: moreButtton,
-        icon: const Icon(
-          Icons.more_vert,
-        ),
-      ),
+      trailing: buttonDisplay == false
+          ? IconButton(
+              onPressed: butttonOnpPress,
+              icon: const Icon(
+                Icons.more_vert,
+              ),
+            )
+          : IconButton(
+              onPressed: butttonOnpPress,
+              icon: const Icon(
+                Icons.delete,
+              ),
+            ),
       onTap: onTap,
     ),
     separatorBuilder: (context, index) => Divider(

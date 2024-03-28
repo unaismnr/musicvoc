@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
-import 'package:musicvoc/view/home/widgets/all_songs.dart';
-import 'package:musicvoc/view/home/widgets/favorites.dart';
-import 'package:musicvoc/view/home/widgets/playlist.dart';
-import 'package:musicvoc/view/home/widgets/recently_played.dart';
+import 'package:musicvoc/view/playlist/playlist.dart';
+import 'package:musicvoc/view/search/screen_search.dart';
+import 'package:musicvoc/view/settings/screen_settings.dart';
+import 'package:musicvoc/view/songs_screens/all_songs.dart';
+import 'package:musicvoc/view/songs_screens/favorites.dart';
+import 'package:musicvoc/view/songs_screens/mostly_played.dart';
+import 'package:musicvoc/view/songs_screens/recently_played.dart';
 
 class ScreenHome extends StatefulWidget {
   const ScreenHome({super.key});
@@ -87,8 +91,8 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
                   children: const [
                     AllSongs(),
                     RecentlyPlayed(),
+                    MostlyPlayed(),
                     Favorites(),
-                    Playlist(),
                     Playlist(),
                   ],
                 ),
@@ -113,14 +117,24 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
       centerTitle: false,
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.to(
+              () => const ScreenSearch(),
+              transition: kNavigationTransition,
+            );
+          },
           icon: Icon(
             Icons.search,
             size: 28.w,
           ),
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.to(
+              () => const ScreenSettings(),
+              transition: kNavigationTransition,
+            );
+          },
           icon: Icon(
             Icons.settings,
             size: 28.w,
