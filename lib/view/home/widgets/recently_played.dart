@@ -11,6 +11,7 @@ class RecentlyPlayed extends StatelessWidget {
       'Movie',
       () {},
       20,
+      () {},
     );
   }
 }

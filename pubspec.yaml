@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter_screenutil: ^5.9.0
   get: ^4.6.6
+  google_fonts: ^6.2.1
+  audio_video_progress_bar: ^2.0.2
 
 dev_dependencies:
   flutter_test:
@@ -79,7 +81,7 @@ flutter:
   # fonts:
   #   - family: Schyler
   #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  #       - assets/
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

@@ -11,6 +11,7 @@ class Playlist extends StatelessWidget {
       'Movie',
       () {},
       20,
+      () {},
     );
   }
 }

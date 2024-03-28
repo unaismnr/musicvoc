@@ -11,6 +11,7 @@ class AllSongs extends StatelessWidget {
       'Movie',
       () {},
       20,
+      () {},
     );
   }
 }

@@ -11,6 +11,7 @@ class MostlyPlayed extends StatelessWidget {
       'Movie',
       () {},
       20,
+      () {},
     );
   }
 }

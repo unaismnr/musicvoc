@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:musicvoc/core/const_colors.dart';
 
 Widget songsListWidget(
-    String title, String description, VoidCallback moreButtton, int itemCount) {
+  String title,
+  String description,
+  VoidCallback moreButtton,
+  int itemCount,
+  VoidCallback onTap,
+) {
   return ListView.separated(
     itemBuilder: (context, index) => ListTile(
-      leading: const CircleAvatar(
-        radius: 20,
+      leading: CircleAvatar(
+        radius: 20.w,
         backgroundColor: kMainBlueColor,
       ),
       title: Column(
@@ -14,15 +20,16 @@ Widget songsListWidget(
         children: [
           Text(
             title,
-            style: const TextStyle(
-              fontSize: 16,
+            style: TextStyle(
+              fontSize: 16.sp,
               fontWeight: FontWeight.w600,
+              color: Theme.of(context).iconTheme.color,
             ),
           ),
           Text(
             description,
-            style: const TextStyle(
-              fontSize: 14,
+            style: TextStyle(
+              fontSize: 14.sp,
             ),
           ),
         ],
@@ -33,9 +40,10 @@ Widget songsListWidget(
           Icons.more_vert,
         ),
       ),
+      onTap: onTap,
     ),
     separatorBuilder: (context, index) => Divider(
-      indent: 72,
+      indent: 72.w,
       color: Theme.of(context).colorScheme.secondary,
     ),
     itemCount: itemCount,

@@ -30,12 +30,12 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
       body: Column(
         children: [
           TabBar(
-            padding: const EdgeInsets.all(10),
+            padding: EdgeInsets.all(10.w),
             controller: _tabController,
             isScrollable: true,
             tabAlignment: TabAlignment.start,
             labelColor: Theme.of(context).iconTheme.color,
-            labelPadding: const EdgeInsets.symmetric(horizontal: 3),
+            labelPadding: EdgeInsets.symmetric(horizontal: 3.w),
             overlayColor: const MaterialStatePropertyAll(
               Colors.transparent,
             ),
@@ -44,7 +44,7 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
             indicator: BoxDecoration(
               border: Border.all(
                 color: kMainBlueColor,
-                width: 1.5,
+                width: 1.5.w,
               ),
 
               // gradient: const LinearGradient(
@@ -55,10 +55,10 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
               //     kMainBlueColor,
               //   ],
               // ),
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(20.w),
             ),
-            labelStyle: const TextStyle(
-              fontSize: 16,
+            labelStyle: TextStyle(
+              fontSize: 16.sp,
               fontWeight: FontWeight.bold,
             ),
             tabs: [
@@ -76,9 +76,10 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20)),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20.w),
+                    topRight: Radius.circular(20.w),
+                  ),
                   color: Theme.of(context).colorScheme.background,
                 ),
                 child: TabBarView(
@@ -113,16 +114,16 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
       actions: [
         IconButton(
           onPressed: () {},
-          icon: const Icon(
+          icon: Icon(
             Icons.search,
-            size: 28,
+            size: 28.w,
           ),
         ),
         IconButton(
           onPressed: () {},
-          icon: const Icon(
+          icon: Icon(
             Icons.settings,
-            size: 28,
+            size: 28.w,
           ),
         ),
         SizedBox(width: 5.w)
@@ -134,7 +135,7 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
     return SizedBox(
       height: 28.h,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
+        padding: EdgeInsets.symmetric(horizontal: 15.w),
         child: Center(
           child: Tab(
             text: title,

@@ -11,6 +11,7 @@ class Favorites extends StatelessWidget {
       'Movie',
       () {},
       20,
+      () {},
     );
   }
 }

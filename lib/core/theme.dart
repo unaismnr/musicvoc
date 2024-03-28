@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:musicvoc/core/const_colors.dart';
 
 class MyThemes {
@@ -7,16 +8,23 @@ class MyThemes {
     brightness: Brightness.light,
     colorScheme: ColorScheme.light(
       background: Colors.grey.shade200,
-      primary: Colors.grey.shade300,
+      primary: Colors.grey.shade500,
       secondary: Colors.grey.shade300,
     ),
     iconTheme: const IconThemeData(
       color: kBlackColor,
-      opacity: 1,
     ),
     appBarTheme: AppBarTheme(
       color: Colors.grey.shade100,
     ),
+    textTheme: GoogleFonts.montserratTextTheme().apply().copyWith(
+          bodyLarge: const TextStyle(
+            color: Colors.black,
+          ),
+          bodyMedium: const TextStyle(
+            color: Colors.grey,
+          ),
+        ),
   );
 
   static final darkMode = ThemeData(
@@ -29,10 +37,17 @@ class MyThemes {
     ),
     iconTheme: const IconThemeData(
       color: kWhiteColor,
-      opacity: 1,
     ),
     appBarTheme: AppBarTheme(
       color: Colors.grey.shade900,
     ),
+    textTheme: GoogleFonts.montserratTextTheme().apply().copyWith(
+          bodyLarge: const TextStyle(
+            color: Colors.white,
+          ),
+          bodyMedium: const TextStyle(
+            color: Colors.grey,
+          ),
+        ),
   );
 }
