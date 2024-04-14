@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:musicvoc/core/theme.dart';
 import 'package:get/get.dart';
 
-import 'view/home/screen_home.dart';
+import 'presentation/home/screen_home.dart';
 
 void main() {
   runApp(const MyApp());
