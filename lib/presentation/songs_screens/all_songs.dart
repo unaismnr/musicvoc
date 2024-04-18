@@ -48,7 +48,7 @@ class _AllSongsState extends State<AllSongs> {
       builder: (context, state) {
         if (state.allSongs.isEmpty) {
           return const Center(
-            child: Text('Waiting'),
+            child: Text('Loading'),
           );
         } else {
           return ListView.separated(

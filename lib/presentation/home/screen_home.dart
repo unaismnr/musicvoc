@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
-import 'package:musicvoc/presentation/now_playing/screen_playing.dart';
+import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
 import 'package:musicvoc/presentation/playlist/playlist.dart';
 import 'package:musicvoc/presentation/search/screen_search.dart';
 import 'package:musicvoc/presentation/settings/screen_settings.dart';
@@ -12,102 +12,86 @@ import 'package:musicvoc/presentation/songs_screens/all_songs.dart';
 import 'package:musicvoc/presentation/songs_screens/favorites.dart';
 import 'package:musicvoc/presentation/songs_screens/mostly_played.dart';
 import 'package:musicvoc/presentation/songs_screens/recently_played.dart';
-import 'package:on_audio_query/on_audio_query.dart';
 
-class ScreenHome extends StatefulWidget {
-  const ScreenHome({super.key});
-
-  @override
-  State<ScreenHome> createState() => _ScreenHomeState();
-}
-
-class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
-  late TabController _tabController;
+class ScreenHome extends StatelessWidget {
+  ScreenHome({super.key});
 
   final player = AssetsAudioPlayer.withId('0');
 
   @override
-  void initState() {
-    _tabController = TabController(length: 5, vsync: this);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    player.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: homeAppBar(),
-      body: Column(
-        children: [
-          TabBar(
-            padding: EdgeInsets.all(10.w),
-            controller: _tabController,
-            isScrollable: true,
-            tabAlignment: TabAlignment.start,
-            labelColor: Theme.of(context).iconTheme.color,
-            labelPadding: EdgeInsets.symmetric(horizontal: 3.w),
-            overlayColor: const MaterialStatePropertyAll(
-              Colors.transparent,
+      appBar: homeAppBar(context),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 15.w),
+        child: Column(
+          children: [
+            kHeight10,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CustomHomeButtons(
+                    onTap: () {
+                      Get.to(
+                        () => const RecentlyPlayed(),
+                        transition: kNavigationTransition,
+                      );
+                    },
+                    title: 'RECENTLY \n PLAYED'),
+                CustomHomeButtons(
+                    onTap: () {
+                      Get.to(
+                        () => const MostlyPlayed(),
+                        transition: kNavigationTransition,
+                      );
+                    },
+                    title: 'MOSTLY \n PLAYED'),
+              ],
             ),
-            unselectedLabelColor: Theme.of(context).iconTheme.color,
-            dividerColor: Colors.transparent,
-            indicator: BoxDecoration(
-              border: Border.all(
-                color: kMainBlueColor,
-                width: 1.5.w,
-              ),
-              borderRadius: BorderRadius.circular(20.w),
+            kHeight10,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CustomHomeButtons(
+                    onTap: () {
+                      Get.to(
+                        () => const Favorites(),
+                        transition: kNavigationTransition,
+                      );
+                    },
+                    title: 'FAVORITES'),
+                CustomHomeButtons(
+                    onTap: () {
+                      Get.to(
+                        () => const PlaylistScreen(),
+                        transition: kNavigationTransition,
+                      );
+                    },
+                    title: 'PLAYLIST'),
+              ],
             ),
-            labelStyle: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.bold,
-            ),
-            tabs: [
-              customTabBar('Songs'),
-              customTabBar('Recently Played'),
-              customTabBar('Mostly Played'),
-              customTabBar('Favorites'),
-              customTabBar('Playlist'),
-            ],
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w),
+            kHeight10,
+            Expanded(
               child: Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20.w),
-                    topRight: Radius.circular(20.w),
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20.w),
+                      topRight: Radius.circular(20.w),
+                    ),
+                    color: Theme.of(context).colorScheme.background,
                   ),
-                  color: Theme.of(context).colorScheme.background,
-                ),
-                child: TabBarView(
-                  controller: _tabController,
-                  children: const [
-                    AllSongs(),
-                    RecentlyPlayed(),
-                    MostlyPlayed(),
-                    Favorites(),
-                    PlaylistScreen(),
-                  ],
-                ),
-              ),
+                  child: const AllSongs()),
             ),
-          ),
-          customBottomMusic(context, player),
-        ],
+          ],
+        ),
       ),
+      bottomSheet: CustomBottomMusic(context: context),
     );
   }
 
-  AppBar homeAppBar() {
+  AppBar homeAppBar(BuildContext context) {
     return AppBar(
       iconTheme: Theme.of(context).iconTheme,
       backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
@@ -163,72 +147,44 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
   }
 }
 
-Widget customBottomMusic(BuildContext context, AssetsAudioPlayer player) {
-  return Container(
-    height: 60,
-    color: Theme.of(context).scaffoldBackgroundColor,
-    child: InkWell(
-      borderRadius: BorderRadius.circular(10),
-      onTap: () =>
-          Get.to(() => ScreenPlaying(), transition: Transition.downToUp),
-      child: PlayerBuilder.current(
-        player: player,
-        builder: (context, playing) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 21),
-                child: QueryArtworkWidget(
-                  id: int.parse(playing.audio.audio.metas.id.toString()),
-                  type: ArtworkType.AUDIO,
-                  nullArtworkWidget: const CircleAvatar(
-                    backgroundColor: kMainBlueColor,
-                    child: Icon(
-                      Icons.music_note,
-                      size: 30,
-                      color: kWhiteColor,
-                    ),
-                  ),
-                  artworkFit: BoxFit.cover,
-                ),
-              ),
-              const SizedBox(width: 10),
-              LimitedBox(
-                maxWidth: 220,
-                child: Text(
-                  playing.audio.audio.metas.title.toString(),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w600,
-                    color: Theme.of(context).textTheme.bodyLarge!.color,
-                  ),
-                ),
-              ),
-              PlayerBuilder.isPlaying(
-                player: player,
-                builder: (context, isPlaying) {
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: IconButton(
-                      onPressed: () {
-                        player.playOrPause();
-                      },
-                      icon: Icon(
-                        isPlaying ? Icons.pause : Icons.play_arrow,
-                        size: 40,
-                        color: kMainBlueColor,
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ],
-          );
-        },
+class CustomHomeButtons extends StatelessWidget {
+  final VoidCallback onTap;
+  final String title;
+
+  const CustomHomeButtons({
+    super.key,
+    required this.onTap,
+    required this.title,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 60.h,
+      width: 160.w,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15.w),
+        color: Theme.of(context).scaffoldBackgroundColor,
+        border: Border.all(
+          color: kMainBlueColor,
+          width: 1.7.w,
+        ),
       ),
-    ),
-  );
+      child: InkWell(
+        borderRadius: BorderRadius.circular(20.w),
+        onTap: onTap,
+        child: Center(
+          child: Text(
+            textAlign: TextAlign.center,
+            title,
+            style: TextStyle(
+              color: Theme.of(context).iconTheme.color,
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }

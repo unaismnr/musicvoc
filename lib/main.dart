@@ -20,13 +20,15 @@ class MyApp extends StatelessWidget {
       designSize: const Size(360, 690),
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => AllSongsBloc()),
+          BlocProvider(
+            create: (context) => AllSongsBloc(),
+          ),
         ],
         child: GetMaterialApp(
           title: 'MusicVoc',
           theme: MyThemes.lightMode,
           darkTheme: MyThemes.darkMode,
-          home: const ScreenHome(),
+          home: ScreenHome(),
           debugShowCheckedModeBanner: false,
         ),
       ),

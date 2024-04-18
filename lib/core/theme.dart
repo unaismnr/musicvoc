@@ -8,14 +8,14 @@ class MyThemes {
     brightness: Brightness.light,
     colorScheme: ColorScheme.light(
       background: Colors.grey.shade200,
-      primary: Colors.grey.shade800,
+      primary: Colors.grey.shade700,
       secondary: Colors.grey.shade300,
     ),
     iconTheme: const IconThemeData(
       color: kBlackColor,
     ),
     appBarTheme: AppBarTheme(
-      color: Colors.grey.shade100,
+      backgroundColor: Colors.grey.shade100,
     ),
     textTheme: GoogleFonts.latoTextTheme().apply().copyWith(
           bodyLarge: const TextStyle(
@@ -41,7 +41,7 @@ class MyThemes {
       color: kWhiteColor,
     ),
     appBarTheme: AppBarTheme(
-      color: Colors.grey.shade900,
+      backgroundColor: Colors.grey.shade900,
     ),
     textTheme: GoogleFonts.latoTextTheme().apply().copyWith(
           bodyLarge: const TextStyle(

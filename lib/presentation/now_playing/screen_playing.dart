@@ -141,7 +141,7 @@ class ScreenPlaying extends StatelessWidget {
                             );
                           }),
                     ),
-                    const SizedBox(height: 50),
+                    kHeight10,
                     //Previous, Next, 10 Back & Forward and Play & Puase
                     PlayerBuilder.isPlaying(
                         player: player,
@@ -201,6 +201,23 @@ class ScreenPlaying extends StatelessWidget {
                             ],
                           );
                         }),
+                    kHeight10,
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10.w),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.repeat, size: 30.sp),
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.shuffle, size: 30.sp),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 );
               }),
