@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/presentation/playlist/playlist_folder_songs.dart';
 
-class Playlist extends StatelessWidget {
-  const Playlist({super.key});
+class PlaylistScreen extends StatelessWidget {
+  const PlaylistScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:musicvoc/presentation/common/songs_list_widget.dart';
-import 'package:musicvoc/presentation/now_playing/screen_playing.dart';
 
 class RecentlyPlayed extends StatelessWidget {
   const RecentlyPlayed({super.key});

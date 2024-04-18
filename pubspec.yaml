@@ -44,6 +44,9 @@ dependencies:
   on_audio_query: ^2.9.0
   bloc: ^8.1.4
   flutter_bloc: ^8.1.5
+  freezed_annotation: ^2.4.1
+  audioplayers: ^6.0.0
+  just_audio: ^0.9.37
 
 dev_dependencies:
   flutter_test:
@@ -55,6 +58,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
+  freezed: ^2.5.2
+  build_runner: ^2.4.9
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

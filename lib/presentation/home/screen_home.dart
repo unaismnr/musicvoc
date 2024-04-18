@@ -1,8 +1,10 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
+import 'package:musicvoc/presentation/now_playing/screen_playing.dart';
 import 'package:musicvoc/presentation/playlist/playlist.dart';
 import 'package:musicvoc/presentation/search/screen_search.dart';
 import 'package:musicvoc/presentation/settings/screen_settings.dart';
@@ -10,6 +12,7 @@ import 'package:musicvoc/presentation/songs_screens/all_songs.dart';
 import 'package:musicvoc/presentation/songs_screens/favorites.dart';
 import 'package:musicvoc/presentation/songs_screens/mostly_played.dart';
 import 'package:musicvoc/presentation/songs_screens/recently_played.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 
 class ScreenHome extends StatefulWidget {
   const ScreenHome({super.key});
@@ -21,10 +24,18 @@ class ScreenHome extends StatefulWidget {
 class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
   late TabController _tabController;
 
+  final player = AssetsAudioPlayer.withId('0');
+
   @override
   void initState() {
     _tabController = TabController(length: 5, vsync: this);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    player.dispose();
+    super.dispose();
   }
 
   @override
@@ -84,12 +95,13 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
                     RecentlyPlayed(),
                     MostlyPlayed(),
                     Favorites(),
-                    Playlist(),
+                    PlaylistScreen(),
                   ],
                 ),
               ),
             ),
-          )
+          ),
+          customBottomMusic(context, player),
         ],
       ),
     );
@@ -113,7 +125,6 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
               () => const ScreenSearch(),
               transition: kNavigationTransition,
             );
-            
           },
           icon: Icon(
             Icons.search,
@@ -150,4 +161,74 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
       ),
     );
   }
+}
+
+Widget customBottomMusic(BuildContext context, AssetsAudioPlayer player) {
+  return Container(
+    height: 60,
+    color: Theme.of(context).scaffoldBackgroundColor,
+    child: InkWell(
+      borderRadius: BorderRadius.circular(10),
+      onTap: () =>
+          Get.to(() => ScreenPlaying(), transition: Transition.downToUp),
+      child: PlayerBuilder.current(
+        player: player,
+        builder: (context, playing) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 21),
+                child: QueryArtworkWidget(
+                  id: int.parse(playing.audio.audio.metas.id.toString()),
+                  type: ArtworkType.AUDIO,
+                  nullArtworkWidget: const CircleAvatar(
+                    backgroundColor: kMainBlueColor,
+                    child: Icon(
+                      Icons.music_note,
+                      size: 30,
+                      color: kWhiteColor,
+                    ),
+                  ),
+                  artworkFit: BoxFit.cover,
+                ),
+              ),
+              const SizedBox(width: 10),
+              LimitedBox(
+                maxWidth: 220,
+                child: Text(
+                  playing.audio.audio.metas.title.toString(),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
+                    color: Theme.of(context).textTheme.bodyLarge!.color,
+                  ),
+                ),
+              ),
+              PlayerBuilder.isPlaying(
+                player: player,
+                builder: (context, isPlaying) {
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: IconButton(
+                      onPressed: () {
+                        player.playOrPause();
+                      },
+                      icon: Icon(
+                        isPlaying ? Icons.pause : Icons.play_arrow,
+                        size: 40,
+                        color: kMainBlueColor,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
+          );
+        },
+      ),
+    ),
+  );
 }
