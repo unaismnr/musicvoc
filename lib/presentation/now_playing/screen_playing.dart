@@ -1,15 +1,28 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:musicvoc/application/loop_and_shuffle_bloc/loop_and_shuffle_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
+import 'package:musicvoc/controllers/audio_player_controller.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 
 class ScreenPlaying extends StatelessWidget {
-  ScreenPlaying({super.key});
+  final List<SongModel>? allSongs;
+  final int? currentIndex;
+  ScreenPlaying({
+    super.key,
+    this.allSongs,
+    this.currentIndex,
+  });
 
-  final player = AssetsAudioPlayer.withId('0');
+  // final player = AssetsAudioPlayer.withId('0');
+  bool isRepeat = false;
+
+  final songPlayController = Get.put(AudioPlayerController());
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +47,15 @@ class ScreenPlaying extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.w),
-          child: PlayerBuilder.current(
-              player: player,
-              builder: (context, playing) {
-                //Listen to the current playing song
+          child: songPlayController.audioPlayer.builderCurrent(
+            builder: (context, playing) {
+              final songPlayControllerIndex =
+                  allSongs != null && allSongs!.isNotEmpty
+                      ? allSongs![songPlayController.playIndex.value]
+                      : null;
+
+              //Listen to the current playing song
+              if (songPlayControllerIndex != null) {
                 return Column(
                   children: [
                     //Song Image
@@ -49,7 +67,8 @@ class ScreenPlaying extends StatelessWidget {
                           borderRadius: BorderRadius.circular(50.w),
                           color: kMainBlueColor),
                       child: QueryArtworkWidget(
-                        id: int.parse(playing.audio.audio.metas.id.toString()),
+                        id: songPlayControllerIndex.id,
+                        // int.parse(playing.audio.audio.metas.id.toString()),
                         type: ArtworkType.AUDIO,
                         nullArtworkWidget: const Icon(
                           Icons.music_note,
@@ -62,7 +81,8 @@ class ScreenPlaying extends StatelessWidget {
                     kHeight10,
                     //Song Title & Sub Title
                     Text(
-                      playing.audio.audio.metas.title!,
+                      // playing,
+                      songPlayControllerIndex.title,
                       textAlign: TextAlign.center,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -73,9 +93,9 @@ class ScreenPlaying extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      playing.audio.audio.metas.artist! == '<unknown>'
+                      songPlayControllerIndex.artist == '<unknown>'
                           ? 'Unknown Artist'
-                          : playing.audio.audio.metas.artist!,
+                          : songPlayControllerIndex.artist!,
                       textAlign: TextAlign.center,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -119,7 +139,7 @@ class ScreenPlaying extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 25.w),
                       child: PlayerBuilder.realtimePlayingInfos(
-                          player: player,
+                          player: songPlayController.audioPlayer,
                           builder: (context, audioTime) {
                             final duration = audioTime.current!.audio.duration;
                             final currentPosition = audioTime.currentPosition;
@@ -130,7 +150,8 @@ class ScreenPlaying extends StatelessWidget {
                               progress: currentPosition,
                               total: duration,
                               onSeek: (duration) async {
-                                await player.seek(duration);
+                                await songPlayController.audioPlayer
+                                    .seek(duration);
                               },
                               timeLabelTextStyle: TextStyle(
                                 color: Theme.of(context)
@@ -144,23 +165,41 @@ class ScreenPlaying extends StatelessWidget {
                     kHeight10,
                     //Previous, Next, 10 Back & Forward and Play & Puase
                     PlayerBuilder.isPlaying(
-                        player: player,
+                        player: songPlayController.audioPlayer,
                         builder: (context, isPlaying) {
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               IconButton(
-                                onPressed: () async {
-                                  if (isPlaying == true) {
-                                    player.pause();
+                                onPressed: () {
+                                  final newIndex =
+                                      songPlayController.playIndex.value - 1;
+
+                                  if (newIndex < allSongs!.length) {
+                                    songPlayController.playSong(
+                                      allSongs![songPlayController
+                                                  .playIndex.value -
+                                              1]
+                                          .uri!,
+                                      allSongs![songPlayController
+                                                  .playIndex.value -
+                                              1]
+                                          .id,
+                                      allSongs![songPlayController
+                                                  .playIndex.value -
+                                              1]
+                                          .title,
+                                      newIndex,
+                                      // songList: allSongs,
+                                    );
                                   }
-                                  await player.previous();
                                 },
                                 icon: Icon(Icons.skip_previous, size: 35.sp),
                               ),
                               IconButton(
                                 onPressed: () {
-                                  player.seekBy(const Duration(seconds: -10));
+                                  songPlayController.audioPlayer
+                                      .seekBy(const Duration(seconds: -10));
                                 },
                                 icon: Icon(Icons.replay_10, size: 35.sp),
                               ),
@@ -170,7 +209,8 @@ class ScreenPlaying extends StatelessWidget {
                                 child: Center(
                                   child: IconButton(
                                     onPressed: () async {
-                                      await player.playOrPause();
+                                      await songPlayController.audioPlayer
+                                          .playOrPause();
                                     },
                                     icon: Icon(
                                       isPlaying
@@ -184,17 +224,40 @@ class ScreenPlaying extends StatelessWidget {
                               ),
                               IconButton(
                                 onPressed: () {
-                                  player.seekBy(const Duration(seconds: 10));
+                                  songPlayController.audioPlayer
+                                      .seekBy(const Duration(seconds: 10));
                                 },
                                 icon: Icon(Icons.forward_10, size: 35.sp),
                               ),
                               IconButton(
                                 onPressed: () {
-                                  player.next();
+                                  final newIndex =
+                                      songPlayController.playIndex.value + 1;
 
-                                  if (isPlaying == false) {
-                                    player.pause();
-                                  }
+                                  newIndex < allSongs!.length
+                                      ? songPlayController.playSong(
+                                          allSongs![songPlayController
+                                                      .playIndex.value +
+                                                  1]
+                                              .uri!,
+                                          allSongs![songPlayController
+                                                      .playIndex.value +
+                                                  1]
+                                              .id,
+                                          allSongs![songPlayController
+                                                      .playIndex.value +
+                                                  1]
+                                              .title,
+                                          newIndex,
+                                          // songList: allSongs,
+                                        )
+                                      : songPlayController.playSong(
+                                          allSongs![0].uri!,
+                                          allSongs![0].id,
+                                          allSongs![0].title,
+                                          0,
+                                          // songList: allSongs,
+                                        );
                                 },
                                 icon: Icon(Icons.skip_next, size: 35.sp),
                               ),
@@ -207,9 +270,35 @@ class ScreenPlaying extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.repeat, size: 30.sp),
+                          BlocBuilder<LoopAndShuffleBloc, LoopAndShuffleState>(
+                            builder: (context, state) {
+                              return IconButton(
+                                onPressed: () {
+                                  if (isRepeat) {
+                                    songPlayController.audioPlayer
+                                        .setLoopMode(LoopMode.none);
+                                    context.read<LoopAndShuffleBloc>().add(
+                                          const LoopAndShuffleEvent.toggle(),
+                                        );
+                                    isRepeat = false;
+                                  } else {
+                                    songPlayController.audioPlayer
+                                        .setLoopMode(LoopMode.single);
+                                    context.read<LoopAndShuffleBloc>().add(
+                                          const LoopAndShuffleEvent.toggled(),
+                                        );
+                                    isRepeat = true;
+                                  }
+                                },
+                                icon: Icon(
+                                  Icons.repeat,
+                                  size: 30.sp,
+                                  color: state.loop == LoopMode.single
+                                      ? kMainBlueColor
+                                      : Theme.of(context).iconTheme.color,
+                                ),
+                              );
+                            },
                           ),
                           IconButton(
                             onPressed: () {},
@@ -220,7 +309,12 @@ class ScreenPlaying extends StatelessWidget {
                     ),
                   ],
                 );
-              }),
+              }
+              return const Center(
+                child: Text('Error'),
+              );
+            },
+          ),
         ),
       ),
     );

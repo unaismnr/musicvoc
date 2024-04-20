@@ -17,6 +17,7 @@ class MyThemes {
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.grey.shade100,
     ),
+    dividerColor: const Color.fromARGB(255, 218, 218, 218),
     textTheme: GoogleFonts.latoTextTheme().apply().copyWith(
           bodyLarge: const TextStyle(
             color: Colors.black,
@@ -40,6 +41,7 @@ class MyThemes {
     iconTheme: const IconThemeData(
       color: kWhiteColor,
     ),
+    dividerColor: const Color.fromARGB(198, 86, 86, 86),
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.grey.shade900,
     ),

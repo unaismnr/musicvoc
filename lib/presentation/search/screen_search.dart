@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
 import 'package:musicvoc/presentation/common/songs_list_widget.dart';
 
@@ -27,7 +25,7 @@ class ScreenSearch extends StatelessWidget {
         true,
         context,
       ),
-      bottomSheet: CustomBottomMusic(context: context),
+      bottomSheet: CustomBottomMusic2(context: context),
     );
   }
 }

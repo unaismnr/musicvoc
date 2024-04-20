@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
+import 'package:musicvoc/presentation/common/splash_screen/splash_screen.dart';
 import 'package:musicvoc/presentation/playlist/playlist.dart';
 import 'package:musicvoc/presentation/search/screen_search.dart';
 import 'package:musicvoc/presentation/settings/screen_settings.dart';
@@ -87,7 +88,7 @@ class ScreenHome extends StatelessWidget {
           ],
         ),
       ),
-      bottomSheet: CustomBottomMusic(context: context),
+      bottomSheet: CustomBottomMusic2(context: context),
     );
   }
 
@@ -117,10 +118,10 @@ class ScreenHome extends StatelessWidget {
         ),
         IconButton(
           onPressed: () {
-            Get.to(
-              () => const ScreenSettings(),
-              transition: kNavigationTransition,
-            );
+            // Get.to(
+            //   () => ScreenSplash(),
+            //   transition: kNavigationTransition,
+            // );
           },
           icon: Icon(
             Icons.settings,

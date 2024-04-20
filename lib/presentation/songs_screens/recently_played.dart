@@ -27,7 +27,7 @@ class RecentlyPlayed extends StatelessWidget {
         true,
         context,
       ),
-      bottomSheet: CustomBottomMusic(context: context),
+      bottomSheet: CustomBottomMusic2(context: context),
     );
   }
 }
