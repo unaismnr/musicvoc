@@ -21,7 +21,7 @@ class MostlyPlayed extends StatelessWidget {
         true,
         context,
       ),
-      bottomSheet: CustomBottomMusic2(context: context),
+      bottomSheet: CustomBottomMusic(context: context),
     );
   }
 }

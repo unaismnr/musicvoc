@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:musicvoc/application/adjust_volume_bloc/adjust_volume_bloc.dart';
 import 'package:musicvoc/application/all_songs_bloc/all_songs_bloc.dart';
 import 'package:musicvoc/application/loop_and_shuffle_bloc/loop_and_shuffle_bloc.dart';
 import 'package:musicvoc/core/theme.dart';
 import 'package:get/get.dart';
-
-import 'presentation/home/screen_home.dart';
+import 'package:musicvoc/presentation/common/splash_screen/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,12 +27,15 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => LoopAndShuffleBloc(),
           ),
+          BlocProvider(
+            create: (context) => AdjustVolumeBloc(),
+          ),
         ],
         child: GetMaterialApp(
           title: 'MusicVoc',
           theme: MyThemes.lightMode,
           darkTheme: MyThemes.darkMode,
-          home: ScreenHome(),
+          home: const ScreenSplash(),
           debugShowCheckedModeBanner: false,
         ),
       ),

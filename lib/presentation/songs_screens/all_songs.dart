@@ -1,5 +1,3 @@
-import 'dart:async';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,46 +5,22 @@ import 'package:get/get.dart';
 import 'package:musicvoc/application/all_songs_bloc/all_songs_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
-import 'package:musicvoc/controllers/audio_player_controller.dart';
 import 'package:musicvoc/presentation/now_playing/screen_playing.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 
-class AllSongs extends StatefulWidget {
-  const AllSongs({super.key});
+class AllSongs extends StatelessWidget {
+  AllSongs({super.key});
 
-  @override
-  State<AllSongs> createState() => _AllSongsState();
-}
+  final player = AssetsAudioPlayer.withId('0');
 
-class _AllSongsState extends State<AllSongs> {
-  StreamSubscription<AllSongsState>? _subscription;
-
-  final assetsAudioPlayer = AssetsAudioPlayer.withId('0');
-  List<SongModel>? allSongs;
-
-  final songPlayController = Get.put(AudioPlayerController());
-
-  @override
-  void initState() {
-    _subscription =
-        BlocProvider.of<AllSongsBloc>(context).stream.listen((event) {});
-    BlocProvider.of<AllSongsBloc>(context).add(
-      const AllSongsEvent.fetchSongs(),
-    );
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _subscription?.cancel();
-    assetsAudioPlayer.dispose();
-    // songPlayController.dispose();
-    super.dispose();
-  }
+  // List<SongModel>? allSongs;
 
   @override
   Widget build(BuildContext context) {
+    final player = AssetsAudioPlayer.withId('0');
+    final List<Audio> convertedAudios = [];
+
     return BlocBuilder<AllSongsBloc, AllSongsState>(
       builder: (context, state) {
         if (state.allSongs.isEmpty) {
@@ -54,7 +28,7 @@ class _AllSongsState extends State<AllSongs> {
             child: Text('Loading'),
           );
         } else {
-          return ListView.separated(
+          return ListView.builder(
             itemBuilder: (context, index) {
               final songs = state.allSongs[index];
               final songArtist = state.allSongs[index].artist == '<unknown>'
@@ -76,8 +50,11 @@ class _AllSongsState extends State<AllSongs> {
                   ),
                 ),
                 title: PlayerBuilder.isPlaying(
-                    player: songPlayController.audioPlayer,
+                    player: player,
                     builder: (context, isPlaying) {
+                      final isCurrentlyPlayingSong =
+                          player.current.valueOrNull?.audio.audio.path ==
+                              songs.uri;
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -88,9 +65,8 @@ class _AllSongsState extends State<AllSongs> {
                             style: TextStyle(
                               fontSize: 13.sp,
                               fontWeight: FontWeight.w600,
-                              color: songPlayController.currentlyPlayingIndex ==
-                                      index
-                                  ? const Color.fromARGB(255, 106, 156, 255)
+                              color: isCurrentlyPlayingSong
+                                  ? kSelectedTextColor
                                   : Theme.of(context)
                                       .textTheme
                                       .bodyLarge!
@@ -103,9 +79,8 @@ class _AllSongsState extends State<AllSongs> {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: 11.sp,
-                              color: songPlayController.currentlyPlayingIndex ==
-                                      index
-                                  ? const Color.fromARGB(255, 106, 156, 255)
+                              color: isCurrentlyPlayingSong
+                                  ? const Color.fromARGB(255, 105, 155, 255)
                                   : Theme.of(context)
                                       .textTheme
                                       .bodyLarge!
@@ -145,49 +120,63 @@ class _AllSongsState extends State<AllSongs> {
                   //   });
                   // }
 
+                  playerOnTap(
+                    state.allSongs,
+                    player,
+                    convertedAudios,
+                  );
+                  player.open(
+                    Playlist(
+                      audios: convertedAudios,
+                      startIndex: index,
+                    ),
+                    loopMode: LoopMode.playlist,
+                    autoStart: true,
+                    headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplug,
+                  );
+
                   Get.to(
-                      () => ScreenPlaying(
-                            allSongs: state.allSongs,
-                            currentIndex: index,
-                          ),
-                      transition: kNavigationTransition);
+                    () => ScreenPlaying(),
+                    transition: kTransitionDownToUp,
+                    duration: const Duration(
+                      milliseconds: 80,
+                    ),
+                  );
 
                   // playSong(songs.uri!, songs.id.toString(), songs.title,
                   //     songs.artist!);
 
-                  songPlayController.playSong(
-                    songs.uri!, songs.id, songs.title, index,
-                    // songList: allSongs!
-                  );
+                  // songPlayController.playSong(
+                  //     songs.uri!, songs.id, songs.title, index,
+                  //     songList: allSongs!);
                 },
               );
             },
-            separatorBuilder: (context, index) => Divider(
-              indent: 16.w,
-              color: Theme.of(context).dividerColor,
-            ),
+            // separatorBuilder: (context, index) => Divider(
+            //   indent: 16.w,
+            //   color: Theme.of(context).dividerColor,
+            // ),
             itemCount: state.allSongs.length,
           );
         }
       },
     );
   }
+}
 
-  // void playSong(String uri, String id, String title, String artist) async {
-  //   try {
-  //     await assetsAudioPlayer.open(
-  //       Audio.file(
-  //         uri,
-  //         metas: Metas(
-  //           id: id,
-  //           title: title,
-  //           artist: artist,
-  //         ),
-  //       ),
-  //     );
-  //     await assetsAudioPlayer.play();
-  //   } catch (e) {
-  //     log('Play Error: $e');
-  //   }
-  // }
+void playerOnTap(
+  List<SongModel> allSongs,
+  AssetsAudioPlayer player,
+  List<Audio> convertedAudios,
+) async {
+  for (var item in allSongs) {
+    convertedAudios.add(
+      Audio.file(item.uri!,
+          metas: Metas(
+            title: item.title,
+            artist: item.artist,
+            id: item.id.toString(),
+          )),
+    );
+  }
 }

@@ -17,7 +17,15 @@ class AllSongsBloc extends Bloc<AllSongsEvent, AllSongsState> {
       if (status.isGranted) {
         try {
           final songs = await GetAudiosRepo.getAudios();
-          emit(state.copyWith(allSongs: songs));
+          final filteredSongs = songs
+              .where((song) =>
+                  song.fileExtension == 'mp3' || song.fileExtension == 'm4a')
+              .toList();
+          for (var item in songs) {
+            if (item.fileExtension == 'mp3') {
+              emit(state.copyWith(allSongs: filteredSongs));
+            }
+          }
         } catch (e) {
           log("All Songs Fetching Error: ${e.toString()}");
         }

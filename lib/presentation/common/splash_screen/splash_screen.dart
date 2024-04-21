@@ -1,64 +1,55 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:musicvoc/core/const_colors.dart';
-// import 'package:musicvoc/domain/song_model.dart';
-// import 'package:on_audio_query/on_audio_query.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:musicvoc/application/all_songs_bloc/all_songs_bloc.dart';
+import 'package:musicvoc/core/const_colors.dart';
+import 'package:musicvoc/presentation/home/screen_home.dart';
 
-// class ScreenSplash extends StatelessWidget {
-//   ScreenSplash({super.key});
+class ScreenSplash extends StatefulWidget {
+  const ScreenSplash({super.key});
 
-//   final audioQuery = OnAudioQuery();
-//   List<SongModel> fetchSongs = [];
-//   List<SongModel> allSongs = [];
+  @override
+  State<ScreenSplash> createState() => _ScreenSplashState();
+}
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return SafeArea(
-//       child: Container(
-//         height: MediaQuery.of(context).size.height,
-//         width: MediaQuery.of(context).size.width,
-//         decoration: const BoxDecoration(
-//           gradient: LinearGradient(
-//               begin: Alignment.topLeft,
-//               end: Alignment.bottomRight,
-//               colors: [
-//                 kMainSkyBlueColor,
-//                 kMainBlueColor,
-//               ]),
-//         ),
-//         child: Center(
-//           child: Image.asset(
-//             height: 300.h,
-//             width: 150.w,
-//             'assets/musicvocsplashlogo.png',
-//           ),
-//         ),
-//       ),
-//     );
-//   }
+class _ScreenSplashState extends State<ScreenSplash> {
+  @override
+  void initState() {
+    BlocProvider.of<AllSongsBloc>(context)
+        .add(const AllSongsEvent.fetchSongs());
+    goToHome();
+    super.initState();
+  }
 
-//   void requestStoragePermission() async {
-//     bool permissionStatus = await audioQuery.permissionsStatus();
+  Future<void> goToHome() async {
+    await Future.delayed(const Duration(seconds: 2));
+    Get.offAll(() => ScreenHome());
+  }
 
-//     if (!permissionStatus) {
-//       await audioQuery.permissionsRequest();
-
-//       fetchSongs = await audioQuery.querySongs();
-//       for (var item in fetchSongs) {
-//         if (item.fileExtension == 'mp3') {
-//           allSongs.add(item);
-//         }
-//       }
-
-//       for (var item in allSongs) {
-//         SongsModel(
-//           title: item.title,
-//           artist: item.artist!,
-//           duration: item.duration!,
-//           songUri: item.uri!,
-//           id: item.id,
-//         );
-//       }
-//     }
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                kMainSkyBlueColor,
+                kMainBlueColor,
+              ]),
+        ),
+        child: Center(
+          child: Image.asset(
+            height: 300.h,
+            width: 150.w,
+            'assets/musicvocsplashlogo.png',
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -35,7 +35,7 @@ class PlaylistScreen extends StatelessWidget {
                   onPressed: () {
                     Get.to(
                       () => const PlaylistFolderSongs(),
-                      transition: kNavigationTransition,
+                      transition: kTransitionRightToLeft,
                     );
                   },
                   icon: Icon(

@@ -9,15 +9,19 @@ part 'loop_and_shuffle_bloc.freezed.dart';
 class LoopAndShuffleBloc
     extends Bloc<LoopAndShuffleEvent, LoopAndShuffleState> {
   LoopAndShuffleBloc() : super(LoopAndShuffleState.initial()) {
-    on<_Toggle>((event, emit) {
+    on<_LoopToggle>((event, emit) {
       final newLoopMode =
           state.loop == LoopMode.single ? LoopMode.none : LoopMode.single;
       emit(state.copyWith(loop: newLoopMode));
     });
-    on<_Toggled>((event, emit) {
+    on<_LoopToggled>((event, emit) {
       final newLoopMode =
           state.loop == LoopMode.none ? LoopMode.single : LoopMode.none;
       emit(state.copyWith(loop: newLoopMode));
+    });
+
+    on<_ShuffleToggle>((event, emit) {
+      emit(state.copyWith(shuffle: !state.shuffle));
     });
   }
 }

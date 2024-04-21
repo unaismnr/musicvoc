@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
-import 'package:musicvoc/presentation/common/splash_screen/splash_screen.dart';
 import 'package:musicvoc/presentation/playlist/playlist.dart';
 import 'package:musicvoc/presentation/search/screen_search.dart';
 import 'package:musicvoc/presentation/settings/screen_settings.dart';
@@ -35,7 +34,10 @@ class ScreenHome extends StatelessWidget {
                     onTap: () {
                       Get.to(
                         () => const RecentlyPlayed(),
-                        transition: kNavigationTransition,
+                        transition: kTransitionRightToLeft,
+                        duration: const Duration(
+                          milliseconds: 80,
+                        ),
                       );
                     },
                     title: 'RECENTLY \n PLAYED'),
@@ -43,7 +45,10 @@ class ScreenHome extends StatelessWidget {
                     onTap: () {
                       Get.to(
                         () => const MostlyPlayed(),
-                        transition: kNavigationTransition,
+                        transition: kTransitionRightToLeft,
+                        duration: const Duration(
+                          milliseconds: 80,
+                        ),
                       );
                     },
                     title: 'MOSTLY \n PLAYED'),
@@ -57,7 +62,10 @@ class ScreenHome extends StatelessWidget {
                     onTap: () {
                       Get.to(
                         () => const Favorites(),
-                        transition: kNavigationTransition,
+                        transition: kTransitionRightToLeft,
+                        duration: const Duration(
+                          milliseconds: 80,
+                        ),
                       );
                     },
                     title: 'FAVORITES'),
@@ -65,7 +73,10 @@ class ScreenHome extends StatelessWidget {
                     onTap: () {
                       Get.to(
                         () => const PlaylistScreen(),
-                        transition: kNavigationTransition,
+                        transition: kTransitionRightToLeft,
+                        duration: const Duration(
+                          milliseconds: 80,
+                        ),
                       );
                     },
                     title: 'PLAYLIST'),
@@ -83,12 +94,12 @@ class ScreenHome extends StatelessWidget {
                     ),
                     color: Theme.of(context).colorScheme.background,
                   ),
-                  child: const AllSongs()),
+                  child: AllSongs()),
             ),
           ],
         ),
       ),
-      bottomSheet: CustomBottomMusic2(context: context),
+      bottomSheet: CustomBottomMusic(context: context),
     );
   }
 
@@ -108,7 +119,10 @@ class ScreenHome extends StatelessWidget {
           onPressed: () {
             Get.to(
               () => const ScreenSearch(),
-              transition: kNavigationTransition,
+              transition: kTransitionRightToLeft,
+              duration: const Duration(
+                milliseconds: 80,
+              ),
             );
           },
           icon: Icon(
@@ -118,10 +132,13 @@ class ScreenHome extends StatelessWidget {
         ),
         IconButton(
           onPressed: () {
-            // Get.to(
-            //   () => ScreenSplash(),
-            //   transition: kNavigationTransition,
-            // );
+            Get.to(
+              () => const ScreenSettings(),
+              transition: kTransitionRightToLeft,
+              duration: const Duration(
+                milliseconds: 80,
+              ),
+            );
           },
           icon: Icon(
             Icons.settings,
