@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:musicvoc/application/adjust_volume_bloc/adjust_volume_bloc.dart';
+import 'package:musicvoc/application/favorite_songs_bloc/favorite_songs_bloc.dart';
 import 'package:musicvoc/application/loop_and_shuffle_bloc/loop_and_shuffle_bloc.dart';
 import 'package:musicvoc/controllers/adjust_speed_text.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
+import 'package:musicvoc/domain/favorite_model.dart';
 import 'package:musicvoc/presentation/now_playing/playing_screen_functions.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
@@ -42,12 +43,7 @@ class ScreenPlaying extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.w),
           child: player.builderCurrent(
             builder: (context, playing) {
-              // final songPlayControllerIndex =
-              //     allSongs != null && allSongs!.isNotEmpty
-              //         ? allSongs![songPlayController.playIndex.value]
-              //         : null;
-
-              //Listen to the current playing song
+              final currentSongDetails = playing.audio.audio.metas;
               return Column(
                 children: [
                   //Song Image
@@ -60,7 +56,7 @@ class ScreenPlaying extends StatelessWidget {
                         color: kMainBlueColor),
                     child: QueryArtworkWidget(
                       id: int.parse(
-                        playing.audio.audio.metas.id.toString(),
+                        currentSongDetails.id.toString(),
                       ),
                       type: ArtworkType.AUDIO,
                       nullArtworkWidget: Icon(
@@ -72,6 +68,7 @@ class ScreenPlaying extends StatelessWidget {
                     ),
                   ),
                   kHeight10,
+
                   //Song Title & Sub Title
                   Text(
                     player.getCurrentAudioTitle,
@@ -98,7 +95,8 @@ class ScreenPlaying extends StatelessWidget {
                     ),
                   ),
                   kHeight10,
-                  //Sound, Volume & Add Buttons
+
+                  //Volume, Favorite & Add To Playlist Buttons
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -108,9 +106,51 @@ class ScreenPlaying extends StatelessWidget {
                         },
                         icon: Icon(Icons.volume_up, size: 35.sp),
                       ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.favorite_outline, size: 35.sp),
+                      BlocBuilder<FavoriteSongsBloc, FavoriteSongsState>(
+                        builder: (context, state) {
+                          final fvDbSongs = state.favoriteSongs;
+                          final isAlreadyInFvDbSongs =
+                              fvDbSongs.firstWhereOrNull(
+                            (element) =>
+                                element.id ==
+                                int.parse(
+                                  currentSongDetails.id.toString(),
+                                ),
+                          );
+                          return IconButton(
+                            onPressed: () {
+                              final favSongs = FavoriteModel(
+                                title: currentSongDetails.title!,
+                                artist: currentSongDetails.artist!,
+                                songUri: player
+                                    .current.valueOrNull!.audio.audio.path,
+                                id: int.parse(currentSongDetails.id.toString()),
+                              );
+                              if (isAlreadyInFvDbSongs != null) {
+                                context.read<FavoriteSongsBloc>().add(
+                                    FavoriteSongsEvent.deleteFavorite(
+                                        favSongs));
+                                toastMessege(context, 'Deleted from Favorite');
+                              } else {
+                                context.read<FavoriteSongsBloc>().add(
+                                    FavoriteSongsEvent.addFavorite(favSongs));
+                                toastMessege(context, 'Added to Favorite');
+                              }
+                              context
+                                  .read<FavoriteSongsBloc>()
+                                  .add(const FavoriteSongsEvent.getFavorite());
+                            },
+                            icon: Icon(
+                              isAlreadyInFvDbSongs != null
+                                  ? Icons.favorite
+                                  : Icons.favorite_outline,
+                              size: 35.sp,
+                              color: isAlreadyInFvDbSongs != null
+                                  ? kMainBlueColor
+                                  : Theme.of(context).iconTheme.color,
+                            ),
+                          );
+                        },
                       ),
                       IconButton(
                         onPressed: () {},
@@ -118,6 +158,7 @@ class ScreenPlaying extends StatelessWidget {
                       ),
                     ],
                   ),
+
                   //Speed Button
                   TextButton(
                     onPressed: () {
@@ -133,6 +174,7 @@ class ScreenPlaying extends StatelessWidget {
                       ),
                     ),
                   ),
+
                   //Song Progress Bar
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 25.w),
@@ -158,6 +200,7 @@ class ScreenPlaying extends StatelessWidget {
                         }),
                   ),
                   kHeight10,
+
                   //Previous, Next, 10 Back & Forward and Play & Puase
                   PlayerBuilder.isPlaying(
                       player: player,

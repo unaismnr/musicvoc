@@ -9,8 +9,6 @@ import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
 
 class PlayingScreenFunctions {
-  double speedText = 1.0;
-
   final player = AssetsAudioPlayer.withId('0');
 
   final songSpeedTextController = Get.put(
@@ -57,13 +55,14 @@ class PlayingScreenFunctions {
         player.setVolume(1);
         player.setPlaySpeed(newSpeed);
         songSpeedTextController.speed.value = newSpeed;
-        speedText = newSpeed;
         Get.back();
       },
       child: Text(
         '${newSpeed}x',
         style: TextStyle(
-          color: speedText == newSpeed ? kSelectedTextColor : kWhiteColor,
+          color: songSpeedTextController.speed.value == newSpeed
+              ? kSelectedTextColor
+              : kWhiteColor,
           fontSize: 15.sp,
           fontWeight: FontWeight.w600,
         ),

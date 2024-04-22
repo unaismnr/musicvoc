@@ -14,8 +14,6 @@ class AllSongs extends StatelessWidget {
 
   final player = AssetsAudioPlayer.withId('0');
 
-  // List<SongModel>? allSongs;
-
   @override
   Widget build(BuildContext context) {
     final player = AssetsAudioPlayer.withId('0');
@@ -122,7 +120,6 @@ class AllSongs extends StatelessWidget {
 
                   playerOnTap(
                     state.allSongs,
-                    player,
                     convertedAudios,
                   );
                   player.open(
@@ -166,9 +163,8 @@ class AllSongs extends StatelessWidget {
 
 void playerOnTap(
   List<SongModel> allSongs,
-  AssetsAudioPlayer player,
   List<Audio> convertedAudios,
-) async {
+) {
   for (var item in allSongs) {
     convertedAudios.add(
       Audio.file(item.uri!,
