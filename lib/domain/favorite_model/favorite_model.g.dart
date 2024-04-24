@@ -21,13 +21,14 @@ class FavoriteModelAdapter extends TypeAdapter<FavoriteModel> {
       artist: fields[1] as String,
       songUri: fields[3] as String,
       id: fields[4] as int,
+      time: fields[5] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, FavoriteModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class FavoriteModelAdapter extends TypeAdapter<FavoriteModel> {
       ..writeByte(3)
       ..write(obj.songUri)
       ..writeByte(4)
-      ..write(obj.id);
+      ..write(obj.id)
+      ..writeByte(5)
+      ..write(obj.time);
   }
 
   @override

@@ -1,5 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:musicvoc/domain/favorite_model.dart';
+import 'package:musicvoc/domain/favorite_model/favorite_model.dart';
 
 class FavoriteDb {
   static String favoriteDbName = "favoriteDb";
@@ -11,6 +11,11 @@ class FavoriteDb {
 
   Future<void> openBox() async {
     favoriteDb = await Hive.openBox<FavoriteModel>(favoriteDbName);
+  }
+
+  Future<List<FavoriteModel>> getFavoriteSongs() async {
+    await openBox();
+    return favoriteDb.values.toList();
   }
 
   Future<void> addFavoriteSongs(FavoriteModel song) async {
@@ -26,17 +31,14 @@ class FavoriteDb {
         (element) => element.id == song.id,
       );
       await favoriteDb.deleteAt(checkedSong);
-      favoriteDb.add(song);
+      await favoriteDb.put(song.id, song);
     }
-  }
-
-  Future<List<FavoriteModel>> getFavoriteSongs() async {
-    await openBox();
-    return favoriteDb.values.toList();
+    await getFavoriteSongs();
   }
 
   Future<void> deleteFavoriteSongs(FavoriteModel song) async {
     await openBox();
     await favoriteDb.delete(song.id);
+    await getFavoriteSongs();
   }
 }

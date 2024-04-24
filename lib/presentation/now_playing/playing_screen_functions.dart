@@ -52,7 +52,6 @@ class PlayingScreenFunctions {
   Widget speedOnTapTile(BuildContext context, double newSpeed) {
     return TextButton(
       onPressed: () {
-        player.setVolume(1);
         player.setPlaySpeed(newSpeed);
         songSpeedTextController.speed.value = newSpeed;
         Get.back();

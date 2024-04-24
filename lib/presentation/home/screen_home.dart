@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:musicvoc/application/favorite_songs_bloc/favorite_songs_bloc.dart';
+import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
@@ -34,6 +35,9 @@ class ScreenHome extends StatelessWidget {
               children: [
                 CustomHomeButtons(
                     onTap: () {
+                      context.read<RecentlyPlayedBloc>().add(
+                            const RecentlyPlayedEvent.getRecentlyPlayed(),
+                          );
                       Get.to(
                         () => const RecentlyPlayed(),
                         transition: kTransitionRightToLeft,

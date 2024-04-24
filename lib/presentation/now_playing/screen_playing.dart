@@ -8,7 +8,7 @@ import 'package:musicvoc/application/loop_and_shuffle_bloc/loop_and_shuffle_bloc
 import 'package:musicvoc/controllers/adjust_speed_text.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
-import 'package:musicvoc/domain/favorite_model.dart';
+import 'package:musicvoc/domain/favorite_model/favorite_model.dart';
 import 'package:musicvoc/presentation/now_playing/playing_screen_functions.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
@@ -125,6 +125,7 @@ class ScreenPlaying extends StatelessWidget {
                                 songUri: player
                                     .current.valueOrNull!.audio.audio.path,
                                 id: int.parse(currentSongDetails.id.toString()),
+                                time: DateTime.now(),
                               );
                               if (isAlreadyInFvDbSongs != null) {
                                 context.read<FavoriteSongsBloc>().add(

@@ -69,7 +69,7 @@ Widget songsListWidget(
 }
 
 class SongsListStaticWidgets {
-  Widget container(Widget child, BuildContext context) => Container(
+  static Widget container(Widget child, BuildContext context) => Container(
         margin: const EdgeInsets.symmetric(horizontal: 15),
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -83,7 +83,7 @@ class SongsListStaticWidgets {
         child: child,
       );
 
-  Widget listTile(
+  static Widget listTile(
     BuildContext context,
     String title,
     String description,
