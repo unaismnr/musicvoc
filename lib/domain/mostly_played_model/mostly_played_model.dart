@@ -1,8 +1,8 @@
 import 'package:hive_flutter/hive_flutter.dart';
-part 'recently_played_model.g.dart';
+part 'mostly_played_model.g.dart';
 
-@HiveType(typeId: 2)
-class RecentlyPlayedModel {
+@HiveType(typeId: 1)
+class MostlyPlayedModel {
   @HiveField(0)
   String title;
 
@@ -16,13 +16,13 @@ class RecentlyPlayedModel {
   int id;
 
   @HiveField(4)
-  DateTime time;
+  int playCount;
 
-  RecentlyPlayedModel({
+  MostlyPlayedModel({
     required this.title,
     required this.artist,
     required this.songUri,
     required this.id,
-    required DateTime? time,
-  }) : time = time ?? DateTime.now();
+    required this.playCount,
+  });
 }

@@ -15,7 +15,9 @@ class FavoriteDb {
 
   Future<List<FavoriteModel>> getFavoriteSongs() async {
     await openBox();
-    return favoriteDb.values.toList();
+    final List<FavoriteModel> songs = favoriteDb.values.toList();
+    songs.sort((a, b) => b.time.compareTo(a.time));
+    return songs;
   }
 
   Future<void> addFavoriteSongs(FavoriteModel song) async {

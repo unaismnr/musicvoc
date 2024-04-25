@@ -1,9 +1,12 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
+import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
 import 'package:musicvoc/presentation/now_playing/screen_playing.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
@@ -86,13 +89,26 @@ class CustomBottomMusic extends StatelessWidget {
                 PlayerBuilder.isPlaying(
                   player: player,
                   builder: (context, isPlaying) {
+                    final song = player.current.value!.audio.audio.metas;
+                    final recentlyPlayedSong = RecentlyPlayedModel(
+                      title: song.title!,
+                      artist: song.artist!,
+                      songUri: player.current.value!.audio.audio.path,
+                      id: int.parse(song.id.toString()),
+                      time: DateTime.now(),
+                    );
                     return Padding(
                       padding: EdgeInsets.only(right: 10.w),
                       child: Row(
                         children: [
                           IconButton(
-                            onPressed: () {
-                              player.previous();
+                            onPressed: () async {
+                              context.read<RecentlyPlayedBloc>().add(
+                                    RecentlyPlayedEvent.addRecentlyPlayed(
+                                      recentlyPlayedSong,
+                                    ),
+                                  );
+                              await player.previous();
                               if (isPlaying == false) {
                                 player.pause();
                               }
@@ -114,8 +130,13 @@ class CustomBottomMusic extends StatelessWidget {
                             ),
                           ),
                           IconButton(
-                            onPressed: () {
-                              player.next();
+                            onPressed: () async {
+                              context.read<RecentlyPlayedBloc>().add(
+                                    RecentlyPlayedEvent.addRecentlyPlayed(
+                                      recentlyPlayedSong,
+                                    ),
+                                  );
+                              await player.next();
                               if (isPlaying == false) {
                                 player.pause();
                               }

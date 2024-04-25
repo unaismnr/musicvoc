@@ -1,14 +1,12 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
 import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
 import 'package:musicvoc/presentation/common/songs_list_widget.dart';
-import 'package:musicvoc/presentation/now_playing/screen_playing.dart';
 
 class RecentlyPlayed extends StatelessWidget {
   const RecentlyPlayed({super.key});
@@ -68,6 +66,11 @@ Widget favoriteSongsList() {
                           : Theme.of(context).textTheme.bodyLarge!.color!,
                       true,
                       () {
+                        context
+                            .read<RecentlyPlayedBloc>()
+                            .add(RecentlyPlayedEvent.deleteRecentlyPlayed(
+                              favSongs,
+                            ));
                         toastMessege(context, 'Deleted From Recently Played');
                       },
                       () {
@@ -83,13 +86,6 @@ Widget favoriteSongsList() {
                           loopMode: LoopMode.playlist,
                           autoStart: true,
                           headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplug,
-                        );
-                        Get.to(
-                          () => ScreenPlaying(),
-                          transition: kTransitionDownToUp,
-                          duration: const Duration(
-                            milliseconds: 80,
-                          ),
                         );
                       },
                       favSongs.id,

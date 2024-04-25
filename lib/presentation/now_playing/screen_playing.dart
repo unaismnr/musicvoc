@@ -5,10 +5,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:musicvoc/application/favorite_songs_bloc/favorite_songs_bloc.dart';
 import 'package:musicvoc/application/loop_and_shuffle_bloc/loop_and_shuffle_bloc.dart';
+import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/controllers/adjust_speed_text.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/domain/favorite_model/favorite_model.dart';
+import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
 import 'package:musicvoc/presentation/now_playing/playing_screen_functions.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
@@ -135,6 +137,7 @@ class ScreenPlaying extends StatelessWidget {
                               } else {
                                 context.read<FavoriteSongsBloc>().add(
                                     FavoriteSongsEvent.addFavorite(favSongs));
+
                                 toastMessege(context, 'Added to Favorite');
                               }
                               context
@@ -206,11 +209,23 @@ class ScreenPlaying extends StatelessWidget {
                   PlayerBuilder.isPlaying(
                       player: player,
                       builder: (context, isPlaying) {
+                        final recentlyPlayedSong = RecentlyPlayedModel(
+                          title: currentSongDetails.title!,
+                          artist: currentSongDetails.artist!,
+                          songUri: player.current.valueOrNull!.audio.audio.path,
+                          id: int.parse(currentSongDetails.id.toString()),
+                          time: DateTime.now(),
+                        );
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             IconButton(
                               onPressed: () async {
+                                context.read<RecentlyPlayedBloc>().add(
+                                      RecentlyPlayedEvent.addRecentlyPlayed(
+                                        recentlyPlayedSong,
+                                      ),
+                                    );
                                 await player.previous();
                                 if (isPlaying == false) {
                                   player.pause();
@@ -250,6 +265,11 @@ class ScreenPlaying extends StatelessWidget {
                             ),
                             IconButton(
                               onPressed: () async {
+                                context.read<RecentlyPlayedBloc>().add(
+                                      RecentlyPlayedEvent.addRecentlyPlayed(
+                                        recentlyPlayedSong,
+                                      ),
+                                    );
                                 await player.next();
                                 if (isPlaying == false) {
                                   player.pause();

@@ -16,7 +16,9 @@ class RecentlyPlayedDb {
 
   Future<List<RecentlyPlayedModel>> getRecentlyPlayed() async {
     await openBox();
-    return recentlyPlayedDb.values.toList();
+    final List<RecentlyPlayedModel> songs = recentlyPlayedDb.values.toList();
+    songs.sort((a, b) => b.time.compareTo(a.time));
+    return songs;
   }
 
   Future<void> addRecentlyPlayed(RecentlyPlayedModel recSong) async {

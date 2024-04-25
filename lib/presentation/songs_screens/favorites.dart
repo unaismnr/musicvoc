@@ -1,7 +1,6 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:musicvoc/application/favorite_songs_bloc/favorite_songs_bloc.dart';
 import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
@@ -10,7 +9,6 @@ import 'package:musicvoc/domain/favorite_model/favorite_model.dart';
 import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
 import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
 import 'package:musicvoc/presentation/common/songs_list_widget.dart';
-import 'package:musicvoc/presentation/now_playing/screen_playing.dart';
 
 class Favorites extends StatelessWidget {
   const Favorites({super.key});
@@ -48,7 +46,6 @@ Widget favoriteSongsList() {
           child: Text('Empty'),
         );
       } else {
-        // state.favoriteSongs.sort((a, b) => b.time.compareTo(a.time));
         return ListView.builder(
             itemCount: state.favoriteSongs.length,
             itemBuilder: (context, index) {
@@ -100,19 +97,13 @@ Widget favoriteSongsList() {
                           artist: favSongs.artist,
                           songUri: favSongs.songUri,
                           id: favSongs.id,
+                          time: DateTime.now(),
                         );
                         context.read<RecentlyPlayedBloc>().add(
                               RecentlyPlayedEvent.addRecentlyPlayed(
                                 recentlyPlayedSong,
                               ),
                             );
-                        Get.to(
-                          () => ScreenPlaying(),
-                          transition: kTransitionDownToUp,
-                          duration: const Duration(
-                            milliseconds: 80,
-                          ),
-                        );
                       },
                       favSongs.id,
                     );

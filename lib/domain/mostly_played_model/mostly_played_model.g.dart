@@ -1,32 +1,32 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'recently_played_model.dart';
+part of 'mostly_played_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class RecentlyPlayedModelAdapter extends TypeAdapter<RecentlyPlayedModel> {
+class MostlyPlayedModelAdapter extends TypeAdapter<MostlyPlayedModel> {
   @override
-  final int typeId = 2;
+  final int typeId = 1;
 
   @override
-  RecentlyPlayedModel read(BinaryReader reader) {
+  MostlyPlayedModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return RecentlyPlayedModel(
+    return MostlyPlayedModel(
       title: fields[0] as String,
       artist: fields[1] as String,
       songUri: fields[2] as String,
       id: fields[3] as int,
-      time: fields[4] as DateTime?,
+      playCount: fields[4] as int,
     );
   }
 
   @override
-  void write(BinaryWriter writer, RecentlyPlayedModel obj) {
+  void write(BinaryWriter writer, MostlyPlayedModel obj) {
     writer
       ..writeByte(5)
       ..writeByte(0)
@@ -38,7 +38,7 @@ class RecentlyPlayedModelAdapter extends TypeAdapter<RecentlyPlayedModel> {
       ..writeByte(3)
       ..write(obj.id)
       ..writeByte(4)
-      ..write(obj.time);
+      ..write(obj.playCount);
   }
 
   @override
@@ -47,7 +47,7 @@ class RecentlyPlayedModelAdapter extends TypeAdapter<RecentlyPlayedModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is RecentlyPlayedModelAdapter &&
+      other is MostlyPlayedModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
