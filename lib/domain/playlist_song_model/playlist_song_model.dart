@@ -1,5 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:on_audio_query/on_audio_query.dart';
+import 'package:musicvoc/domain/song_model.dart';
+part 'playlist_song_model.g.dart';
 
 @HiveType(typeId: 3)
 class PlaylistSongModel {
@@ -7,7 +8,7 @@ class PlaylistSongModel {
   String playlistName;
 
   @HiveField(1)
-  List<SongModel> playlistSongs;
+  List<SongsModel> playlistSongs;
 
   PlaylistSongModel({
     required this.playlistName,

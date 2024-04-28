@@ -21,10 +21,10 @@ class CustomBottomMusic extends StatelessWidget {
     return Container(
       height: 50.h,
       decoration: BoxDecoration(
-        border: Border.all(
-          color: Theme.of(context).dividerColor,
-          width: 1.3,
-        ),
+        // border: Border.all(
+        //   color: Theme.of(context).dividerColor,
+        //   // width: 1.3,
+        // ),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(28.w),
           topRight: Radius.circular(28.w),

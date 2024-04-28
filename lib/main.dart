@@ -8,6 +8,7 @@ import 'package:musicvoc/application/adjust_volume_bloc/adjust_volume_bloc.dart'
 import 'package:musicvoc/application/all_songs_bloc/all_songs_bloc.dart';
 import 'package:musicvoc/application/favorite_songs_bloc/favorite_songs_bloc.dart';
 import 'package:musicvoc/application/loop_and_shuffle_bloc/loop_and_shuffle_bloc.dart';
+import 'package:musicvoc/application/playlist_bloc/playlist_bloc.dart';
 import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/core/theme.dart';
 import 'package:get/get.dart';
@@ -44,6 +45,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => RecentlyPlayedBloc(),
+          ),
+          BlocProvider(
+            create: (context) => PlaylistBloc(),
           ),
         ],
         child: GetMaterialApp(

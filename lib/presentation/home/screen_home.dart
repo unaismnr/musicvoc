@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:musicvoc/application/favorite_songs_bloc/favorite_songs_bloc.dart';
+import 'package:musicvoc/application/playlist_bloc/playlist_bloc.dart';
 import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
@@ -69,6 +70,10 @@ class ScreenHome extends StatelessWidget {
                     title: 'FAVORITES'),
                 CustomHomeButtons(
                     onTap: () {
+                      context.read<PlaylistBloc>().add(
+                            const PlaylistEvent.getPlaylist(),
+                          );
+
                       Get.to(
                         () => const PlaylistScreen(),
                         transition: kTransitionRightToLeft,

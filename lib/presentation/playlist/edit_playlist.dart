@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:musicvoc/core/other_consts.dart';
 
 class EditPlaylist extends StatelessWidget {
-  const EditPlaylist({super.key});
+  EditPlaylist({super.key});
+
+  final textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,7 @@ class EditPlaylist extends StatelessWidget {
                       ),
                     ),
                     TextFormField(
+                      controller: textController,
                       decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Type Here',
