@@ -3,74 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-Widget songsListWidget(
-  String title,
-  String description,
-  VoidCallback butttonOnpPress,
-  int itemCount,
-  VoidCallback onTap,
-  bool buttonDisplay,
-  BuildContext context,
-) {
-  return Container(
-    margin: const EdgeInsets.symmetric(horizontal: 15),
-    height: MediaQuery.of(context).size.height,
-    width: MediaQuery.of(context).size.width,
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(20.w),
-        topRight: Radius.circular(20.w),
-      ),
-      color: Theme.of(context).colorScheme.background,
-    ),
-    child: ListView.builder(
-      itemBuilder: (context, index) => ListTile(
-        leading: CircleAvatar(
-          radius: 20.w,
-          backgroundColor: kMainBlueColor,
-        ),
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
-                color: Theme.of(context).iconTheme.color,
-              ),
-            ),
-            Text(
-              description,
-              style: TextStyle(
-                fontSize: 14.sp,
-              ),
-            ),
-          ],
-        ),
-        trailing: buttonDisplay == false
-            ? IconButton(
-                onPressed: butttonOnpPress,
-                icon: const Icon(
-                  Icons.more_vert,
-                ),
-              )
-            : IconButton(
-                onPressed: butttonOnpPress,
-                icon: const Icon(
-                  Icons.delete,
-                ),
-              ),
-        onTap: onTap,
-      ),
-      itemCount: itemCount,
-    ),
-  );
-}
-
 class SongsListStaticWidgets {
   static Widget container(Widget child, BuildContext context) => Container(
-        margin: const EdgeInsets.symmetric(horizontal: 15),
+        margin: EdgeInsets.symmetric(horizontal: 15.w),
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
@@ -100,9 +35,9 @@ class SongsListStaticWidgets {
           child: QueryArtworkWidget(
             id: id,
             type: ArtworkType.AUDIO,
-            nullArtworkWidget: const Icon(
+            nullArtworkWidget: Icon(
               Icons.music_note,
-              size: 35,
+              size: 35.sp,
               color: Colors.white,
             ),
           ),

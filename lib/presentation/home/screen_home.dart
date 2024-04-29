@@ -4,13 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:musicvoc/application/favorite_songs_bloc/favorite_songs_bloc.dart';
-import 'package:musicvoc/application/playlist_bloc/playlist_bloc.dart';
-import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
 import 'package:musicvoc/presentation/playlist/playlist.dart';
-import 'package:musicvoc/presentation/search/screen_search.dart';
 import 'package:musicvoc/presentation/settings/screen_settings.dart';
 import 'package:musicvoc/presentation/songs_screens/all_songs.dart';
 import 'package:musicvoc/presentation/songs_screens/favorites.dart';
@@ -35,9 +32,6 @@ class ScreenHome extends StatelessWidget {
               children: [
                 CustomHomeButtons(
                     onTap: () {
-                      context.read<RecentlyPlayedBloc>().add(
-                            const RecentlyPlayedEvent.getRecentlyPlayed(),
-                          );
                       Get.to(
                         () => const RecentlyPlayed(),
                         transition: kTransitionRightToLeft,
@@ -70,10 +64,6 @@ class ScreenHome extends StatelessWidget {
                     title: 'FAVORITES'),
                 CustomHomeButtons(
                     onTap: () {
-                      context.read<PlaylistBloc>().add(
-                            const PlaylistEvent.getPlaylist(),
-                          );
-
                       Get.to(
                         () => const PlaylistScreen(),
                         transition: kTransitionRightToLeft,
@@ -120,13 +110,13 @@ class ScreenHome extends StatelessWidget {
       actions: [
         IconButton(
           onPressed: () {
-            Get.to(
-              () => const ScreenSearch(),
-              transition: kTransitionRightToLeft,
-              duration: const Duration(
-                milliseconds: 80,
-              ),
-            );
+            // Get.to(
+            //   () => const ScreenSearch(),
+            //   transition: kTransitionRightToLeft,
+            //   duration: const Duration(
+            //     milliseconds: 80,
+            //   ),
+            // );
           },
           icon: Icon(
             Icons.search,
@@ -135,13 +125,13 @@ class ScreenHome extends StatelessWidget {
         ),
         IconButton(
           onPressed: () {
-            Get.to(
-              () => const ScreenSettings(),
-              transition: kTransitionRightToLeft,
-              duration: const Duration(
-                milliseconds: 80,
-              ),
-            );
+            // Get.to(
+            //   () => const ScreenSettings(),
+            //   transition: kTransitionRightToLeft,
+            //   duration: const Duration(
+            //     milliseconds: 80,
+            //   ),
+            // );
           },
           icon: Icon(
             Icons.settings,

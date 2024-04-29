@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:musicvoc/application/all_songs_bloc/all_songs_bloc.dart';
-import 'package:musicvoc/application/playlist_bloc/playlist_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/domain/song_model.dart';
 import 'package:musicvoc/presentation/common/songs_list_widget.dart';
+import 'package:musicvoc/services/database/playlist_db.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class AddSongsToPlaylist extends StatelessWidget {
   final String playlistName;
-  const AddSongsToPlaylist({super.key, required this.playlistName});
+
+  const AddSongsToPlaylist({
+    super.key,
+    required this.playlistName,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,17 +24,14 @@ class AddSongsToPlaylist extends StatelessWidget {
         centerTitle: true,
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 10),
+            padding: EdgeInsets.only(right: 10.w),
             child: IconButton(
               onPressed: () {
-                context.read<PlaylistBloc>().add(
-                      const PlaylistEvent.getPlaylist(),
-                    );
                 Navigator.pop(context);
               },
-              icon: const Icon(
+              icon: Icon(
                 Icons.check,
-                size: 25,
+                size: 25.sp,
               ),
             ),
           ),
@@ -38,7 +39,7 @@ class AddSongsToPlaylist extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const SizedBox(height: 5),
+          SizedBox(height: 5.h),
           Expanded(
             child: SongsListStaticWidgets.container(
               BlocBuilder<AllSongsBloc, AllSongsState>(
@@ -60,9 +61,9 @@ class AddSongsToPlaylist extends StatelessWidget {
                             child: QueryArtworkWidget(
                               id: allSongs.id,
                               type: ArtworkType.AUDIO,
-                              nullArtworkWidget: const Icon(
+                              nullArtworkWidget: Icon(
                                 Icons.music_note,
-                                size: 35,
+                                size: 35.sp,
                                 color: Colors.white,
                               ),
                             ),
@@ -108,18 +109,12 @@ class AddSongsToPlaylist extends StatelessWidget {
                                 id: allSongs.id,
                                 time: DateTime.now(),
                               );
-                              context.read<PlaylistBloc>().add(
-                                    PlaylistEvent.addSongsToPlaylist(
-                                        playlistName, songsModel),
-                                  );
-                              context.read<PlaylistBloc>().add(
-                                    PlaylistEvent.getPlaylistByName(
-                                      playlistName,
-                                    ),
-                                  );
-                              context.read<PlaylistBloc>().add(
-                                    const PlaylistEvent.getPlaylist(),
-                                  );
+                              PlaylistDb.instance.addSongsToPlaylist(
+                                playlistName,
+                                songsModel,
+                              );
+                              PlaylistDb.instance
+                                  .refreshPlaylistFolderSongs(playlistName);
                             },
                             icon: const Icon(
                               Icons.add_circle,
@@ -135,7 +130,6 @@ class AddSongsToPlaylist extends StatelessWidget {
           ),
         ],
       ),
-      // bottomSheet: CustomBottomMusic(context: context),
     );
   }
 }

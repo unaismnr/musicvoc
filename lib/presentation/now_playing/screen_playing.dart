@@ -15,6 +15,7 @@ import 'package:musicvoc/presentation/now_playing/playing_screen_functions.dart'
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 
+// ignore: must_be_immutable
 class ScreenPlaying extends StatelessWidget {
   ScreenPlaying({
     super.key,

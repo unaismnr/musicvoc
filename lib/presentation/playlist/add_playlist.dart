@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:musicvoc/application/playlist_bloc/playlist_bloc.dart';
 import 'package:musicvoc/core/other_consts.dart';
-import 'package:musicvoc/domain/playlist_song_model/playlist_song_model.dart';
+import 'package:musicvoc/services/database/playlist_db.dart';
 
 class AddPlaylist extends StatelessWidget {
   AddPlaylist({super.key});
@@ -19,11 +19,12 @@ class AddPlaylist extends StatelessWidget {
         centerTitle: true,
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 10),
+            padding: EdgeInsets.only(right: 10.w),
             child: IconButton(
               onPressed: () {
                 final name = textController.text.trim();
                 if (globeFormKey.currentState!.validate()) {
+                  PlaylistDb.instance.createPlaylist(name);
                   context.read<PlaylistBloc>().add(
                         PlaylistEvent.createPlaylist(name),
                       );
@@ -33,16 +34,16 @@ class AddPlaylist extends StatelessWidget {
                   Navigator.pop(context);
                 }
               },
-              icon: const Icon(
+              icon: Icon(
                 Icons.check,
-                size: 25,
+                size: 25.sp,
               ),
             ),
           ),
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: 20.w),
         child: Column(
           children: [
             kHeight10,
@@ -50,10 +51,10 @@ class AddPlaylist extends StatelessWidget {
               height: 120.h,
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.background,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(10.w),
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -61,7 +62,7 @@ class AddPlaylist extends StatelessWidget {
                     Text(
                       'Enter Playlist Name',
                       style: TextStyle(
-                        fontSize: 17,
+                        fontSize: 17.sp,
                         color: Theme.of(context).textTheme.bodyLarge!.color,
                       ),
                     ),
@@ -69,12 +70,12 @@ class AddPlaylist extends StatelessWidget {
                       key: globeFormKey,
                       child: TextFormField(
                         controller: textController,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Type Here',
                           hintStyle: TextStyle(
-                            fontSize: 15,
-                            color: Color.fromARGB(170, 158, 158, 158),
+                            fontSize: 15.sp,
+                            color: const Color.fromARGB(170, 158, 158, 158),
                           ),
                         ),
                         validator: (value) {

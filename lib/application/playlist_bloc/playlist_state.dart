@@ -4,11 +4,9 @@ part of 'playlist_bloc.dart';
 class PlaylistState with _$PlaylistState {
   const factory PlaylistState({
     required List<PlaylistSongModel> playlist,
-    required List<PlaylistSongModel> getPlaylistByName,
   }) = _PlaylistState;
 
   factory PlaylistState.initial() => const PlaylistState(
         playlist: [],
-        getPlaylistByName: [],
       );
 }

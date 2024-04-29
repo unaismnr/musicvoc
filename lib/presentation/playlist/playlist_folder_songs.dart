@@ -2,12 +2,14 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:musicvoc/application/playlist_bloc/playlist_bloc.dart';
+import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
+import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
 import 'package:musicvoc/domain/song_model.dart';
 import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
 import 'package:musicvoc/presentation/common/songs_list_widget.dart';
 import 'package:musicvoc/presentation/playlist/add_songs_toPlaylist.dart';
+import 'package:musicvoc/services/database/playlist_db.dart';
 
 class PlaylistFolderSongs extends StatelessWidget {
   final String title;
@@ -21,6 +23,7 @@ class PlaylistFolderSongs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PlaylistDb.instance.refreshPlaylistFolderSongs(title);
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
@@ -32,15 +35,10 @@ class PlaylistFolderSongs extends StatelessWidget {
           SizedBox(height: 5.h),
           Expanded(
             child: SongsListStaticWidgets.container(
-              BlocBuilder<PlaylistBloc, PlaylistState>(
-                builder: (context, state) {
-                  final player = AssetsAudioPlayer.withId('0');
-                  for (var item in state.getPlaylistByName) {
-                    if (item.playlistSongs.isEmpty) {
-                      return const Center(
-                        child: Text('Empty'),
-                      );
-                    } else {
+              ValueListenableBuilder(
+                  valueListenable: PlaylistDb.instance.playlistListner,
+                  builder: (context, newList, _) {
+                    for (var item in newList) {
                       return ListView.builder(
                           itemCount: item.playlistSongs.length,
                           itemBuilder: (context, index) {
@@ -69,23 +67,11 @@ class PlaylistFolderSongs extends StatelessWidget {
                                             .color!,
                                     true,
                                     () {
-                                      context.read<PlaylistBloc>().add(
-                                            PlaylistEvent
-                                                .deleteSongFromPlaylist(
-                                              item.playlistName,
-                                              playlistSongs,
-                                            ),
-                                          );
-
-                                      context.read<PlaylistBloc>().add(
-                                            PlaylistEvent.getPlaylistByName(
-                                              item.playlistName,
-                                            ),
-                                          );
-
-                                      context.read<PlaylistBloc>().add(
-                                            const PlaylistEvent.getPlaylist(),
-                                          );
+                                      PlaylistDb.instance
+                                          .deleteSongFromPlaylist(
+                                        item.playlistName,
+                                        playlistSongs,
+                                      );
                                     },
                                     () {
                                       playerOnTap(
@@ -102,43 +88,42 @@ class PlaylistFolderSongs extends StatelessWidget {
                                         headPhoneStrategy:
                                             HeadPhoneStrategy.pauseOnUnplug,
                                       );
-                                      // final recentlyPlayedSong = RecentlyPlayedModel(
-                                      //   title: favSongs.title,
-                                      //   artist: favSongs.artist,
-                                      //   songUri: favSongs.songUri,
-                                      //   id: favSongs.id,
-                                      //   time: DateTime.now(),
-                                      // );
-                                      // context.read<RecentlyPlayedBloc>().add(
-                                      //       RecentlyPlayedEvent.addRecentlyPlayed(
-                                      //         recentlyPlayedSong,
-                                      //       ),
-                                      //     );
+                                      final recentlyPlayedSong =
+                                          RecentlyPlayedModel(
+                                        title: playlistSongs.title,
+                                        artist: playlistSongs.artist,
+                                        songUri: playlistSongs.songUri,
+                                        id: playlistSongs.id,
+                                        time: DateTime.now(),
+                                      );
+                                      context.read<RecentlyPlayedBloc>().add(
+                                            RecentlyPlayedEvent
+                                                .addRecentlyPlayed(
+                                              recentlyPlayedSong,
+                                            ),
+                                          );
                                     },
                                     playlistSongs.id,
                                   );
                                 });
-                            // final playlistSongs = state.playlist[index].playlistSongs[index];
                           });
                     }
-                  }
-                  return const SizedBox();
-                },
-              ),
+                    return const SizedBox();
+                  }),
               context,
             ),
           ),
         ],
       ),
       floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 50),
+        padding: EdgeInsets.only(bottom: 50.h),
         child: FloatingActionButton(
           backgroundColor: Theme.of(context).colorScheme.background,
           elevation: 0,
           child: Icon(
             Icons.add,
             color: Theme.of(context).iconTheme.color,
-            size: 30,
+            size: 30.sp,
           ),
           onPressed: () {
             Navigator.of(context).push(

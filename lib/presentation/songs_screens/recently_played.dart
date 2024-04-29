@@ -1,6 +1,7 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
@@ -13,6 +14,9 @@ class RecentlyPlayed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<RecentlyPlayedBloc>().add(
+          const RecentlyPlayedEvent.getRecentlyPlayed(),
+        );
     return Scaffold(
       appBar: AppBar(
         title: const Text('Recently Played'),
@@ -20,7 +24,7 @@ class RecentlyPlayed extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const SizedBox(height: 5),
+          SizedBox(height: 5.h),
           Expanded(
             child: SongsListStaticWidgets.container(
               favoriteSongsList(),

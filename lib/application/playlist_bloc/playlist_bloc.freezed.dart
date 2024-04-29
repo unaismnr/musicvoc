@@ -19,40 +19,21 @@ mixin _$PlaylistEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getPlaylist,
-    required TResult Function(String playlistNameToGet) getPlaylistByName,
     required TResult Function(String playlistNameToCreate) createPlaylist,
-    required TResult Function(
-            String playlistName, SongsModel addSongsToPlaylist)
-        addSongsToPlaylist,
-    required TResult Function(
-            String playlistNameToDelete, SongsModel deleteSongsFromPlaylist)
-        deleteSongFromPlaylist,
     required TResult Function(PlaylistSongModel deletePlaylist) deletePlaylist,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getPlaylist,
-    TResult? Function(String playlistNameToGet)? getPlaylistByName,
     TResult? Function(String playlistNameToCreate)? createPlaylist,
-    TResult? Function(String playlistName, SongsModel addSongsToPlaylist)?
-        addSongsToPlaylist,
-    TResult? Function(
-            String playlistNameToDelete, SongsModel deleteSongsFromPlaylist)?
-        deleteSongFromPlaylist,
     TResult? Function(PlaylistSongModel deletePlaylist)? deletePlaylist,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getPlaylist,
-    TResult Function(String playlistNameToGet)? getPlaylistByName,
     TResult Function(String playlistNameToCreate)? createPlaylist,
-    TResult Function(String playlistName, SongsModel addSongsToPlaylist)?
-        addSongsToPlaylist,
-    TResult Function(
-            String playlistNameToDelete, SongsModel deleteSongsFromPlaylist)?
-        deleteSongFromPlaylist,
     TResult Function(PlaylistSongModel deletePlaylist)? deletePlaylist,
     required TResult orElse(),
   }) =>
@@ -60,31 +41,21 @@ mixin _$PlaylistEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPlaylist value) getPlaylist,
-    required TResult Function(_GetPlaylistByName value) getPlaylistByName,
     required TResult Function(_CreatePlaylist value) createPlaylist,
-    required TResult Function(_AddSongsToPlaylist value) addSongsToPlaylist,
-    required TResult Function(_DeleteSongFromPlaylist value)
-        deleteSongFromPlaylist,
     required TResult Function(_DeletePlaylist value) deletePlaylist,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPlaylist value)? getPlaylist,
-    TResult? Function(_GetPlaylistByName value)? getPlaylistByName,
     TResult? Function(_CreatePlaylist value)? createPlaylist,
-    TResult? Function(_AddSongsToPlaylist value)? addSongsToPlaylist,
-    TResult? Function(_DeleteSongFromPlaylist value)? deleteSongFromPlaylist,
     TResult? Function(_DeletePlaylist value)? deletePlaylist,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPlaylist value)? getPlaylist,
-    TResult Function(_GetPlaylistByName value)? getPlaylistByName,
     TResult Function(_CreatePlaylist value)? createPlaylist,
-    TResult Function(_AddSongsToPlaylist value)? addSongsToPlaylist,
-    TResult Function(_DeleteSongFromPlaylist value)? deleteSongFromPlaylist,
     TResult Function(_DeletePlaylist value)? deletePlaylist,
     required TResult orElse(),
   }) =>
@@ -154,14 +125,7 @@ class _$GetPlaylistImpl with DiagnosticableTreeMixin implements _GetPlaylist {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getPlaylist,
-    required TResult Function(String playlistNameToGet) getPlaylistByName,
     required TResult Function(String playlistNameToCreate) createPlaylist,
-    required TResult Function(
-            String playlistName, SongsModel addSongsToPlaylist)
-        addSongsToPlaylist,
-    required TResult Function(
-            String playlistNameToDelete, SongsModel deleteSongsFromPlaylist)
-        deleteSongFromPlaylist,
     required TResult Function(PlaylistSongModel deletePlaylist) deletePlaylist,
   }) {
     return getPlaylist();
@@ -171,13 +135,7 @@ class _$GetPlaylistImpl with DiagnosticableTreeMixin implements _GetPlaylist {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getPlaylist,
-    TResult? Function(String playlistNameToGet)? getPlaylistByName,
     TResult? Function(String playlistNameToCreate)? createPlaylist,
-    TResult? Function(String playlistName, SongsModel addSongsToPlaylist)?
-        addSongsToPlaylist,
-    TResult? Function(
-            String playlistNameToDelete, SongsModel deleteSongsFromPlaylist)?
-        deleteSongFromPlaylist,
     TResult? Function(PlaylistSongModel deletePlaylist)? deletePlaylist,
   }) {
     return getPlaylist?.call();
@@ -187,13 +145,7 @@ class _$GetPlaylistImpl with DiagnosticableTreeMixin implements _GetPlaylist {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getPlaylist,
-    TResult Function(String playlistNameToGet)? getPlaylistByName,
     TResult Function(String playlistNameToCreate)? createPlaylist,
-    TResult Function(String playlistName, SongsModel addSongsToPlaylist)?
-        addSongsToPlaylist,
-    TResult Function(
-            String playlistNameToDelete, SongsModel deleteSongsFromPlaylist)?
-        deleteSongFromPlaylist,
     TResult Function(PlaylistSongModel deletePlaylist)? deletePlaylist,
     required TResult orElse(),
   }) {
@@ -207,11 +159,7 @@ class _$GetPlaylistImpl with DiagnosticableTreeMixin implements _GetPlaylist {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPlaylist value) getPlaylist,
-    required TResult Function(_GetPlaylistByName value) getPlaylistByName,
     required TResult Function(_CreatePlaylist value) createPlaylist,
-    required TResult Function(_AddSongsToPlaylist value) addSongsToPlaylist,
-    required TResult Function(_DeleteSongFromPlaylist value)
-        deleteSongFromPlaylist,
     required TResult Function(_DeletePlaylist value) deletePlaylist,
   }) {
     return getPlaylist(this);
@@ -221,10 +169,7 @@ class _$GetPlaylistImpl with DiagnosticableTreeMixin implements _GetPlaylist {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPlaylist value)? getPlaylist,
-    TResult? Function(_GetPlaylistByName value)? getPlaylistByName,
     TResult? Function(_CreatePlaylist value)? createPlaylist,
-    TResult? Function(_AddSongsToPlaylist value)? addSongsToPlaylist,
-    TResult? Function(_DeleteSongFromPlaylist value)? deleteSongFromPlaylist,
     TResult? Function(_DeletePlaylist value)? deletePlaylist,
   }) {
     return getPlaylist?.call(this);
@@ -234,10 +179,7 @@ class _$GetPlaylistImpl with DiagnosticableTreeMixin implements _GetPlaylist {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPlaylist value)? getPlaylist,
-    TResult Function(_GetPlaylistByName value)? getPlaylistByName,
     TResult Function(_CreatePlaylist value)? createPlaylist,
-    TResult Function(_AddSongsToPlaylist value)? addSongsToPlaylist,
-    TResult Function(_DeleteSongFromPlaylist value)? deleteSongFromPlaylist,
     TResult Function(_DeletePlaylist value)? deletePlaylist,
     required TResult orElse(),
   }) {
@@ -250,187 +192,6 @@ class _$GetPlaylistImpl with DiagnosticableTreeMixin implements _GetPlaylist {
 
 abstract class _GetPlaylist implements PlaylistEvent {
   const factory _GetPlaylist() = _$GetPlaylistImpl;
-}
-
-/// @nodoc
-abstract class _$$GetPlaylistByNameImplCopyWith<$Res> {
-  factory _$$GetPlaylistByNameImplCopyWith(_$GetPlaylistByNameImpl value,
-          $Res Function(_$GetPlaylistByNameImpl) then) =
-      __$$GetPlaylistByNameImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String playlistNameToGet});
-}
-
-/// @nodoc
-class __$$GetPlaylistByNameImplCopyWithImpl<$Res>
-    extends _$PlaylistEventCopyWithImpl<$Res, _$GetPlaylistByNameImpl>
-    implements _$$GetPlaylistByNameImplCopyWith<$Res> {
-  __$$GetPlaylistByNameImplCopyWithImpl(_$GetPlaylistByNameImpl _value,
-      $Res Function(_$GetPlaylistByNameImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? playlistNameToGet = null,
-  }) {
-    return _then(_$GetPlaylistByNameImpl(
-      null == playlistNameToGet
-          ? _value.playlistNameToGet
-          : playlistNameToGet // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$GetPlaylistByNameImpl
-    with DiagnosticableTreeMixin
-    implements _GetPlaylistByName {
-  const _$GetPlaylistByNameImpl(this.playlistNameToGet);
-
-  @override
-  final String playlistNameToGet;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PlaylistEvent.getPlaylistByName(playlistNameToGet: $playlistNameToGet)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'PlaylistEvent.getPlaylistByName'))
-      ..add(DiagnosticsProperty('playlistNameToGet', playlistNameToGet));
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$GetPlaylistByNameImpl &&
-            (identical(other.playlistNameToGet, playlistNameToGet) ||
-                other.playlistNameToGet == playlistNameToGet));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, playlistNameToGet);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$GetPlaylistByNameImplCopyWith<_$GetPlaylistByNameImpl> get copyWith =>
-      __$$GetPlaylistByNameImplCopyWithImpl<_$GetPlaylistByNameImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() getPlaylist,
-    required TResult Function(String playlistNameToGet) getPlaylistByName,
-    required TResult Function(String playlistNameToCreate) createPlaylist,
-    required TResult Function(
-            String playlistName, SongsModel addSongsToPlaylist)
-        addSongsToPlaylist,
-    required TResult Function(
-            String playlistNameToDelete, SongsModel deleteSongsFromPlaylist)
-        deleteSongFromPlaylist,
-    required TResult Function(PlaylistSongModel deletePlaylist) deletePlaylist,
-  }) {
-    return getPlaylistByName(playlistNameToGet);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getPlaylist,
-    TResult? Function(String playlistNameToGet)? getPlaylistByName,
-    TResult? Function(String playlistNameToCreate)? createPlaylist,
-    TResult? Function(String playlistName, SongsModel addSongsToPlaylist)?
-        addSongsToPlaylist,
-    TResult? Function(
-            String playlistNameToDelete, SongsModel deleteSongsFromPlaylist)?
-        deleteSongFromPlaylist,
-    TResult? Function(PlaylistSongModel deletePlaylist)? deletePlaylist,
-  }) {
-    return getPlaylistByName?.call(playlistNameToGet);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getPlaylist,
-    TResult Function(String playlistNameToGet)? getPlaylistByName,
-    TResult Function(String playlistNameToCreate)? createPlaylist,
-    TResult Function(String playlistName, SongsModel addSongsToPlaylist)?
-        addSongsToPlaylist,
-    TResult Function(
-            String playlistNameToDelete, SongsModel deleteSongsFromPlaylist)?
-        deleteSongFromPlaylist,
-    TResult Function(PlaylistSongModel deletePlaylist)? deletePlaylist,
-    required TResult orElse(),
-  }) {
-    if (getPlaylistByName != null) {
-      return getPlaylistByName(playlistNameToGet);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_GetPlaylist value) getPlaylist,
-    required TResult Function(_GetPlaylistByName value) getPlaylistByName,
-    required TResult Function(_CreatePlaylist value) createPlaylist,
-    required TResult Function(_AddSongsToPlaylist value) addSongsToPlaylist,
-    required TResult Function(_DeleteSongFromPlaylist value)
-        deleteSongFromPlaylist,
-    required TResult Function(_DeletePlaylist value) deletePlaylist,
-  }) {
-    return getPlaylistByName(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetPlaylist value)? getPlaylist,
-    TResult? Function(_GetPlaylistByName value)? getPlaylistByName,
-    TResult? Function(_CreatePlaylist value)? createPlaylist,
-    TResult? Function(_AddSongsToPlaylist value)? addSongsToPlaylist,
-    TResult? Function(_DeleteSongFromPlaylist value)? deleteSongFromPlaylist,
-    TResult? Function(_DeletePlaylist value)? deletePlaylist,
-  }) {
-    return getPlaylistByName?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetPlaylist value)? getPlaylist,
-    TResult Function(_GetPlaylistByName value)? getPlaylistByName,
-    TResult Function(_CreatePlaylist value)? createPlaylist,
-    TResult Function(_AddSongsToPlaylist value)? addSongsToPlaylist,
-    TResult Function(_DeleteSongFromPlaylist value)? deleteSongFromPlaylist,
-    TResult Function(_DeletePlaylist value)? deletePlaylist,
-    required TResult orElse(),
-  }) {
-    if (getPlaylistByName != null) {
-      return getPlaylistByName(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _GetPlaylistByName implements PlaylistEvent {
-  const factory _GetPlaylistByName(final String playlistNameToGet) =
-      _$GetPlaylistByNameImpl;
-
-  String get playlistNameToGet;
-  @JsonKey(ignore: true)
-  _$$GetPlaylistByNameImplCopyWith<_$GetPlaylistByNameImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -510,14 +271,7 @@ class _$CreatePlaylistImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getPlaylist,
-    required TResult Function(String playlistNameToGet) getPlaylistByName,
     required TResult Function(String playlistNameToCreate) createPlaylist,
-    required TResult Function(
-            String playlistName, SongsModel addSongsToPlaylist)
-        addSongsToPlaylist,
-    required TResult Function(
-            String playlistNameToDelete, SongsModel deleteSongsFromPlaylist)
-        deleteSongFromPlaylist,
     required TResult Function(PlaylistSongModel deletePlaylist) deletePlaylist,
   }) {
     return createPlaylist(playlistNameToCreate);
@@ -527,13 +281,7 @@ class _$CreatePlaylistImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getPlaylist,
-    TResult? Function(String playlistNameToGet)? getPlaylistByName,
     TResult? Function(String playlistNameToCreate)? createPlaylist,
-    TResult? Function(String playlistName, SongsModel addSongsToPlaylist)?
-        addSongsToPlaylist,
-    TResult? Function(
-            String playlistNameToDelete, SongsModel deleteSongsFromPlaylist)?
-        deleteSongFromPlaylist,
     TResult? Function(PlaylistSongModel deletePlaylist)? deletePlaylist,
   }) {
     return createPlaylist?.call(playlistNameToCreate);
@@ -543,13 +291,7 @@ class _$CreatePlaylistImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getPlaylist,
-    TResult Function(String playlistNameToGet)? getPlaylistByName,
     TResult Function(String playlistNameToCreate)? createPlaylist,
-    TResult Function(String playlistName, SongsModel addSongsToPlaylist)?
-        addSongsToPlaylist,
-    TResult Function(
-            String playlistNameToDelete, SongsModel deleteSongsFromPlaylist)?
-        deleteSongFromPlaylist,
     TResult Function(PlaylistSongModel deletePlaylist)? deletePlaylist,
     required TResult orElse(),
   }) {
@@ -563,11 +305,7 @@ class _$CreatePlaylistImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPlaylist value) getPlaylist,
-    required TResult Function(_GetPlaylistByName value) getPlaylistByName,
     required TResult Function(_CreatePlaylist value) createPlaylist,
-    required TResult Function(_AddSongsToPlaylist value) addSongsToPlaylist,
-    required TResult Function(_DeleteSongFromPlaylist value)
-        deleteSongFromPlaylist,
     required TResult Function(_DeletePlaylist value) deletePlaylist,
   }) {
     return createPlaylist(this);
@@ -577,10 +315,7 @@ class _$CreatePlaylistImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPlaylist value)? getPlaylist,
-    TResult? Function(_GetPlaylistByName value)? getPlaylistByName,
     TResult? Function(_CreatePlaylist value)? createPlaylist,
-    TResult? Function(_AddSongsToPlaylist value)? addSongsToPlaylist,
-    TResult? Function(_DeleteSongFromPlaylist value)? deleteSongFromPlaylist,
     TResult? Function(_DeletePlaylist value)? deletePlaylist,
   }) {
     return createPlaylist?.call(this);
@@ -590,10 +325,7 @@ class _$CreatePlaylistImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPlaylist value)? getPlaylist,
-    TResult Function(_GetPlaylistByName value)? getPlaylistByName,
     TResult Function(_CreatePlaylist value)? createPlaylist,
-    TResult Function(_AddSongsToPlaylist value)? addSongsToPlaylist,
-    TResult Function(_DeleteSongFromPlaylist value)? deleteSongFromPlaylist,
     TResult Function(_DeletePlaylist value)? deletePlaylist,
     required TResult orElse(),
   }) {
@@ -612,401 +344,6 @@ abstract class _CreatePlaylist implements PlaylistEvent {
   @JsonKey(ignore: true)
   _$$CreatePlaylistImplCopyWith<_$CreatePlaylistImpl> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$AddSongsToPlaylistImplCopyWith<$Res> {
-  factory _$$AddSongsToPlaylistImplCopyWith(_$AddSongsToPlaylistImpl value,
-          $Res Function(_$AddSongsToPlaylistImpl) then) =
-      __$$AddSongsToPlaylistImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String playlistName, SongsModel addSongsToPlaylist});
-}
-
-/// @nodoc
-class __$$AddSongsToPlaylistImplCopyWithImpl<$Res>
-    extends _$PlaylistEventCopyWithImpl<$Res, _$AddSongsToPlaylistImpl>
-    implements _$$AddSongsToPlaylistImplCopyWith<$Res> {
-  __$$AddSongsToPlaylistImplCopyWithImpl(_$AddSongsToPlaylistImpl _value,
-      $Res Function(_$AddSongsToPlaylistImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? playlistName = null,
-    Object? addSongsToPlaylist = null,
-  }) {
-    return _then(_$AddSongsToPlaylistImpl(
-      null == playlistName
-          ? _value.playlistName
-          : playlistName // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == addSongsToPlaylist
-          ? _value.addSongsToPlaylist
-          : addSongsToPlaylist // ignore: cast_nullable_to_non_nullable
-              as SongsModel,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$AddSongsToPlaylistImpl
-    with DiagnosticableTreeMixin
-    implements _AddSongsToPlaylist {
-  const _$AddSongsToPlaylistImpl(this.playlistName, this.addSongsToPlaylist);
-
-  @override
-  final String playlistName;
-  @override
-  final SongsModel addSongsToPlaylist;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PlaylistEvent.addSongsToPlaylist(playlistName: $playlistName, addSongsToPlaylist: $addSongsToPlaylist)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'PlaylistEvent.addSongsToPlaylist'))
-      ..add(DiagnosticsProperty('playlistName', playlistName))
-      ..add(DiagnosticsProperty('addSongsToPlaylist', addSongsToPlaylist));
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AddSongsToPlaylistImpl &&
-            (identical(other.playlistName, playlistName) ||
-                other.playlistName == playlistName) &&
-            (identical(other.addSongsToPlaylist, addSongsToPlaylist) ||
-                other.addSongsToPlaylist == addSongsToPlaylist));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, playlistName, addSongsToPlaylist);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AddSongsToPlaylistImplCopyWith<_$AddSongsToPlaylistImpl> get copyWith =>
-      __$$AddSongsToPlaylistImplCopyWithImpl<_$AddSongsToPlaylistImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() getPlaylist,
-    required TResult Function(String playlistNameToGet) getPlaylistByName,
-    required TResult Function(String playlistNameToCreate) createPlaylist,
-    required TResult Function(
-            String playlistName, SongsModel addSongsToPlaylist)
-        addSongsToPlaylist,
-    required TResult Function(
-            String playlistNameToDelete, SongsModel deleteSongsFromPlaylist)
-        deleteSongFromPlaylist,
-    required TResult Function(PlaylistSongModel deletePlaylist) deletePlaylist,
-  }) {
-    return addSongsToPlaylist(playlistName, this.addSongsToPlaylist);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getPlaylist,
-    TResult? Function(String playlistNameToGet)? getPlaylistByName,
-    TResult? Function(String playlistNameToCreate)? createPlaylist,
-    TResult? Function(String playlistName, SongsModel addSongsToPlaylist)?
-        addSongsToPlaylist,
-    TResult? Function(
-            String playlistNameToDelete, SongsModel deleteSongsFromPlaylist)?
-        deleteSongFromPlaylist,
-    TResult? Function(PlaylistSongModel deletePlaylist)? deletePlaylist,
-  }) {
-    return addSongsToPlaylist?.call(playlistName, this.addSongsToPlaylist);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getPlaylist,
-    TResult Function(String playlistNameToGet)? getPlaylistByName,
-    TResult Function(String playlistNameToCreate)? createPlaylist,
-    TResult Function(String playlistName, SongsModel addSongsToPlaylist)?
-        addSongsToPlaylist,
-    TResult Function(
-            String playlistNameToDelete, SongsModel deleteSongsFromPlaylist)?
-        deleteSongFromPlaylist,
-    TResult Function(PlaylistSongModel deletePlaylist)? deletePlaylist,
-    required TResult orElse(),
-  }) {
-    if (addSongsToPlaylist != null) {
-      return addSongsToPlaylist(playlistName, this.addSongsToPlaylist);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_GetPlaylist value) getPlaylist,
-    required TResult Function(_GetPlaylistByName value) getPlaylistByName,
-    required TResult Function(_CreatePlaylist value) createPlaylist,
-    required TResult Function(_AddSongsToPlaylist value) addSongsToPlaylist,
-    required TResult Function(_DeleteSongFromPlaylist value)
-        deleteSongFromPlaylist,
-    required TResult Function(_DeletePlaylist value) deletePlaylist,
-  }) {
-    return addSongsToPlaylist(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetPlaylist value)? getPlaylist,
-    TResult? Function(_GetPlaylistByName value)? getPlaylistByName,
-    TResult? Function(_CreatePlaylist value)? createPlaylist,
-    TResult? Function(_AddSongsToPlaylist value)? addSongsToPlaylist,
-    TResult? Function(_DeleteSongFromPlaylist value)? deleteSongFromPlaylist,
-    TResult? Function(_DeletePlaylist value)? deletePlaylist,
-  }) {
-    return addSongsToPlaylist?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetPlaylist value)? getPlaylist,
-    TResult Function(_GetPlaylistByName value)? getPlaylistByName,
-    TResult Function(_CreatePlaylist value)? createPlaylist,
-    TResult Function(_AddSongsToPlaylist value)? addSongsToPlaylist,
-    TResult Function(_DeleteSongFromPlaylist value)? deleteSongFromPlaylist,
-    TResult Function(_DeletePlaylist value)? deletePlaylist,
-    required TResult orElse(),
-  }) {
-    if (addSongsToPlaylist != null) {
-      return addSongsToPlaylist(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _AddSongsToPlaylist implements PlaylistEvent {
-  const factory _AddSongsToPlaylist(
-          final String playlistName, final SongsModel addSongsToPlaylist) =
-      _$AddSongsToPlaylistImpl;
-
-  String get playlistName;
-  SongsModel get addSongsToPlaylist;
-  @JsonKey(ignore: true)
-  _$$AddSongsToPlaylistImplCopyWith<_$AddSongsToPlaylistImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$DeleteSongFromPlaylistImplCopyWith<$Res> {
-  factory _$$DeleteSongFromPlaylistImplCopyWith(
-          _$DeleteSongFromPlaylistImpl value,
-          $Res Function(_$DeleteSongFromPlaylistImpl) then) =
-      __$$DeleteSongFromPlaylistImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String playlistNameToDelete, SongsModel deleteSongsFromPlaylist});
-}
-
-/// @nodoc
-class __$$DeleteSongFromPlaylistImplCopyWithImpl<$Res>
-    extends _$PlaylistEventCopyWithImpl<$Res, _$DeleteSongFromPlaylistImpl>
-    implements _$$DeleteSongFromPlaylistImplCopyWith<$Res> {
-  __$$DeleteSongFromPlaylistImplCopyWithImpl(
-      _$DeleteSongFromPlaylistImpl _value,
-      $Res Function(_$DeleteSongFromPlaylistImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? playlistNameToDelete = null,
-    Object? deleteSongsFromPlaylist = null,
-  }) {
-    return _then(_$DeleteSongFromPlaylistImpl(
-      null == playlistNameToDelete
-          ? _value.playlistNameToDelete
-          : playlistNameToDelete // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == deleteSongsFromPlaylist
-          ? _value.deleteSongsFromPlaylist
-          : deleteSongsFromPlaylist // ignore: cast_nullable_to_non_nullable
-              as SongsModel,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$DeleteSongFromPlaylistImpl
-    with DiagnosticableTreeMixin
-    implements _DeleteSongFromPlaylist {
-  const _$DeleteSongFromPlaylistImpl(
-      this.playlistNameToDelete, this.deleteSongsFromPlaylist);
-
-  @override
-  final String playlistNameToDelete;
-  @override
-  final SongsModel deleteSongsFromPlaylist;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PlaylistEvent.deleteSongFromPlaylist(playlistNameToDelete: $playlistNameToDelete, deleteSongsFromPlaylist: $deleteSongsFromPlaylist)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'PlaylistEvent.deleteSongFromPlaylist'))
-      ..add(DiagnosticsProperty('playlistNameToDelete', playlistNameToDelete))
-      ..add(DiagnosticsProperty(
-          'deleteSongsFromPlaylist', deleteSongsFromPlaylist));
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DeleteSongFromPlaylistImpl &&
-            (identical(other.playlistNameToDelete, playlistNameToDelete) ||
-                other.playlistNameToDelete == playlistNameToDelete) &&
-            (identical(
-                    other.deleteSongsFromPlaylist, deleteSongsFromPlaylist) ||
-                other.deleteSongsFromPlaylist == deleteSongsFromPlaylist));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, playlistNameToDelete, deleteSongsFromPlaylist);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$DeleteSongFromPlaylistImplCopyWith<_$DeleteSongFromPlaylistImpl>
-      get copyWith => __$$DeleteSongFromPlaylistImplCopyWithImpl<
-          _$DeleteSongFromPlaylistImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() getPlaylist,
-    required TResult Function(String playlistNameToGet) getPlaylistByName,
-    required TResult Function(String playlistNameToCreate) createPlaylist,
-    required TResult Function(
-            String playlistName, SongsModel addSongsToPlaylist)
-        addSongsToPlaylist,
-    required TResult Function(
-            String playlistNameToDelete, SongsModel deleteSongsFromPlaylist)
-        deleteSongFromPlaylist,
-    required TResult Function(PlaylistSongModel deletePlaylist) deletePlaylist,
-  }) {
-    return deleteSongFromPlaylist(
-        playlistNameToDelete, deleteSongsFromPlaylist);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getPlaylist,
-    TResult? Function(String playlistNameToGet)? getPlaylistByName,
-    TResult? Function(String playlistNameToCreate)? createPlaylist,
-    TResult? Function(String playlistName, SongsModel addSongsToPlaylist)?
-        addSongsToPlaylist,
-    TResult? Function(
-            String playlistNameToDelete, SongsModel deleteSongsFromPlaylist)?
-        deleteSongFromPlaylist,
-    TResult? Function(PlaylistSongModel deletePlaylist)? deletePlaylist,
-  }) {
-    return deleteSongFromPlaylist?.call(
-        playlistNameToDelete, deleteSongsFromPlaylist);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getPlaylist,
-    TResult Function(String playlistNameToGet)? getPlaylistByName,
-    TResult Function(String playlistNameToCreate)? createPlaylist,
-    TResult Function(String playlistName, SongsModel addSongsToPlaylist)?
-        addSongsToPlaylist,
-    TResult Function(
-            String playlistNameToDelete, SongsModel deleteSongsFromPlaylist)?
-        deleteSongFromPlaylist,
-    TResult Function(PlaylistSongModel deletePlaylist)? deletePlaylist,
-    required TResult orElse(),
-  }) {
-    if (deleteSongFromPlaylist != null) {
-      return deleteSongFromPlaylist(
-          playlistNameToDelete, deleteSongsFromPlaylist);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_GetPlaylist value) getPlaylist,
-    required TResult Function(_GetPlaylistByName value) getPlaylistByName,
-    required TResult Function(_CreatePlaylist value) createPlaylist,
-    required TResult Function(_AddSongsToPlaylist value) addSongsToPlaylist,
-    required TResult Function(_DeleteSongFromPlaylist value)
-        deleteSongFromPlaylist,
-    required TResult Function(_DeletePlaylist value) deletePlaylist,
-  }) {
-    return deleteSongFromPlaylist(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetPlaylist value)? getPlaylist,
-    TResult? Function(_GetPlaylistByName value)? getPlaylistByName,
-    TResult? Function(_CreatePlaylist value)? createPlaylist,
-    TResult? Function(_AddSongsToPlaylist value)? addSongsToPlaylist,
-    TResult? Function(_DeleteSongFromPlaylist value)? deleteSongFromPlaylist,
-    TResult? Function(_DeletePlaylist value)? deletePlaylist,
-  }) {
-    return deleteSongFromPlaylist?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetPlaylist value)? getPlaylist,
-    TResult Function(_GetPlaylistByName value)? getPlaylistByName,
-    TResult Function(_CreatePlaylist value)? createPlaylist,
-    TResult Function(_AddSongsToPlaylist value)? addSongsToPlaylist,
-    TResult Function(_DeleteSongFromPlaylist value)? deleteSongFromPlaylist,
-    TResult Function(_DeletePlaylist value)? deletePlaylist,
-    required TResult orElse(),
-  }) {
-    if (deleteSongFromPlaylist != null) {
-      return deleteSongFromPlaylist(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _DeleteSongFromPlaylist implements PlaylistEvent {
-  const factory _DeleteSongFromPlaylist(final String playlistNameToDelete,
-      final SongsModel deleteSongsFromPlaylist) = _$DeleteSongFromPlaylistImpl;
-
-  String get playlistNameToDelete;
-  SongsModel get deleteSongsFromPlaylist;
-  @JsonKey(ignore: true)
-  _$$DeleteSongFromPlaylistImplCopyWith<_$DeleteSongFromPlaylistImpl>
-      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1086,14 +423,7 @@ class _$DeletePlaylistImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getPlaylist,
-    required TResult Function(String playlistNameToGet) getPlaylistByName,
     required TResult Function(String playlistNameToCreate) createPlaylist,
-    required TResult Function(
-            String playlistName, SongsModel addSongsToPlaylist)
-        addSongsToPlaylist,
-    required TResult Function(
-            String playlistNameToDelete, SongsModel deleteSongsFromPlaylist)
-        deleteSongFromPlaylist,
     required TResult Function(PlaylistSongModel deletePlaylist) deletePlaylist,
   }) {
     return deletePlaylist(this.deletePlaylist);
@@ -1103,13 +433,7 @@ class _$DeletePlaylistImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getPlaylist,
-    TResult? Function(String playlistNameToGet)? getPlaylistByName,
     TResult? Function(String playlistNameToCreate)? createPlaylist,
-    TResult? Function(String playlistName, SongsModel addSongsToPlaylist)?
-        addSongsToPlaylist,
-    TResult? Function(
-            String playlistNameToDelete, SongsModel deleteSongsFromPlaylist)?
-        deleteSongFromPlaylist,
     TResult? Function(PlaylistSongModel deletePlaylist)? deletePlaylist,
   }) {
     return deletePlaylist?.call(this.deletePlaylist);
@@ -1119,13 +443,7 @@ class _$DeletePlaylistImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getPlaylist,
-    TResult Function(String playlistNameToGet)? getPlaylistByName,
     TResult Function(String playlistNameToCreate)? createPlaylist,
-    TResult Function(String playlistName, SongsModel addSongsToPlaylist)?
-        addSongsToPlaylist,
-    TResult Function(
-            String playlistNameToDelete, SongsModel deleteSongsFromPlaylist)?
-        deleteSongFromPlaylist,
     TResult Function(PlaylistSongModel deletePlaylist)? deletePlaylist,
     required TResult orElse(),
   }) {
@@ -1139,11 +457,7 @@ class _$DeletePlaylistImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPlaylist value) getPlaylist,
-    required TResult Function(_GetPlaylistByName value) getPlaylistByName,
     required TResult Function(_CreatePlaylist value) createPlaylist,
-    required TResult Function(_AddSongsToPlaylist value) addSongsToPlaylist,
-    required TResult Function(_DeleteSongFromPlaylist value)
-        deleteSongFromPlaylist,
     required TResult Function(_DeletePlaylist value) deletePlaylist,
   }) {
     return deletePlaylist(this);
@@ -1153,10 +467,7 @@ class _$DeletePlaylistImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPlaylist value)? getPlaylist,
-    TResult? Function(_GetPlaylistByName value)? getPlaylistByName,
     TResult? Function(_CreatePlaylist value)? createPlaylist,
-    TResult? Function(_AddSongsToPlaylist value)? addSongsToPlaylist,
-    TResult? Function(_DeleteSongFromPlaylist value)? deleteSongFromPlaylist,
     TResult? Function(_DeletePlaylist value)? deletePlaylist,
   }) {
     return deletePlaylist?.call(this);
@@ -1166,10 +477,7 @@ class _$DeletePlaylistImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPlaylist value)? getPlaylist,
-    TResult Function(_GetPlaylistByName value)? getPlaylistByName,
     TResult Function(_CreatePlaylist value)? createPlaylist,
-    TResult Function(_AddSongsToPlaylist value)? addSongsToPlaylist,
-    TResult Function(_DeleteSongFromPlaylist value)? deleteSongFromPlaylist,
     TResult Function(_DeletePlaylist value)? deletePlaylist,
     required TResult orElse(),
   }) {
@@ -1193,8 +501,6 @@ abstract class _DeletePlaylist implements PlaylistEvent {
 /// @nodoc
 mixin _$PlaylistState {
   List<PlaylistSongModel> get playlist => throw _privateConstructorUsedError;
-  List<PlaylistSongModel> get getPlaylistByName =>
-      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PlaylistStateCopyWith<PlaylistState> get copyWith =>
@@ -1207,9 +513,7 @@ abstract class $PlaylistStateCopyWith<$Res> {
           PlaylistState value, $Res Function(PlaylistState) then) =
       _$PlaylistStateCopyWithImpl<$Res, PlaylistState>;
   @useResult
-  $Res call(
-      {List<PlaylistSongModel> playlist,
-      List<PlaylistSongModel> getPlaylistByName});
+  $Res call({List<PlaylistSongModel> playlist});
 }
 
 /// @nodoc
@@ -1226,16 +530,11 @@ class _$PlaylistStateCopyWithImpl<$Res, $Val extends PlaylistState>
   @override
   $Res call({
     Object? playlist = null,
-    Object? getPlaylistByName = null,
   }) {
     return _then(_value.copyWith(
       playlist: null == playlist
           ? _value.playlist
           : playlist // ignore: cast_nullable_to_non_nullable
-              as List<PlaylistSongModel>,
-      getPlaylistByName: null == getPlaylistByName
-          ? _value.getPlaylistByName
-          : getPlaylistByName // ignore: cast_nullable_to_non_nullable
               as List<PlaylistSongModel>,
     ) as $Val);
   }
@@ -1249,9 +548,7 @@ abstract class _$$PlaylistStateImplCopyWith<$Res>
       __$$PlaylistStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {List<PlaylistSongModel> playlist,
-      List<PlaylistSongModel> getPlaylistByName});
+  $Res call({List<PlaylistSongModel> playlist});
 }
 
 /// @nodoc
@@ -1266,16 +563,11 @@ class __$$PlaylistStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? playlist = null,
-    Object? getPlaylistByName = null,
   }) {
     return _then(_$PlaylistStateImpl(
       playlist: null == playlist
           ? _value._playlist
           : playlist // ignore: cast_nullable_to_non_nullable
-              as List<PlaylistSongModel>,
-      getPlaylistByName: null == getPlaylistByName
-          ? _value._getPlaylistByName
-          : getPlaylistByName // ignore: cast_nullable_to_non_nullable
               as List<PlaylistSongModel>,
     ));
   }
@@ -1286,11 +578,8 @@ class __$$PlaylistStateImplCopyWithImpl<$Res>
 class _$PlaylistStateImpl
     with DiagnosticableTreeMixin
     implements _PlaylistState {
-  const _$PlaylistStateImpl(
-      {required final List<PlaylistSongModel> playlist,
-      required final List<PlaylistSongModel> getPlaylistByName})
-      : _playlist = playlist,
-        _getPlaylistByName = getPlaylistByName;
+  const _$PlaylistStateImpl({required final List<PlaylistSongModel> playlist})
+      : _playlist = playlist;
 
   final List<PlaylistSongModel> _playlist;
   @override
@@ -1300,18 +589,9 @@ class _$PlaylistStateImpl
     return EqualUnmodifiableListView(_playlist);
   }
 
-  final List<PlaylistSongModel> _getPlaylistByName;
-  @override
-  List<PlaylistSongModel> get getPlaylistByName {
-    if (_getPlaylistByName is EqualUnmodifiableListView)
-      return _getPlaylistByName;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_getPlaylistByName);
-  }
-
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PlaylistState(playlist: $playlist, getPlaylistByName: $getPlaylistByName)';
+    return 'PlaylistState(playlist: $playlist)';
   }
 
   @override
@@ -1319,8 +599,7 @@ class _$PlaylistStateImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'PlaylistState'))
-      ..add(DiagnosticsProperty('playlist', playlist))
-      ..add(DiagnosticsProperty('getPlaylistByName', getPlaylistByName));
+      ..add(DiagnosticsProperty('playlist', playlist));
   }
 
   @override
@@ -1328,16 +607,12 @@ class _$PlaylistStateImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PlaylistStateImpl &&
-            const DeepCollectionEquality().equals(other._playlist, _playlist) &&
-            const DeepCollectionEquality()
-                .equals(other._getPlaylistByName, _getPlaylistByName));
+            const DeepCollectionEquality().equals(other._playlist, _playlist));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_playlist),
-      const DeepCollectionEquality().hash(_getPlaylistByName));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_playlist));
 
   @JsonKey(ignore: true)
   @override
@@ -1348,14 +623,10 @@ class _$PlaylistStateImpl
 
 abstract class _PlaylistState implements PlaylistState {
   const factory _PlaylistState(
-          {required final List<PlaylistSongModel> playlist,
-          required final List<PlaylistSongModel> getPlaylistByName}) =
-      _$PlaylistStateImpl;
+      {required final List<PlaylistSongModel> playlist}) = _$PlaylistStateImpl;
 
   @override
   List<PlaylistSongModel> get playlist;
-  @override
-  List<PlaylistSongModel> get getPlaylistByName;
   @override
   @JsonKey(ignore: true)
   _$$PlaylistStateImplCopyWith<_$PlaylistStateImpl> get copyWith =>
