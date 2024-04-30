@@ -117,10 +117,9 @@ class AddSongsToPlaylist extends StatelessWidget {
                                   .refreshPlaylistFolderSongs(playlistName);
                             },
                             icon: const Icon(
-                              Icons.add_circle,
+                              Icons.add,
                             ),
                           ),
-                          onTap: () {},
                         );
                       });
                 }

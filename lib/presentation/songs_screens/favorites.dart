@@ -43,7 +43,10 @@ Widget favoriteSongsList() {
     builder: (context, state) {
       if (state.favoriteSongs.isEmpty) {
         return const Center(
-          child: Text('Empty'),
+          child: Text(
+            'No Songs',
+            textAlign: TextAlign.center,
+          ),
         );
       } else {
         return ListView.builder(

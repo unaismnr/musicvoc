@@ -1,17 +1,23 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:musicvoc/application/favorite_songs_bloc/favorite_songs_bloc.dart';
 import 'package:musicvoc/application/loop_and_shuffle_bloc/loop_and_shuffle_bloc.dart';
+import 'package:musicvoc/application/playlist_bloc/playlist_bloc.dart';
 import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/controllers/adjust_speed_text.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/domain/favorite_model/favorite_model.dart';
 import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
+import 'package:musicvoc/domain/song_model.dart';
 import 'package:musicvoc/presentation/now_playing/playing_screen_functions.dart';
+import 'package:musicvoc/presentation/playlist/add_playlist.dart';
+import 'package:musicvoc/services/database/playlist_db.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 
@@ -158,7 +164,13 @@ class ScreenPlaying extends StatelessWidget {
                         },
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.read<PlaylistBloc>().add(
+                                const PlaylistEvent.getPlaylist(),
+                              );
+                          customBottomSheet(
+                              context, currentSongDetails, player);
+                        },
                         icon: Icon(Icons.add, size: 35.sp),
                       ),
                     ],
@@ -339,6 +351,116 @@ class ScreenPlaying extends StatelessWidget {
             },
           ),
         ),
+      ),
+    );
+  }
+
+  Future<dynamic> customBottomSheet(BuildContext context,
+      Metas currentSongDetails, AssetsAudioPlayer player) {
+    return showModalBottomSheet(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        context: context,
+        builder: (context) => SizedBox(
+              height: MediaQuery.of(context).size.height / 3,
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  kHeight10,
+                  Text(
+                    'Add to Playlist',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Theme.of(context).textTheme.bodyLarge!.color,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  kHeight10,
+                  BottomSheetCustomRow(
+                      title: 'New',
+                      iconOnPress: () {
+                        Get.to(
+                          () => AddPlaylist(),
+                          transition: kTransitionRightToLeft,
+                          duration: const Duration(),
+                        );
+                      }),
+                  BlocBuilder<PlaylistBloc, PlaylistState>(
+                    builder: (context, state) {
+                      return Expanded(
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            final playlist = state.playlist[index];
+                            return BottomSheetCustomRow(
+                                title: playlist.playlistName,
+                                iconOnPress: () {
+                                  final songsModel = SongsModel(
+                                    title: currentSongDetails.title!,
+                                    artist: currentSongDetails.artist!,
+                                    songUri: player
+                                        .current.valueOrNull!.audio.audio.path,
+                                    id: int.parse(
+                                        currentSongDetails.id.toString()),
+                                    time: DateTime.now(),
+                                  );
+                                  PlaylistDb.instance.addSongsToPlaylist(
+                                    playlist.playlistName,
+                                    songsModel,
+                                  );
+                                  PlaylistDb.instance
+                                      .refreshPlaylistFolderSongs(
+                                          playlist.playlistName);
+                                  Get.back();
+                                  toastMessege(context, 'Added Successfully');
+                                });
+                          },
+                          itemCount: state.playlist.length,
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ));
+  }
+}
+
+class BottomSheetCustomRow extends StatelessWidget {
+  final String title;
+  final VoidCallback iconOnPress;
+  const BottomSheetCustomRow({
+    super.key,
+    required this.title,
+    required this.iconOnPress,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 50),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Expanded(
+            child: Text(
+              title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 13,
+                color: Theme.of(context).textTheme.bodyLarge!.color,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          IconButton(
+            onPressed: iconOnPress,
+            icon: const Icon(
+              Icons.add,
+            ),
+          ),
+        ],
       ),
     );
   }

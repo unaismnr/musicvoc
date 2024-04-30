@@ -45,7 +45,7 @@ Widget favoriteSongsList() {
     builder: (context, state) {
       if (state.recentlyPlayed.isEmpty) {
         return const Center(
-          child: Text('Empty'),
+          child: Text('No Recent'),
         );
       } else {
         return ListView.builder(

@@ -35,9 +35,7 @@ class ScreenHome extends StatelessWidget {
                       Get.to(
                         () => const RecentlyPlayed(),
                         transition: kTransitionRightToLeft,
-                        duration: const Duration(
-                          milliseconds: 80,
-                        ),
+                        duration: const Duration(),
                       );
                     },
                     title: 'RECENTLY \n PLAYED'),
@@ -56,9 +54,7 @@ class ScreenHome extends StatelessWidget {
                       Get.to(
                         () => const Favorites(),
                         transition: kTransitionRightToLeft,
-                        duration: const Duration(
-                          milliseconds: 80,
-                        ),
+                        duration: const Duration(),
                       );
                     },
                     title: 'FAVORITES'),
@@ -67,9 +63,7 @@ class ScreenHome extends StatelessWidget {
                       Get.to(
                         () => const PlaylistScreen(),
                         transition: kTransitionRightToLeft,
-                        duration: const Duration(
-                          milliseconds: 80,
-                        ),
+                        duration: const Duration(),
                       );
                     },
                     title: 'PLAYLIST'),
@@ -125,13 +119,11 @@ class ScreenHome extends StatelessWidget {
         ),
         IconButton(
           onPressed: () {
-            // Get.to(
-            //   () => const ScreenSettings(),
-            //   transition: kTransitionRightToLeft,
-            //   duration: const Duration(
-            //     milliseconds: 80,
-            //   ),
-            // );
+            Get.to(
+              () => const ScreenSettings(),
+              transition: kTransitionRightToLeft,
+              duration: const Duration(),
+            );
           },
           icon: Icon(
             Icons.settings,

@@ -16,7 +16,7 @@ ToastFuture toastMessege(BuildContext context, String msg) {
     context: context,
     animation: StyledToastAnimation.scale,
     reverseAnimation: StyledToastAnimation.fade,
-    position: StyledToastPosition.center,
+    position: StyledToastPosition.bottom,
     animDuration: const Duration(seconds: 1),
     duration: const Duration(seconds: 2),
     curve: Curves.elasticOut,

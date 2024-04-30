@@ -2,6 +2,7 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
@@ -38,6 +39,16 @@ class PlaylistFolderSongs extends StatelessWidget {
               ValueListenableBuilder(
                   valueListenable: PlaylistDb.instance.playlistListner,
                   builder: (context, newList, _) {
+                    bool anyPlaylistHasSongs = newList.any(
+                      (element) => element.playlistSongs.isNotEmpty,
+                    );
+
+                    if (!anyPlaylistHasSongs) {
+                      return const Center(
+                        child: Text('No Songs'),
+                      );
+                    }
+
                     for (var item in newList) {
                       return ListView.builder(
                           itemCount: item.playlistSongs.length,
@@ -116,7 +127,7 @@ class PlaylistFolderSongs extends StatelessWidget {
         ],
       ),
       floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: 50.h),
+        padding: EdgeInsets.only(bottom: 50.h, right: 10.w),
         child: FloatingActionButton(
           backgroundColor: Theme.of(context).colorScheme.background,
           elevation: 0,
@@ -126,12 +137,11 @@ class PlaylistFolderSongs extends StatelessWidget {
             size: 30.sp,
           ),
           onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => AddSongsToPlaylist(
-                  playlistName: title,
-                ),
+            Get.to(
+              () => AddSongsToPlaylist(
+                playlistName: title,
               ),
+              duration: const Duration(),
             );
           },
         ),

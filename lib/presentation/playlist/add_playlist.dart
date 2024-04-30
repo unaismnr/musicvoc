@@ -32,6 +32,7 @@ class AddPlaylist extends StatelessWidget {
                         const PlaylistEvent.getPlaylist(),
                       );
                   Navigator.pop(context);
+                  toastMessege(context, 'Playlist Created Successfully');
                 }
               },
               icon: Icon(

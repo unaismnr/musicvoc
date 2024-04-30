@@ -40,7 +40,7 @@ class CustomBottomMusic extends StatelessWidget {
           () => ScreenPlaying(),
           transition: kTransitionDownToUp,
           duration: const Duration(
-            milliseconds: 90,
+            milliseconds: 150,
           ),
         ),
         child: PlayerBuilder.current(

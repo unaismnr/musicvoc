@@ -18,6 +18,9 @@ class PlaylistBloc extends Bloc<PlaylistEvent, PlaylistState> {
 
     on<_CreatePlaylist>((event, emit) async {
       PlaylistDb.instance.createPlaylist(event.playlistNameToCreate);
+      emit(
+        state.copyWith(playlist: await PlaylistDb.instance.getPlaylist()),
+      );
     });
 
     on<_DeletePlaylist>((event, emit) async {

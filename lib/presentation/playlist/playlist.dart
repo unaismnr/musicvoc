@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:musicvoc/application/playlist_bloc/playlist_bloc.dart';
 import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/domain/playlist_song_model/playlist_song_model.dart';
-import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
 import 'package:musicvoc/presentation/playlist/add_playlist.dart';
 import 'package:musicvoc/presentation/playlist/playlist_folder_songs.dart';
 
@@ -24,6 +23,14 @@ class PlaylistScreen extends StatelessWidget {
       ),
       body: BlocBuilder<PlaylistBloc, PlaylistState>(
         builder: (context, state) {
+          if (state.playlist.isEmpty) {
+            return const Center(
+              child: Text(
+                'No Playlist\nCreate Now',
+                textAlign: TextAlign.center,
+              ),
+            );
+          }
           return ListView.separated(
             itemCount: state.playlist.length,
             shrinkWrap: true,
@@ -89,6 +96,8 @@ class PlaylistScreen extends StatelessWidget {
                     () => PlaylistFolderSongs(
                       title: playlist.playlistName,
                     ),
+                    transition: kTransitionRightToLeft,
+                    duration: const Duration(milliseconds: 150),
                   );
                 },
               );
@@ -97,26 +106,21 @@ class PlaylistScreen extends StatelessWidget {
           );
         },
       ),
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: 50.h),
-        child: FloatingActionButton(
-          backgroundColor: Theme.of(context).colorScheme.background,
-          elevation: 0,
-          child: Icon(
-            Icons.add,
-            color: Theme.of(context).iconTheme.color,
-            size: 30.sp,
-          ),
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => AddPlaylist(),
-              ),
-            );
-          },
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).colorScheme.background,
+        elevation: 0,
+        child: Icon(
+          Icons.add,
+          color: Theme.of(context).iconTheme.color,
+          size: 30.sp,
         ),
+        onPressed: () {
+          Get.to(
+            () => AddPlaylist(),
+            duration: const Duration(),
+          );
+        },
       ),
-      bottomSheet: CustomBottomMusic(context: context),
     );
   }
 }
