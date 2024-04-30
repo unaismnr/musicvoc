@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:musicvoc/application/all_songs_bloc/all_songs_bloc.dart';
 import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
+import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
@@ -87,8 +88,36 @@ class AllSongs extends StatelessWidget {
                         ],
                       );
                     }),
-                trailing: const Icon(
-                  Icons.more_vert,
+                trailing: IconButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                      backgroundColor:
+                          Theme.of(context).scaffoldBackgroundColor,
+                      context: context,
+                      builder: (context) => SizedBox(
+                        height: 130.h,
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          children: [
+                            kHeight10,
+                            ListTile(
+                              leading: const Icon(Icons.favorite),
+                              title: const Text("Add to Favorite"),
+                              onTap: () {},
+                            ),
+                            ListTile(
+                              leading: const Icon(Icons.playlist_add),
+                              title: const Text("Add to Playlist"),
+                              onTap: () {},
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.more_vert,
+                  ),
                 ),
                 onTap: () {
                   // final currentAudio = assetsAudioPlayer.current.valueOrNull;

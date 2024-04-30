@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
+import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
 import 'package:musicvoc/domain/song_model.dart';
 import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
@@ -83,6 +84,8 @@ class PlaylistFolderSongs extends StatelessWidget {
                                         item.playlistName,
                                         playlistSongs,
                                       );
+                                      toastMessege(context,
+                                          'Song Deleted from ${item.playlistName}');
                                     },
                                     () {
                                       playerOnTap(

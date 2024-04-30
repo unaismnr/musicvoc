@@ -47,6 +47,18 @@ class PlaylistDb {
     await getPlaylist();
   }
 
+  Future<void> editPlaylist(String oldName, String newName) async {
+    await openBox();
+    final playlist = playlistDb.get(oldName);
+    if (playlist != null) {
+      await playlistDb.delete(oldName);
+      playlist.playlistName = newName;
+      playlistDb.put(newName, playlist);
+    } else {
+      log('Playlist not found');
+    }
+  }
+
   Future<void> addSongsToPlaylist(String playlistName, SongsModel song) async {
     await openBox();
     try {

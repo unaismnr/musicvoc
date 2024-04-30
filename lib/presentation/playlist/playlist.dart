@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:musicvoc/application/playlist_bloc/playlist_bloc.dart';
 import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/domain/playlist_song_model/playlist_song_model.dart';
-import 'package:musicvoc/presentation/playlist/add_playlist.dart';
+import 'package:musicvoc/presentation/playlist/add_edit_playlist.dart';
 import 'package:musicvoc/presentation/playlist/playlist_folder_songs.dart';
 
 class PlaylistScreen extends StatelessWidget {
@@ -26,7 +26,7 @@ class PlaylistScreen extends StatelessWidget {
           if (state.playlist.isEmpty) {
             return const Center(
               child: Text(
-                'No Playlist\nCreate Now',
+                'No Playlist',
                 textAlign: TextAlign.center,
               ),
             );
@@ -58,36 +58,117 @@ class PlaylistScreen extends StatelessWidget {
                 ),
                 title: Text(
                   playlist.playlistName,
-                  // 'Song Title',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                // subtitle: Text(
-                //   '${playlist.playlistSongs.length} Songs',
-                //   maxLines: 1,
-                //   overflow: TextOverflow.ellipsis,
-                //   style: TextStyle(
-                //     color: Colors.grey[600],
-                //   ),
-                // ),
                 trailing: IconButton(
                   onPressed: () {
-                    final playlistModel = PlaylistSongModel(
-                      playlistName: playlist.playlistName,
-                      playlistSongs: playlist.playlistSongs,
-                    );
-                    context.read<PlaylistBloc>().add(
-                          PlaylistEvent.deletePlaylist(
-                            playlistModel,
-                          ),
-                        );
+                    showModalBottomSheet(
+                      backgroundColor:
+                          Theme.of(context).scaffoldBackgroundColor,
+                      context: context,
+                      builder: (context) => SizedBox(
+                        height: 130.h,
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          children: [
+                            kHeight10,
+                            ListTile(
+                              leading: const Icon(Icons.edit),
+                              title: const Text("Edit Playlist Name"),
+                              onTap: () {
+                                Get.back();
+                                Get.to(
+                                  () => AddEditPlaylist(
+                                      initialPlaylistName:
+                                          playlist.playlistName),
+                                  duration: const Duration(),
+                                );
+                              },
+                            ),
+                            ListTile(
+                              leading: const Icon(Icons.delete),
+                              title: const Text("Delete Playlist"),
+                              onTap: () {
+                                Get.back();
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    backgroundColor: Theme.of(context)
+                                        .scaffoldBackgroundColor,
+                                    title: Text(
+                                      'Are you sure to delete ${playlist.playlistName}?',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge!
+                                            .color,
+                                        fontSize: 18.sp,
+                                      ),
+                                    ),
+                                    content: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Get.back();
+                                          },
+                                          child: Text(
+                                            'Close',
+                                            style: TextStyle(
+                                              color: const Color.fromARGB(
+                                                  255, 105, 155, 255),
+                                              fontSize: 15.sp,
+                                            ),
+                                          ),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            final playlistModel =
+                                                PlaylistSongModel(
+                                              playlistName:
+                                                  playlist.playlistName,
+                                              playlistSongs:
+                                                  playlist.playlistSongs,
+                                            );
+                                            context.read<PlaylistBloc>().add(
+                                                  PlaylistEvent.deletePlaylist(
+                                                    playlistModel,
+                                                  ),
+                                                );
 
-                    context.read<PlaylistBloc>().add(
-                          const PlaylistEvent.getPlaylist(),
-                        );
+                                            context.read<PlaylistBloc>().add(
+                                                  const PlaylistEvent
+                                                      .getPlaylist(),
+                                                );
+
+                                            toastMessege(context,
+                                                '${playlist.playlistName} Deleted');
+                                            Get.back();
+                                          },
+                                          child: Text(
+                                            'Delete',
+                                            style: TextStyle(
+                                              color: const Color.fromARGB(
+                                                  255, 105, 155, 255),
+                                              fontSize: 15.sp,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
                   },
                   icon: Icon(
-                    Icons.delete,
+                    Icons.more_vert,
                     size: 23.sp,
                   ),
                 ),
@@ -116,7 +197,7 @@ class PlaylistScreen extends StatelessWidget {
         ),
         onPressed: () {
           Get.to(
-            () => AddPlaylist(),
+            () => AddEditPlaylist(),
             duration: const Duration(),
           );
         },

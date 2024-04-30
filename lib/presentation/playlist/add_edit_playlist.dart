@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:musicvoc/application/playlist_bloc/playlist_bloc.dart';
 import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/services/database/playlist_db.dart';
 
-class AddPlaylist extends StatelessWidget {
-  AddPlaylist({super.key});
+class AddEditPlaylist extends StatelessWidget {
+  final String? initialPlaylistName;
+  AddEditPlaylist({super.key, this.initialPlaylistName});
 
   final textController = TextEditingController();
   final globeFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    textController.text = initialPlaylistName ?? '';
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add New'),
@@ -24,15 +27,24 @@ class AddPlaylist extends StatelessWidget {
               onPressed: () {
                 final name = textController.text.trim();
                 if (globeFormKey.currentState!.validate()) {
-                  PlaylistDb.instance.createPlaylist(name);
+                  initialPlaylistName == null
+                      ? PlaylistDb.instance.createPlaylist(name)
+                      : PlaylistDb.instance
+                          .editPlaylist(initialPlaylistName!, name);
+
                   context.read<PlaylistBloc>().add(
                         PlaylistEvent.createPlaylist(name),
                       );
                   context.read<PlaylistBloc>().add(
                         const PlaylistEvent.getPlaylist(),
                       );
-                  Navigator.pop(context);
-                  toastMessege(context, 'Playlist Created Successfully');
+                  toastMessege(
+                    context,
+                    initialPlaylistName == null
+                        ? 'Playlist $name Created'
+                        : 'Playlist $name Edited',
+                  );
+                  Get.back();
                 }
               },
               icon: Icon(

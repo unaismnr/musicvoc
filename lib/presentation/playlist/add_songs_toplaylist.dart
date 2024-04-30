@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:musicvoc/application/all_songs_bloc/all_songs_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
+import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/domain/song_model.dart';
 import 'package:musicvoc/presentation/common/songs_list_widget.dart';
 import 'package:musicvoc/services/database/playlist_db.dart';
@@ -27,6 +28,7 @@ class AddSongsToPlaylist extends StatelessWidget {
             padding: EdgeInsets.only(right: 10.w),
             child: IconButton(
               onPressed: () {
+                toastMessege(context, 'Songs Added to $playlistName');
                 Navigator.pop(context);
               },
               icon: Icon(
