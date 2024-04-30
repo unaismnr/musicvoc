@@ -81,8 +81,4 @@ class SongsListStaticWidgets {
               ),
         onTap: onTap,
       );
-
-  static TextStyle descriptionTextStyle() => TextStyle(
-        fontSize: 14.sp,
-      );
 }

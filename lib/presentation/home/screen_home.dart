@@ -8,6 +8,7 @@ import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
 import 'package:musicvoc/presentation/playlist/playlist.dart';
+import 'package:musicvoc/presentation/search/screen_search.dart';
 import 'package:musicvoc/presentation/settings/screen_settings.dart';
 import 'package:musicvoc/presentation/songs_screens/all_songs.dart';
 import 'package:musicvoc/presentation/songs_screens/favorites.dart';
@@ -104,13 +105,11 @@ class ScreenHome extends StatelessWidget {
       actions: [
         IconButton(
           onPressed: () {
-            // Get.to(
-            //   () => const ScreenSearch(),
-            //   transition: kTransitionRightToLeft,
-            //   duration: const Duration(
-            //     milliseconds: 80,
-            //   ),
-            // );
+            Get.to(
+              () => ScreenSearch(),
+              transition: kTransitionRightToLeft,
+              duration: const Duration(),
+            );
           },
           icon: Icon(
             Icons.search,

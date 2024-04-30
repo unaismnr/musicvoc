@@ -29,7 +29,7 @@ class PlayingScreenFunctions {
           textAlign: TextAlign.center,
         ),
         titleTextStyle: TextStyle(
-          color: kWhiteColor,
+          color: Theme.of(context).textTheme.bodyLarge!.color,
           fontSize: 18.sp,
           fontWeight: FontWeight.w600,
         ),
@@ -48,7 +48,7 @@ class PlayingScreenFunctions {
             ),
           ),
         ),
-        backgroundColor: kBlackColor,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
     );
   }
@@ -65,7 +65,7 @@ class PlayingScreenFunctions {
         style: TextStyle(
           color: songSpeedTextController.speed.value == newSpeed
               ? kSelectedTextColor
-              : kWhiteColor,
+              : Theme.of(context).textTheme.bodyLarge!.color,
           fontSize: 15.sp,
           fontWeight: FontWeight.w600,
         ),
@@ -90,7 +90,7 @@ class PlayingScreenFunctions {
                 Text(
                   '${state.volume}',
                   style: TextStyle(
-                    color: kWhiteColor,
+                    color: Theme.of(context).textTheme.bodyLarge!.color,
                     fontSize: 17.sp,
                     fontWeight: FontWeight.w600,
                   ),
@@ -98,11 +98,11 @@ class PlayingScreenFunctions {
               ],
             ),
             titleTextStyle: TextStyle(
-              color: kWhiteColor,
+              color: Theme.of(context).textTheme.bodyLarge!.color,
               fontSize: 18.sp,
               fontWeight: FontWeight.w600,
             ),
-            backgroundColor: kBlackColor,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             content: SizedBox(
               height: 20.h,
               child: SliderTheme(
