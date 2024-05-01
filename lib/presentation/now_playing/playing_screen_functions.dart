@@ -106,11 +106,11 @@ class PlayingScreenFunctions {
             content: SizedBox(
               height: 20.h,
               child: SliderTheme(
-                data: const SliderThemeData(
+                data: SliderThemeData(
                   activeTrackColor: kMainBlueColor,
-                  inactiveTrackColor: kWhiteColor,
+                  inactiveTrackColor: Theme.of(context).iconTheme.color,
                   thumbColor: kMainBlueColor,
-                  overlayColor: Color.fromARGB(78, 0, 85, 255),
+                  overlayColor: const Color.fromARGB(78, 0, 85, 255),
                   activeTickMarkColor: Colors.transparent,
                   inactiveTickMarkColor: Colors.transparent,
                 ),
@@ -137,8 +137,8 @@ class PlayingScreenFunctions {
   }
 
   //ModelBottomSheet
-  static Future<dynamic> customBottomSheet(BuildContext context,
-      Metas currentSongDetails, AssetsAudioPlayer player) {
+  static Future<dynamic> customBottomSheet(
+      BuildContext context, SongsModel songsModel) {
     return showModalBottomSheet(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         context: context,
@@ -177,15 +177,6 @@ class PlayingScreenFunctions {
                             return BottomSheetCustomRow(
                                 title: playlist.playlistName,
                                 iconOnPress: () {
-                                  final songsModel = SongsModel(
-                                    title: currentSongDetails.title!,
-                                    artist: currentSongDetails.artist!,
-                                    songUri: player
-                                        .current.valueOrNull!.audio.audio.path,
-                                    id: int.parse(
-                                        currentSongDetails.id.toString()),
-                                    time: DateTime.now(),
-                                  );
                                   PlaylistDb.instance.addSongsToPlaylist(
                                     playlist.playlistName,
                                     songsModel,

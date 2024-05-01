@@ -12,6 +12,7 @@ import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/domain/favorite_model/favorite_model.dart';
 import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
+import 'package:musicvoc/domain/song_model.dart';
 import 'package:musicvoc/presentation/now_playing/playing_screen_functions.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
@@ -163,8 +164,16 @@ class ScreenPlaying extends StatelessWidget {
                           context.read<PlaylistBloc>().add(
                                 const PlaylistEvent.getPlaylist(),
                               );
+                          final songsModel = SongsModel(
+                            title: currentSongDetails.title!,
+                            artist: currentSongDetails.artist!,
+                            songUri:
+                                player.current.valueOrNull!.audio.audio.path,
+                            id: int.parse(currentSongDetails.id.toString()),
+                            time: DateTime.now(),
+                          );
                           PlayingScreenFunctions.customBottomSheet(
-                              context, currentSongDetails, player);
+                              context, songsModel);
                         },
                         icon: Icon(Icons.add, size: 35.sp),
                       ),
