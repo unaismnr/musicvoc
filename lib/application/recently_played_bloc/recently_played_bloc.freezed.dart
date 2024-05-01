@@ -20,22 +20,21 @@ mixin _$RecentlyPlayedEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() getRecentlyPlayed,
     required TResult Function(RecentlyPlayedModel addSong) addRecentlyPlayed,
-    required TResult Function(RecentlyPlayedModel deleteSong)
-        deleteRecentlyPlayed,
+    required TResult Function(int recSongId) deleteRecentlyPlayed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getRecentlyPlayed,
     TResult? Function(RecentlyPlayedModel addSong)? addRecentlyPlayed,
-    TResult? Function(RecentlyPlayedModel deleteSong)? deleteRecentlyPlayed,
+    TResult? Function(int recSongId)? deleteRecentlyPlayed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getRecentlyPlayed,
     TResult Function(RecentlyPlayedModel addSong)? addRecentlyPlayed,
-    TResult Function(RecentlyPlayedModel deleteSong)? deleteRecentlyPlayed,
+    TResult Function(int recSongId)? deleteRecentlyPlayed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -121,8 +120,7 @@ class _$GetRecentlyPlayedImpl implements _GetRecentlyPlayed {
   TResult when<TResult extends Object?>({
     required TResult Function() getRecentlyPlayed,
     required TResult Function(RecentlyPlayedModel addSong) addRecentlyPlayed,
-    required TResult Function(RecentlyPlayedModel deleteSong)
-        deleteRecentlyPlayed,
+    required TResult Function(int recSongId) deleteRecentlyPlayed,
   }) {
     return getRecentlyPlayed();
   }
@@ -132,7 +130,7 @@ class _$GetRecentlyPlayedImpl implements _GetRecentlyPlayed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getRecentlyPlayed,
     TResult? Function(RecentlyPlayedModel addSong)? addRecentlyPlayed,
-    TResult? Function(RecentlyPlayedModel deleteSong)? deleteRecentlyPlayed,
+    TResult? Function(int recSongId)? deleteRecentlyPlayed,
   }) {
     return getRecentlyPlayed?.call();
   }
@@ -142,7 +140,7 @@ class _$GetRecentlyPlayedImpl implements _GetRecentlyPlayed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getRecentlyPlayed,
     TResult Function(RecentlyPlayedModel addSong)? addRecentlyPlayed,
-    TResult Function(RecentlyPlayedModel deleteSong)? deleteRecentlyPlayed,
+    TResult Function(int recSongId)? deleteRecentlyPlayed,
     required TResult orElse(),
   }) {
     if (getRecentlyPlayed != null) {
@@ -257,8 +255,7 @@ class _$AddRecentlyPlayedImpl implements _AddRecentlyPlayed {
   TResult when<TResult extends Object?>({
     required TResult Function() getRecentlyPlayed,
     required TResult Function(RecentlyPlayedModel addSong) addRecentlyPlayed,
-    required TResult Function(RecentlyPlayedModel deleteSong)
-        deleteRecentlyPlayed,
+    required TResult Function(int recSongId) deleteRecentlyPlayed,
   }) {
     return addRecentlyPlayed(addSong);
   }
@@ -268,7 +265,7 @@ class _$AddRecentlyPlayedImpl implements _AddRecentlyPlayed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getRecentlyPlayed,
     TResult? Function(RecentlyPlayedModel addSong)? addRecentlyPlayed,
-    TResult? Function(RecentlyPlayedModel deleteSong)? deleteRecentlyPlayed,
+    TResult? Function(int recSongId)? deleteRecentlyPlayed,
   }) {
     return addRecentlyPlayed?.call(addSong);
   }
@@ -278,7 +275,7 @@ class _$AddRecentlyPlayedImpl implements _AddRecentlyPlayed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getRecentlyPlayed,
     TResult Function(RecentlyPlayedModel addSong)? addRecentlyPlayed,
-    TResult Function(RecentlyPlayedModel deleteSong)? deleteRecentlyPlayed,
+    TResult Function(int recSongId)? deleteRecentlyPlayed,
     required TResult orElse(),
   }) {
     if (addRecentlyPlayed != null) {
@@ -338,7 +335,7 @@ abstract class _$$DeleteRecentlyPlayedImplCopyWith<$Res> {
           $Res Function(_$DeleteRecentlyPlayedImpl) then) =
       __$$DeleteRecentlyPlayedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({RecentlyPlayedModel deleteSong});
+  $Res call({int recSongId});
 }
 
 /// @nodoc
@@ -352,13 +349,13 @@ class __$$DeleteRecentlyPlayedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? deleteSong = null,
+    Object? recSongId = null,
   }) {
     return _then(_$DeleteRecentlyPlayedImpl(
-      null == deleteSong
-          ? _value.deleteSong
-          : deleteSong // ignore: cast_nullable_to_non_nullable
-              as RecentlyPlayedModel,
+      null == recSongId
+          ? _value.recSongId
+          : recSongId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -366,14 +363,14 @@ class __$$DeleteRecentlyPlayedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DeleteRecentlyPlayedImpl implements _DeleteRecentlyPlayed {
-  const _$DeleteRecentlyPlayedImpl(this.deleteSong);
+  const _$DeleteRecentlyPlayedImpl(this.recSongId);
 
   @override
-  final RecentlyPlayedModel deleteSong;
+  final int recSongId;
 
   @override
   String toString() {
-    return 'RecentlyPlayedEvent.deleteRecentlyPlayed(deleteSong: $deleteSong)';
+    return 'RecentlyPlayedEvent.deleteRecentlyPlayed(recSongId: $recSongId)';
   }
 
   @override
@@ -381,12 +378,12 @@ class _$DeleteRecentlyPlayedImpl implements _DeleteRecentlyPlayed {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeleteRecentlyPlayedImpl &&
-            (identical(other.deleteSong, deleteSong) ||
-                other.deleteSong == deleteSong));
+            (identical(other.recSongId, recSongId) ||
+                other.recSongId == recSongId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, deleteSong);
+  int get hashCode => Object.hash(runtimeType, recSongId);
 
   @JsonKey(ignore: true)
   @override
@@ -401,10 +398,9 @@ class _$DeleteRecentlyPlayedImpl implements _DeleteRecentlyPlayed {
   TResult when<TResult extends Object?>({
     required TResult Function() getRecentlyPlayed,
     required TResult Function(RecentlyPlayedModel addSong) addRecentlyPlayed,
-    required TResult Function(RecentlyPlayedModel deleteSong)
-        deleteRecentlyPlayed,
+    required TResult Function(int recSongId) deleteRecentlyPlayed,
   }) {
-    return deleteRecentlyPlayed(deleteSong);
+    return deleteRecentlyPlayed(recSongId);
   }
 
   @override
@@ -412,9 +408,9 @@ class _$DeleteRecentlyPlayedImpl implements _DeleteRecentlyPlayed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getRecentlyPlayed,
     TResult? Function(RecentlyPlayedModel addSong)? addRecentlyPlayed,
-    TResult? Function(RecentlyPlayedModel deleteSong)? deleteRecentlyPlayed,
+    TResult? Function(int recSongId)? deleteRecentlyPlayed,
   }) {
-    return deleteRecentlyPlayed?.call(deleteSong);
+    return deleteRecentlyPlayed?.call(recSongId);
   }
 
   @override
@@ -422,11 +418,11 @@ class _$DeleteRecentlyPlayedImpl implements _DeleteRecentlyPlayed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getRecentlyPlayed,
     TResult Function(RecentlyPlayedModel addSong)? addRecentlyPlayed,
-    TResult Function(RecentlyPlayedModel deleteSong)? deleteRecentlyPlayed,
+    TResult Function(int recSongId)? deleteRecentlyPlayed,
     required TResult orElse(),
   }) {
     if (deleteRecentlyPlayed != null) {
-      return deleteRecentlyPlayed(deleteSong);
+      return deleteRecentlyPlayed(recSongId);
     }
     return orElse();
   }
@@ -467,10 +463,10 @@ class _$DeleteRecentlyPlayedImpl implements _DeleteRecentlyPlayed {
 }
 
 abstract class _DeleteRecentlyPlayed implements RecentlyPlayedEvent {
-  const factory _DeleteRecentlyPlayed(final RecentlyPlayedModel deleteSong) =
+  const factory _DeleteRecentlyPlayed(final int recSongId) =
       _$DeleteRecentlyPlayedImpl;
 
-  RecentlyPlayedModel get deleteSong;
+  int get recSongId;
   @JsonKey(ignore: true)
   _$$DeleteRecentlyPlayedImplCopyWith<_$DeleteRecentlyPlayedImpl>
       get copyWith => throw _privateConstructorUsedError;

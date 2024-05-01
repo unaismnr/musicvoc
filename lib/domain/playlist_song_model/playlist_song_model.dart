@@ -1,5 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:musicvoc/domain/song_model.dart';
+import 'package:musicvoc/domain/songs_model/songs_model.dart';
 part 'playlist_song_model.g.dart';
 
 @HiveType(typeId: 3)

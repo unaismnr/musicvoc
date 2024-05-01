@@ -29,7 +29,7 @@ class FavoriteSongsBloc extends Bloc<FavoriteSongsEvent, FavoriteSongsState> {
     //DeleteFavorite
     on<_DeleteFavorite>((event, emit) async {
       await FavoriteDb.instance.deleteFavoriteSongs(
-        event.deleteSong,
+        event.songId,
       );
       emit(state.copyWith(
         favoriteSongs: await FavoriteDb.instance.getFavoriteSongs(),

@@ -51,20 +51,20 @@ Widget favoriteSongsList() {
         return ListView.builder(
             itemCount: state.recentlyPlayed.length,
             itemBuilder: (context, index) {
-              final favSongs = state.recentlyPlayed[index];
+              final recSongs = state.recentlyPlayed[index];
 
               return PlayerBuilder.isPlaying(
                   player: player,
                   builder: (context, playing) {
                     final isCurrentlyPlaying =
                         player.current.valueOrNull?.audio.audio.path ==
-                            favSongs.songUri;
+                            recSongs.songUri;
                     return SongsListStaticWidgets.listTile(
                       context,
-                      favSongs.title,
-                      favSongs.artist == '<unknown>'
+                      recSongs.title,
+                      recSongs.artist == '<unknown>'
                           ? 'Unknown Artist'
-                          : favSongs.artist,
+                          : recSongs.artist,
                       isCurrentlyPlaying
                           ? kSelectedTextColor
                           : Theme.of(context).textTheme.bodyLarge!.color!,
@@ -73,7 +73,7 @@ Widget favoriteSongsList() {
                         context
                             .read<RecentlyPlayedBloc>()
                             .add(RecentlyPlayedEvent.deleteRecentlyPlayed(
-                              favSongs,
+                              recSongs.id,
                             ));
                         toastMessege(context, 'Deleted From Recently Played');
                       },
@@ -92,7 +92,7 @@ Widget favoriteSongsList() {
                           headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplug,
                         );
                       },
-                      favSongs.id,
+                      recSongs.id,
                     );
                   });
             });

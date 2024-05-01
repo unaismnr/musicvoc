@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'song_model.dart';
+part of 'songs_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator

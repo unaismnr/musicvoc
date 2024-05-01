@@ -20,21 +20,21 @@ mixin _$FavoriteSongsEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() getFavorite,
     required TResult Function(FavoriteModel addSong) addFavorite,
-    required TResult Function(FavoriteModel deleteSong) deleteFavorite,
+    required TResult Function(int songId) deleteFavorite,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getFavorite,
     TResult? Function(FavoriteModel addSong)? addFavorite,
-    TResult? Function(FavoriteModel deleteSong)? deleteFavorite,
+    TResult? Function(int songId)? deleteFavorite,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getFavorite,
     TResult Function(FavoriteModel addSong)? addFavorite,
-    TResult Function(FavoriteModel deleteSong)? deleteFavorite,
+    TResult Function(int songId)? deleteFavorite,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,7 +120,7 @@ class _$GetFavoriteImpl implements _GetFavorite {
   TResult when<TResult extends Object?>({
     required TResult Function() getFavorite,
     required TResult Function(FavoriteModel addSong) addFavorite,
-    required TResult Function(FavoriteModel deleteSong) deleteFavorite,
+    required TResult Function(int songId) deleteFavorite,
   }) {
     return getFavorite();
   }
@@ -130,7 +130,7 @@ class _$GetFavoriteImpl implements _GetFavorite {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getFavorite,
     TResult? Function(FavoriteModel addSong)? addFavorite,
-    TResult? Function(FavoriteModel deleteSong)? deleteFavorite,
+    TResult? Function(int songId)? deleteFavorite,
   }) {
     return getFavorite?.call();
   }
@@ -140,7 +140,7 @@ class _$GetFavoriteImpl implements _GetFavorite {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getFavorite,
     TResult Function(FavoriteModel addSong)? addFavorite,
-    TResult Function(FavoriteModel deleteSong)? deleteFavorite,
+    TResult Function(int songId)? deleteFavorite,
     required TResult orElse(),
   }) {
     if (getFavorite != null) {
@@ -254,7 +254,7 @@ class _$AddFavoriteImpl implements _AddFavorite {
   TResult when<TResult extends Object?>({
     required TResult Function() getFavorite,
     required TResult Function(FavoriteModel addSong) addFavorite,
-    required TResult Function(FavoriteModel deleteSong) deleteFavorite,
+    required TResult Function(int songId) deleteFavorite,
   }) {
     return addFavorite(addSong);
   }
@@ -264,7 +264,7 @@ class _$AddFavoriteImpl implements _AddFavorite {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getFavorite,
     TResult? Function(FavoriteModel addSong)? addFavorite,
-    TResult? Function(FavoriteModel deleteSong)? deleteFavorite,
+    TResult? Function(int songId)? deleteFavorite,
   }) {
     return addFavorite?.call(addSong);
   }
@@ -274,7 +274,7 @@ class _$AddFavoriteImpl implements _AddFavorite {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getFavorite,
     TResult Function(FavoriteModel addSong)? addFavorite,
-    TResult Function(FavoriteModel deleteSong)? deleteFavorite,
+    TResult Function(int songId)? deleteFavorite,
     required TResult orElse(),
   }) {
     if (addFavorite != null) {
@@ -333,7 +333,7 @@ abstract class _$$DeleteFavoriteImplCopyWith<$Res> {
           $Res Function(_$DeleteFavoriteImpl) then) =
       __$$DeleteFavoriteImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({FavoriteModel deleteSong});
+  $Res call({int songId});
 }
 
 /// @nodoc
@@ -347,13 +347,13 @@ class __$$DeleteFavoriteImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? deleteSong = null,
+    Object? songId = null,
   }) {
     return _then(_$DeleteFavoriteImpl(
-      null == deleteSong
-          ? _value.deleteSong
-          : deleteSong // ignore: cast_nullable_to_non_nullable
-              as FavoriteModel,
+      null == songId
+          ? _value.songId
+          : songId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -361,14 +361,14 @@ class __$$DeleteFavoriteImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DeleteFavoriteImpl implements _DeleteFavorite {
-  const _$DeleteFavoriteImpl(this.deleteSong);
+  const _$DeleteFavoriteImpl(this.songId);
 
   @override
-  final FavoriteModel deleteSong;
+  final int songId;
 
   @override
   String toString() {
-    return 'FavoriteSongsEvent.deleteFavorite(deleteSong: $deleteSong)';
+    return 'FavoriteSongsEvent.deleteFavorite(songId: $songId)';
   }
 
   @override
@@ -376,12 +376,11 @@ class _$DeleteFavoriteImpl implements _DeleteFavorite {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeleteFavoriteImpl &&
-            (identical(other.deleteSong, deleteSong) ||
-                other.deleteSong == deleteSong));
+            (identical(other.songId, songId) || other.songId == songId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, deleteSong);
+  int get hashCode => Object.hash(runtimeType, songId);
 
   @JsonKey(ignore: true)
   @override
@@ -395,9 +394,9 @@ class _$DeleteFavoriteImpl implements _DeleteFavorite {
   TResult when<TResult extends Object?>({
     required TResult Function() getFavorite,
     required TResult Function(FavoriteModel addSong) addFavorite,
-    required TResult Function(FavoriteModel deleteSong) deleteFavorite,
+    required TResult Function(int songId) deleteFavorite,
   }) {
-    return deleteFavorite(deleteSong);
+    return deleteFavorite(songId);
   }
 
   @override
@@ -405,9 +404,9 @@ class _$DeleteFavoriteImpl implements _DeleteFavorite {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getFavorite,
     TResult? Function(FavoriteModel addSong)? addFavorite,
-    TResult? Function(FavoriteModel deleteSong)? deleteFavorite,
+    TResult? Function(int songId)? deleteFavorite,
   }) {
-    return deleteFavorite?.call(deleteSong);
+    return deleteFavorite?.call(songId);
   }
 
   @override
@@ -415,11 +414,11 @@ class _$DeleteFavoriteImpl implements _DeleteFavorite {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getFavorite,
     TResult Function(FavoriteModel addSong)? addFavorite,
-    TResult Function(FavoriteModel deleteSong)? deleteFavorite,
+    TResult Function(int songId)? deleteFavorite,
     required TResult orElse(),
   }) {
     if (deleteFavorite != null) {
-      return deleteFavorite(deleteSong);
+      return deleteFavorite(songId);
     }
     return orElse();
   }
@@ -460,10 +459,9 @@ class _$DeleteFavoriteImpl implements _DeleteFavorite {
 }
 
 abstract class _DeleteFavorite implements FavoriteSongsEvent {
-  const factory _DeleteFavorite(final FavoriteModel deleteSong) =
-      _$DeleteFavoriteImpl;
+  const factory _DeleteFavorite(final int songId) = _$DeleteFavoriteImpl;
 
-  FavoriteModel get deleteSong;
+  int get songId;
   @JsonKey(ignore: true)
   _$$DeleteFavoriteImplCopyWith<_$DeleteFavoriteImpl> get copyWith =>
       throw _privateConstructorUsedError;

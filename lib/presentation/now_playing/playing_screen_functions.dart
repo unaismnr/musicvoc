@@ -8,7 +8,7 @@ import 'package:musicvoc/application/playlist_bloc/playlist_bloc.dart';
 import 'package:musicvoc/controllers/adjust_speed_text.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
-import 'package:musicvoc/domain/song_model.dart';
+import 'package:musicvoc/domain/songs_model/songs_model.dart';
 import 'package:musicvoc/presentation/playlist/add_edit_playlist.dart';
 import 'package:musicvoc/services/database/playlist_db.dart';
 

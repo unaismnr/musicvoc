@@ -7,6 +7,6 @@ class FavoriteSongsEvent with _$FavoriteSongsEvent {
     FavoriteModel addSong,
   ) = _AddFavorite;
   const factory FavoriteSongsEvent.deleteFavorite(
-    FavoriteModel deleteSong,
+    int songId,
   ) = _DeleteFavorite;
 }

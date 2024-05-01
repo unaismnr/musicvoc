@@ -12,7 +12,7 @@ import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/domain/favorite_model/favorite_model.dart';
 import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
-import 'package:musicvoc/domain/song_model.dart';
+import 'package:musicvoc/domain/songs_model/songs_model.dart';
 import 'package:musicvoc/presentation/now_playing/playing_screen_functions.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
@@ -134,8 +134,8 @@ class ScreenPlaying extends StatelessWidget {
                               );
                               if (isAlreadyInFvDbSongs != null) {
                                 context.read<FavoriteSongsBloc>().add(
-                                    FavoriteSongsEvent.deleteFavorite(
-                                        favSongs));
+                                    FavoriteSongsEvent.deleteFavorite(int.parse(
+                                        currentSongDetails.id.toString())));
                                 toastMessege(context, 'Deleted from Favorite');
                               } else {
                                 context.read<FavoriteSongsBloc>().add(

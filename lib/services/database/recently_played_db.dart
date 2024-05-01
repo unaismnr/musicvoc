@@ -41,9 +41,9 @@ class RecentlyPlayedDb {
     await getRecentlyPlayed();
   }
 
-  Future<void> deleteRecentlyPlayed(RecentlyPlayedModel recSong) async {
+  Future<void> deleteRecentlyPlayed(int recSongId) async {
     await openBox();
-    await recentlyPlayedDb.delete(recSong.id);
+    await recentlyPlayedDb.delete(recSongId);
     await getRecentlyPlayed();
   }
 }

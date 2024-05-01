@@ -12,6 +12,7 @@ import 'package:musicvoc/presentation/search/screen_search.dart';
 import 'package:musicvoc/presentation/settings/screen_settings.dart';
 import 'package:musicvoc/presentation/songs_screens/all_songs.dart';
 import 'package:musicvoc/presentation/songs_screens/favorites.dart';
+import 'package:musicvoc/presentation/songs_screens/mostly_played.dart';
 import 'package:musicvoc/presentation/songs_screens/recently_played.dart';
 
 class ScreenHome extends StatelessWidget {
@@ -40,7 +41,15 @@ class ScreenHome extends StatelessWidget {
                       );
                     },
                     title: 'RECENTLY \n PLAYED'),
-                CustomHomeButtons(onTap: () {}, title: 'MOSTLY \n PLAYED'),
+                CustomHomeButtons(
+                    onTap: () {
+                      Get.to(
+                        () => const MostlyPlayed(),
+                        transition: kTransitionRightToLeft,
+                        duration: const Duration(),
+                      );
+                    },
+                    title: 'MOSTLY \n PLAYED'),
               ],
             ),
             kHeight10,

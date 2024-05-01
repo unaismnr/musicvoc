@@ -1,23 +1,26 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:musicvoc/application/favorite_songs_bloc/favorite_songs_bloc.dart';
+import 'package:musicvoc/application/mostly_played_bloc/mostly_played_bloc.dart';
 import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
-import 'package:musicvoc/domain/favorite_model/favorite_model.dart';
+import 'package:musicvoc/domain/mostly_played_model/mostly_played_model.dart';
 import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
 import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
 import 'package:musicvoc/presentation/common/songs_list_widget.dart';
 
-class Favorites extends StatelessWidget {
-  const Favorites({super.key});
+class MostlyPlayed extends StatelessWidget {
+  const MostlyPlayed({super.key});
 
   @override
   Widget build(BuildContext context) {
+    context.read<MostlyPlayedBloc>().add(
+          const MostlyPlayedEvent.getMostlyPlayed(),
+        );
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Favorites'),
+        title: const Text('Mostly Played'),
         centerTitle: true,
       ),
       body: Column(
@@ -25,7 +28,7 @@ class Favorites extends StatelessWidget {
           const SizedBox(height: 5),
           Expanded(
             child: SongsListStaticWidgets.container(
-              favoriteSongsList(),
+              mostlyPlayedSongsList(),
               context,
             ),
           ),
@@ -36,12 +39,12 @@ class Favorites extends StatelessWidget {
   }
 }
 
-Widget favoriteSongsList() {
+Widget mostlyPlayedSongsList() {
   final player = AssetsAudioPlayer.withId('0');
   final List<Audio> convertedAudios = [];
-  return BlocBuilder<FavoriteSongsBloc, FavoriteSongsState>(
+  return BlocBuilder<MostlyPlayedBloc, MostlyPlayedState>(
     builder: (context, state) {
-      if (state.favoriteSongs.isEmpty) {
+      if (state.mostlyPlayed.isEmpty) {
         return const Center(
           child: Text(
             'No Songs',
@@ -50,40 +53,40 @@ Widget favoriteSongsList() {
         );
       } else {
         return ListView.builder(
-            itemCount: state.favoriteSongs.length,
+            itemCount: state.mostlyPlayed.length,
             itemBuilder: (context, index) {
-              final favSongs = state.favoriteSongs[index];
+              final mostSongs = state.mostlyPlayed[index];
 
               return PlayerBuilder.isPlaying(
                   player: player,
                   builder: (context, playing) {
                     final isCurrentlyPlaying =
                         player.current.valueOrNull?.audio.audio.path ==
-                            favSongs.songUri;
+                            mostSongs.songUri;
                     return SongsListStaticWidgets.listTile(
                       context,
-                      favSongs.title,
-                      favSongs.artist == '<unknown>'
+                      mostSongs.title,
+                      mostSongs.artist == '<unknown>'
                           ? 'Unknown Artist'
-                          : favSongs.artist,
+                          : mostSongs.artist,
                       isCurrentlyPlaying
                           ? kSelectedTextColor
                           : Theme.of(context).textTheme.bodyLarge!.color!,
                       true,
                       () {
-                        context.read<FavoriteSongsBloc>().add(
-                              FavoriteSongsEvent.deleteFavorite(
-                                favSongs.id,
+                        context.read<MostlyPlayedBloc>().add(
+                              MostlyPlayedEvent.deleteMostlyPlayed(
+                                mostSongs.id,
                               ),
                             );
-                        context.read<FavoriteSongsBloc>().add(
-                              const FavoriteSongsEvent.getFavorite(),
+                        context.read<MostlyPlayedBloc>().add(
+                              const MostlyPlayedEvent.getMostlyPlayed(),
                             );
-                        toastMessege(context, 'Deleted From Favorite');
+                        toastMessege(context, 'Deleted From MostlyPlayed');
                       },
                       () {
                         playerOnTap(
-                          state.favoriteSongs,
+                          state.mostlyPlayed,
                           convertedAudios,
                         );
                         player.open(
@@ -96,10 +99,10 @@ Widget favoriteSongsList() {
                           headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplug,
                         );
                         final recentlyPlayedSong = RecentlyPlayedModel(
-                          title: favSongs.title,
-                          artist: favSongs.artist,
-                          songUri: favSongs.songUri,
-                          id: favSongs.id,
+                          title: mostSongs.title,
+                          artist: mostSongs.artist,
+                          songUri: mostSongs.songUri,
+                          id: mostSongs.id,
                           time: DateTime.now(),
                         );
                         context.read<RecentlyPlayedBloc>().add(
@@ -108,7 +111,7 @@ Widget favoriteSongsList() {
                               ),
                             );
                       },
-                      favSongs.id,
+                      mostSongs.id,
                     );
                   });
             });
@@ -118,7 +121,7 @@ Widget favoriteSongsList() {
 }
 
 void playerOnTap(
-  List<FavoriteModel> allSongs,
+  List<MostlyPlayedModel> allSongs,
   List<Audio> convertedAudios,
 ) {
   for (var item in allSongs) {

@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:musicvoc/domain/playlist_song_model/playlist_song_model.dart';
-import 'package:musicvoc/domain/song_model.dart';
+import 'package:musicvoc/domain/songs_model/songs_model.dart';
 
 class PlaylistDb {
   static String playlistDbName = "PlaylistDb";

@@ -30,7 +30,7 @@ class RecentlyPlayedBloc
     //DeleteRecentlyPlayed
     on<_DeleteRecentlyPlayed>((event, emit) async {
       await RecentlyPlayedDb.instance.deleteRecentlyPlayed(
-        event.deleteSong,
+        event.recSongId,
       );
       emit(state.copyWith(
         recentlyPlayed: await RecentlyPlayedDb.instance.getRecentlyPlayed(),

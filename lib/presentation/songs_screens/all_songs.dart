@@ -3,13 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:musicvoc/application/all_songs_bloc/all_songs_bloc.dart';
 import 'package:musicvoc/application/favorite_songs_bloc/favorite_songs_bloc.dart';
+import 'package:musicvoc/application/mostly_played_bloc/mostly_played_bloc.dart';
 import 'package:musicvoc/application/playlist_bloc/playlist_bloc.dart';
 import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/domain/favorite_model/favorite_model.dart';
+import 'package:musicvoc/domain/mostly_played_model/mostly_played_model.dart';
 import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
-import 'package:musicvoc/domain/song_model.dart';
+import 'package:musicvoc/domain/songs_model/songs_model.dart';
 import 'package:musicvoc/presentation/now_playing/playing_screen_functions.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
@@ -129,6 +131,18 @@ class AllSongs extends StatelessWidget {
                   context.read<RecentlyPlayedBloc>().add(
                         RecentlyPlayedEvent.addRecentlyPlayed(
                           recentlyPlayedSong,
+                        ),
+                      );
+
+                  final mostlyPlayedSong = MostlyPlayedModel(
+                    title: songs.title,
+                    artist: songs.artist!,
+                    songUri: songs.uri!,
+                    id: songs.id,
+                  );
+                  context.read<MostlyPlayedBloc>().add(
+                        MostlyPlayedEvent.addMostlyPlayed(
+                          mostlyPlayedSong,
                         ),
                       );
                 },

@@ -38,9 +38,9 @@ class FavoriteDb {
     await getFavoriteSongs();
   }
 
-  Future<void> deleteFavoriteSongs(FavoriteModel song) async {
+  Future<void> deleteFavoriteSongs(int songId) async {
     await openBox();
-    await favoriteDb.delete(song.id);
+    await favoriteDb.delete(songId);
     await getFavoriteSongs();
   }
 }

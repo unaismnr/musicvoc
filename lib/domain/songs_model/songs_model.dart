@@ -1,5 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
-part 'song_model.g.dart';
+part 'songs_model.g.dart';
 
 @HiveType(typeId: 4)
 class SongsModel {

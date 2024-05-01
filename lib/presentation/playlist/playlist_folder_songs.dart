@@ -7,7 +7,7 @@ import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.d
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
-import 'package:musicvoc/domain/song_model.dart';
+import 'package:musicvoc/domain/songs_model/songs_model.dart';
 import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
 import 'package:musicvoc/presentation/common/songs_list_widget.dart';
 import 'package:musicvoc/presentation/playlist/add_songs_toPlaylist.dart';
