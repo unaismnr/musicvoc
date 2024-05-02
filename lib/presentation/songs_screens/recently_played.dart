@@ -112,6 +112,9 @@ void playerOnTap(
             title: item.title,
             artist: item.artist,
             id: item.id.toString(),
+            image: const MetasImage.asset(
+              'assets/musicvocnotification.png',
+            ),
           )),
     );
   }

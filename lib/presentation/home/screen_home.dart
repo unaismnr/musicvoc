@@ -128,7 +128,7 @@ class ScreenHome extends StatelessWidget {
         IconButton(
           onPressed: () {
             Get.to(
-              () => const ScreenSettings(),
+              () => ScreenSettings(),
               transition: kTransitionRightToLeft,
               duration: const Duration(),
             );

@@ -18,17 +18,17 @@ class _ScreenSplashState extends State<ScreenSplash> {
   void initState() {
     BlocProvider.of<AllSongsBloc>(context)
         .add(const AllSongsEvent.fetchSongs());
-    goToHome();
     super.initState();
   }
 
   Future<void> goToHome() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 3));
     Get.offAll(() => ScreenHome());
   }
 
   @override
   Widget build(BuildContext context) {
+    goToHome();
     return SafeArea(
       child: Container(
         height: MediaQuery.of(context).size.height,

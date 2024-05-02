@@ -20,12 +20,10 @@ class AllSongs extends StatelessWidget {
   AllSongs({super.key});
 
   final player = AssetsAudioPlayer.withId('0');
+  final List<Audio> convertedAudios = [];
 
   @override
   Widget build(BuildContext context) {
-    final player = AssetsAudioPlayer.withId('0');
-    final List<Audio> convertedAudios = [];
-
     return BlocBuilder<AllSongsBloc, AllSongsState>(
       builder: (context, state) {
         if (state.allSongs.isEmpty) {
@@ -119,6 +117,7 @@ class AllSongs extends StatelessWidget {
                     loopMode: LoopMode.playlist,
                     autoStart: true,
                     headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplug,
+                    showNotification: true,
                   );
 
                   final recentlyPlayedSong = RecentlyPlayedModel(
@@ -216,6 +215,9 @@ void playerOnTap(
             title: item.title,
             artist: item.artist,
             id: item.id.toString(),
+            image: const MetasImage.asset(
+              'assets/musicvocnotification.png',
+            ),
           )),
     );
   }
