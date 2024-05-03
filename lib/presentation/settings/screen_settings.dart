@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:musicvoc/controllers/theme_change_controller.dart';
+import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/presentation/settings/about.dart';
 import 'package:musicvoc/presentation/settings/privacy_policy.dart';
@@ -32,6 +34,8 @@ class ScreenSettings extends StatelessWidget {
     }
   ];
 
+  final themeChangeController = Get.put(ThemeChangeController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,31 +61,23 @@ class ScreenSettings extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.w),
                   color: Theme.of(context).colorScheme.background,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 30.w,
-                      offset: const Offset(0, 10),
-                    ),
-                  ],
                 ),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(10.w),
-                  onTap: () {},
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(width: 20.w),
-                      const Icon(Icons.color_lens_outlined),
-                      SizedBox(width: 15.w),
-                      Text(
-                        'Theme',
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          color: Theme.of(context).textTheme.bodyLarge!.color,
-                        ),
-                      ),
-                    ],
+                child: ListTile(
+                  leading: const Icon(Icons.color_lens_outlined),
+                  title: Text(
+                    'Theme',
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      color: Theme.of(context).textTheme.bodyLarge!.color,
+                    ),
+                  ),
+                  trailing: Obx(
+                    () => Switch(
+                        activeTrackColor: kMainBlueColor,
+                        value: themeChangeController.isDarkTheme.value,
+                        onChanged: (value) {
+                          themeChangeController.changeTheme();
+                        }),
                   ),
                 ),
               ),
@@ -96,13 +92,6 @@ class ScreenSettings extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.w),
                   color: Theme.of(context).colorScheme.background,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 30.w,
-                      offset: const Offset(0, 10),
-                    ),
-                  ],
                 ),
                 child: ListView.separated(
                   shrinkWrap: true,

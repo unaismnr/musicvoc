@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:musicvoc/application/all_songs_bloc/all_songs_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/presentation/home/screen_home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ScreenSplash extends StatefulWidget {
   const ScreenSplash({super.key});
@@ -19,11 +20,20 @@ class _ScreenSplashState extends State<ScreenSplash> {
     BlocProvider.of<AllSongsBloc>(context)
         .add(const AllSongsEvent.fetchSongs());
     super.initState();
+    _loadThemePreference();
   }
 
   Future<void> goToHome() async {
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 2));
     Get.offAll(() => ScreenHome());
+  }
+
+  Future<void> _loadThemePreference() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isDarkTheme = prefs.getBool('isDarkTheme') ?? false;
+    Get.changeThemeMode(
+      isDarkTheme ? ThemeMode.light : ThemeMode.dark,
+    );
   }
 
   @override
