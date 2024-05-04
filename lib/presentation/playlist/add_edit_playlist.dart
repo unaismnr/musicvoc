@@ -47,9 +47,9 @@ class AddEditPlaylist extends StatelessWidget {
                   Get.back();
                 }
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.check,
-                size: 25.sp,
+                size: 25,
               ),
             ),
           ),
@@ -75,7 +75,7 @@ class AddEditPlaylist extends StatelessWidget {
                     Text(
                       'Enter Playlist Name',
                       style: TextStyle(
-                        fontSize: 17.sp,
+                        fontSize: 17,
                         color: Theme.of(context).textTheme.bodyLarge!.color,
                       ),
                     ),
@@ -83,12 +83,12 @@ class AddEditPlaylist extends StatelessWidget {
                       key: globeFormKey,
                       child: TextFormField(
                         controller: textController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Type Here',
                           hintStyle: TextStyle(
-                            fontSize: 15.sp,
-                            color: const Color.fromARGB(170, 158, 158, 158),
+                            fontSize: 15,
+                            color: Color.fromARGB(170, 158, 158, 158),
                           ),
                         ),
                         validator: (value) {

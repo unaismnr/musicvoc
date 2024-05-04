@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -66,22 +64,24 @@ class ScreenSettings extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.w),
                   color: Theme.of(context).colorScheme.background,
                 ),
-                child: ListTile(
-                  leading: const Icon(Icons.color_lens_outlined),
-                  title: Text(
-                    'Theme',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      color: Theme.of(context).textTheme.bodyLarge!.color,
+                child: Center(
+                  child: ListTile(
+                    leading: const Icon(Icons.color_lens_outlined),
+                    title: Text(
+                      'Theme',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Theme.of(context).textTheme.bodyLarge!.color,
+                      ),
                     ),
-                  ),
-                  trailing: Obx(
-                    () => Switch(
-                        activeTrackColor: kMainBlueColor,
-                        value: themeChangeController.isDarkTheme.value,
-                        onChanged: (value) {
-                          themeChangeController.changeTheme();
-                        }),
+                    trailing: Obx(
+                      () => Switch(
+                          activeTrackColor: kMainBlueColor,
+                          value: themeChangeController.isDarkTheme.value,
+                          onChanged: (value) {
+                            themeChangeController.changeTheme();
+                          }),
+                    ),
                   ),
                 ),
               ),
@@ -108,7 +108,7 @@ class ScreenSettings extends StatelessWidget {
                           title: Text(
                             '${pagesList[index]['title']}',
                             style: TextStyle(
-                              fontSize: 16.sp,
+                              fontSize: 16,
                               color:
                                   Theme.of(context).textTheme.bodyLarge!.color,
                             ),
@@ -160,11 +160,10 @@ class ScreenSettings extends StatelessWidget {
   }
 
   Future<void> emailContact() async {
-    if (await launchUrl(
+    if (!await launchUrl(
       Uri.parse('mailto:contact@netecart.com'),
     )) {
-      log('Could not launch email');
-      // throw Exception('Could not launch email');
+      throw Exception('Could not launch email');
     }
   }
 }

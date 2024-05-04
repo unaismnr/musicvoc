@@ -31,9 +31,9 @@ class AddSongsToPlaylist extends StatelessWidget {
                 toastMessege(context, 'Songs Added to $playlistName');
                 Navigator.pop(context);
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.check,
-                size: 25.sp,
+                size: 25,
               ),
             ),
           ),
@@ -58,7 +58,7 @@ class AddSongsToPlaylist extends StatelessWidget {
 
                         return ListTile(
                           leading: CircleAvatar(
-                            radius: 23.w,
+                            radius: 23,
                             backgroundColor: kMainBlueColor,
                             child: QueryArtworkWidget(
                               id: allSongs.id,
@@ -78,7 +78,7 @@ class AddSongsToPlaylist extends StatelessWidget {
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                  fontSize: 13.sp,
+                                  fontSize: 13,
                                   fontWeight: FontWeight.w600,
                                   color: Theme.of(context)
                                       .textTheme
@@ -93,7 +93,7 @@ class AddSongsToPlaylist extends StatelessWidget {
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                  fontSize: 11.sp,
+                                  fontSize: 11,
                                   color: Theme.of(context)
                                       .textTheme
                                       .bodyLarge!

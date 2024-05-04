@@ -6,14 +6,14 @@ class ScreenTermsAndConditions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SizedBox sizedBoxHeight = SizedBox(height: 16.0.h);
+    SizedBox sizedBoxHeight = SizedBox(height: 16.h);
     final TextStyle boldTextStyle = TextStyle(
-      fontSize: 16.0.sp,
+      fontSize: 16,
       fontWeight: FontWeight.bold,
       color: Theme.of(context).textTheme.bodyLarge!.color,
     );
     final TextStyle regularTextStyle = TextStyle(
-      fontSize: 15.0.sp,
+      fontSize: 15,
       color: Theme.of(context).textTheme.bodyLarge!.color,
     );
 

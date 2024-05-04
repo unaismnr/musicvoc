@@ -38,20 +38,23 @@ class PlaylistScreen extends StatelessWidget {
               final playlist = state.playlist[index];
               return ListTile(
                 leading: Container(
-                  height: 140.h,
-                  width: 55.w,
+                  // height: 140.h,
+                  // width: 55.w,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.w),
+                    borderRadius: BorderRadius.circular(10),
                     color: const Color.fromARGB(36, 158, 158, 158),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(5.0.w),
+                    padding: const EdgeInsets.all(5.0),
                     child: CircleAvatar(
+                      radius: 23,
                       backgroundColor: Theme.of(context).colorScheme.background,
-                      child: Icon(
-                        Icons.music_note,
-                        color: Colors.grey[500],
-                        size: 30.sp,
+                      child: Center(
+                        child: Icon(
+                          Icons.music_note,
+                          color: Colors.grey[500],
+                          size: 30,
+                        ),
                       ),
                     ),
                   ),
@@ -104,7 +107,7 @@ class PlaylistScreen extends StatelessWidget {
                                             .textTheme
                                             .bodyLarge!
                                             .color,
-                                        fontSize: 18.sp,
+                                        fontSize: 18,
                                       ),
                                     ),
                                     content: Row(
@@ -114,12 +117,12 @@ class PlaylistScreen extends StatelessWidget {
                                           onPressed: () {
                                             Get.back();
                                           },
-                                          child: Text(
+                                          child: const Text(
                                             'Close',
                                             style: TextStyle(
-                                              color: const Color.fromARGB(
+                                              color: Color.fromARGB(
                                                   255, 105, 155, 255),
-                                              fontSize: 15.sp,
+                                              fontSize: 15,
                                             ),
                                           ),
                                         ),
@@ -147,12 +150,12 @@ class PlaylistScreen extends StatelessWidget {
                                                 '${playlist.playlistName} Deleted');
                                             Get.back();
                                           },
-                                          child: Text(
+                                          child: const Text(
                                             'Delete',
                                             style: TextStyle(
-                                              color: const Color.fromARGB(
+                                              color: Color.fromARGB(
                                                   255, 105, 155, 255),
-                                              fontSize: 15.sp,
+                                              fontSize: 15,
                                             ),
                                           ),
                                         ),
@@ -167,9 +170,9 @@ class PlaylistScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.more_vert,
-                    size: 23.sp,
+                    size: 23,
                   ),
                 ),
                 onTap: () {
@@ -193,7 +196,7 @@ class PlaylistScreen extends StatelessWidget {
         child: Icon(
           Icons.add,
           color: Theme.of(context).iconTheme.color,
-          size: 30.sp,
+          size: 30,
         ),
         onPressed: () {
           Get.to(

@@ -42,7 +42,7 @@ class AllSongs extends StatelessWidget {
 
               return ListTile(
                 leading: CircleAvatar(
-                  radius: 23.w,
+                  radius: 23,
                   backgroundColor: kMainBlueColor,
                   child: QueryArtworkWidget(
                     id: songs.id,
@@ -68,7 +68,7 @@ class AllSongs extends StatelessWidget {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                              fontSize: 13.sp,
+                              fontSize: 13,
                               fontWeight: FontWeight.w600,
                               color: isCurrentlyPlayingSong
                                   ? kSelectedTextColor
@@ -83,7 +83,7 @@ class AllSongs extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                              fontSize: 11.sp,
+                              fontSize: 11,
                               color: isCurrentlyPlayingSong
                                   ? const Color.fromARGB(255, 105, 155, 255)
                                   : Theme.of(context)

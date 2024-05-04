@@ -24,7 +24,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
     _loadThemePreference();
   }
 
-  Future<void> goToHome() async {
+  Future<void> _goToHome() async {
     await Future.delayed(const Duration(seconds: 2));
     Get.offAll(
       () => ScreenHome(),
@@ -43,7 +43,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
 
   @override
   Widget build(BuildContext context) {
-    goToHome();
+    _goToHome();
     return SafeArea(
       child: Container(
         height: MediaQuery.of(context).size.height,

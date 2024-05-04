@@ -41,7 +41,7 @@ class ScreenAbout extends StatelessWidget {
                 child: Text(
                   'MusicVoc is an offline music player app that allows users to listen to music from their storage. It also includes functions such as adding to favorites, creating playlists, viewing recently played tracks, and seeing the most frequently played songs.',
                   style: TextStyle(
-                    fontSize: 18.sp,
+                    fontSize: 18,
                     color: Theme.of(context).textTheme.bodyLarge!.color,
                   ),
                   textAlign: TextAlign.center,

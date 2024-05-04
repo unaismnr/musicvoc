@@ -159,7 +159,7 @@ class PlaylistFolderSongs extends StatelessWidget {
           child: Icon(
             Icons.add,
             color: Theme.of(context).iconTheme.color,
-            size: 30.sp,
+            size: 30,
           ),
           onPressed: () {
             Get.to(

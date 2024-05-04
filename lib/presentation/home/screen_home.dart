@@ -130,9 +130,9 @@ class ScreenHome extends StatelessWidget {
               ),
             );
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.search,
-            size: 28.w,
+            size: 28,
           ),
         ),
         IconButton(
@@ -145,27 +145,13 @@ class ScreenHome extends StatelessWidget {
               ),
             );
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.settings,
-            size: 28.w,
+            size: 28,
           ),
         ),
         SizedBox(width: 5.w)
       ],
-    );
-  }
-
-  Widget customTabBar(String title) {
-    return SizedBox(
-      height: 28.h,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.w),
-        child: Center(
-          child: Tab(
-            text: title,
-          ),
-        ),
-      ),
     );
   }
 }
@@ -190,7 +176,7 @@ class CustomHomeButtons extends StatelessWidget {
         color: Theme.of(context).scaffoldBackgroundColor,
         border: Border.all(
           color: kMainBlueColor,
-          width: 1.7.w,
+          width: 1.7,
         ),
       ),
       child: InkWell(

@@ -59,11 +59,11 @@ class CustomBottomMusic extends StatelessWidget {
                         playing.audio.audio.metas.id.toString(),
                       ),
                       type: ArtworkType.AUDIO,
-                      nullArtworkWidget: CircleAvatar(
+                      nullArtworkWidget: const CircleAvatar(
                         backgroundColor: kMainBlueColor,
                         child: Icon(
                           Icons.music_note,
-                          size: 30.w,
+                          size: 30,
                           color: kWhiteColor,
                         ),
                       ),
@@ -79,7 +79,7 @@ class CustomBottomMusic extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        fontSize: 14.sp,
+                        fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: Theme.of(context).textTheme.bodyLarge!.color,
                       ),
@@ -113,9 +113,9 @@ class CustomBottomMusic extends StatelessWidget {
                                 player.pause();
                               }
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.skip_previous,
-                              size: 30.sp,
+                              size: 30,
                               color: kMainBlueColor,
                             ),
                           ),
@@ -125,7 +125,7 @@ class CustomBottomMusic extends StatelessWidget {
                             },
                             icon: Icon(
                               isPlaying ? Icons.pause : Icons.play_arrow,
-                              size: 30.sp,
+                              size: 30,
                               color: kMainBlueColor,
                             ),
                           ),
@@ -141,9 +141,9 @@ class CustomBottomMusic extends StatelessWidget {
                                 player.pause();
                               }
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.skip_next,
-                              size: 30.sp,
+                              size: 30,
                               color: kMainBlueColor,
                             ),
                           ),

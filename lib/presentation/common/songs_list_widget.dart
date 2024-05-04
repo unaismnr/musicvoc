@@ -30,14 +30,14 @@ class SongsListStaticWidgets {
   ) =>
       ListTile(
         leading: CircleAvatar(
-          radius: 23.w,
+          radius: 23,
           backgroundColor: kMainBlueColor,
           child: QueryArtworkWidget(
             id: id,
             type: ArtworkType.AUDIO,
-            nullArtworkWidget: Icon(
+            nullArtworkWidget: const Icon(
               Icons.music_note,
-              size: 35.sp,
+              size: 35,
               color: Colors.white,
             ),
           ),
@@ -50,7 +50,7 @@ class SongsListStaticWidgets {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                fontSize: 13.sp,
+                fontSize: 13,
                 fontWeight: FontWeight.w600,
                 color: color,
               ),
@@ -60,7 +60,7 @@ class SongsListStaticWidgets {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                fontSize: 11.sp,
+                fontSize: 11,
                 color: color,
               ),
             ),
