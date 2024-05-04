@@ -2,12 +2,16 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:musicvoc/application/mostly_played_bloc/mostly_played_bloc.dart';
 import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
+import 'package:musicvoc/domain/mostly_played_model/mostly_played_model.dart';
 import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
 import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
 import 'package:musicvoc/presentation/common/songs_list_widget.dart';
+import 'package:musicvoc/presentation/now_playing/screen_playing.dart';
 
 class RecentlyPlayed extends StatelessWidget {
   const RecentlyPlayed({super.key});
@@ -78,6 +82,13 @@ Widget favoriteSongsList() {
                         toastMessege(context, 'Deleted From Recently Played');
                       },
                       () {
+                        Get.to(
+                          () => const ScreenPlaying(),
+                          transition: kTransitionRightToLeft,
+                          duration: const Duration(
+                            milliseconds: 100,
+                          ),
+                        );
                         playerOnTap(
                           state.recentlyPlayed,
                           convertedAudios,
@@ -91,6 +102,29 @@ Widget favoriteSongsList() {
                           autoStart: true,
                           headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplug,
                         );
+                        final recentlyPlayedSong = RecentlyPlayedModel(
+                          title: recSongs.title,
+                          artist: recSongs.artist,
+                          songUri: recSongs.songUri,
+                          id: recSongs.id,
+                          time: DateTime.now(),
+                        );
+                        context.read<RecentlyPlayedBloc>().add(
+                              RecentlyPlayedEvent.addRecentlyPlayed(
+                                recentlyPlayedSong,
+                              ),
+                            );
+                        final mostlyPlayedSong = MostlyPlayedModel(
+                          title: recSongs.title,
+                          artist: recSongs.artist,
+                          songUri: recSongs.songUri,
+                          id: recSongs.id,
+                        );
+                        context.read<MostlyPlayedBloc>().add(
+                              MostlyPlayedEvent.addMostlyPlayed(
+                                mostlyPlayedSong,
+                              ),
+                            );
                       },
                       recSongs.id,
                     );

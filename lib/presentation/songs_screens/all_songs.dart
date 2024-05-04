@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:musicvoc/application/all_songs_bloc/all_songs_bloc.dart';
 import 'package:musicvoc/application/favorite_songs_bloc/favorite_songs_bloc.dart';
 import 'package:musicvoc/application/mostly_played_bloc/mostly_played_bloc.dart';
@@ -13,6 +14,7 @@ import 'package:musicvoc/domain/mostly_played_model/mostly_played_model.dart';
 import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
 import 'package:musicvoc/domain/songs_model/songs_model.dart';
 import 'package:musicvoc/presentation/now_playing/playing_screen_functions.dart';
+import 'package:musicvoc/presentation/now_playing/screen_playing.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 
@@ -105,6 +107,13 @@ class AllSongs extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
+                  Get.to(
+                    () => const ScreenPlaying(),
+                    transition: kTransitionRightToLeft,
+                    duration: const Duration(
+                      milliseconds: 100,
+                    ),
+                  );
                   playerOnTap(
                     state.allSongs,
                     convertedAudios,

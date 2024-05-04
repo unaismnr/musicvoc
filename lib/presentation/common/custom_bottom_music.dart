@@ -37,10 +37,10 @@ class CustomBottomMusic extends StatelessWidget {
           topRight: Radius.circular(28.w),
         ),
         onTap: () => Get.to(
-          () => ScreenPlaying(),
+          () => const ScreenPlaying(),
           transition: kTransitionDownToUp,
           duration: const Duration(
-            milliseconds: 150,
+            milliseconds: 100,
           ),
         ),
         child: PlayerBuilder.current(

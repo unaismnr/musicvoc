@@ -1,6 +1,7 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:musicvoc/application/mostly_played_bloc/mostly_played_bloc.dart';
 import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
@@ -9,6 +10,7 @@ import 'package:musicvoc/domain/mostly_played_model/mostly_played_model.dart';
 import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
 import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
 import 'package:musicvoc/presentation/common/songs_list_widget.dart';
+import 'package:musicvoc/presentation/now_playing/screen_playing.dart';
 
 class MostlyPlayed extends StatelessWidget {
   const MostlyPlayed({super.key});
@@ -85,6 +87,13 @@ Widget mostlyPlayedSongsList() {
                         toastMessege(context, 'Deleted From MostlyPlayed');
                       },
                       () {
+                        Get.to(
+                          () => const ScreenPlaying(),
+                          transition: kTransitionRightToLeft,
+                          duration: const Duration(
+                            milliseconds: 100,
+                          ),
+                        );
                         playerOnTap(
                           state.mostlyPlayed,
                           convertedAudios,
@@ -108,6 +117,17 @@ Widget mostlyPlayedSongsList() {
                         context.read<RecentlyPlayedBloc>().add(
                               RecentlyPlayedEvent.addRecentlyPlayed(
                                 recentlyPlayedSong,
+                              ),
+                            );
+                        final mostlyPlayedSong = MostlyPlayedModel(
+                          title: mostSongs.title,
+                          artist: mostSongs.artist,
+                          songUri: mostSongs.songUri,
+                          id: mostSongs.id,
+                        );
+                        context.read<MostlyPlayedBloc>().add(
+                              MostlyPlayedEvent.addMostlyPlayed(
+                                mostlyPlayedSong,
                               ),
                             );
                       },

@@ -13,6 +13,7 @@ import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
 import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
 import 'package:musicvoc/presentation/common/songs_list_widget.dart';
+import 'package:musicvoc/presentation/now_playing/screen_playing.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class ScreenSearch extends StatelessWidget {
@@ -81,6 +82,13 @@ class ScreenSearch extends StatelessWidget {
                                       context, 'Deleted From Favorite');
                                 },
                                 () {
+                                  Get.to(
+                                    () => const ScreenPlaying(),
+                                    transition: kTransitionRightToLeft,
+                                    duration: const Duration(
+                                      milliseconds: 100,
+                                    ),
+                                  );
                                   playerOnTap(
                                     searchResults,
                                     convertedAudios,

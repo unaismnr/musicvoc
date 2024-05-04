@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:musicvoc/application/all_songs_bloc/all_songs_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
+import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/presentation/home/screen_home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,7 +26,11 @@ class _ScreenSplashState extends State<ScreenSplash> {
 
   Future<void> goToHome() async {
     await Future.delayed(const Duration(seconds: 2));
-    Get.offAll(() => ScreenHome());
+    Get.offAll(
+      () => ScreenHome(),
+      transition: kTransitionRightToLeft,
+      duration: const Duration(),
+    );
   }
 
   Future<void> _loadThemePreference() async {

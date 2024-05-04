@@ -5,25 +5,32 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:musicvoc/application/favorite_songs_bloc/favorite_songs_bloc.dart';
 import 'package:musicvoc/application/loop_and_shuffle_bloc/loop_and_shuffle_bloc.dart';
+import 'package:musicvoc/application/mostly_played_bloc/mostly_played_bloc.dart';
 import 'package:musicvoc/application/playlist_bloc/playlist_bloc.dart';
 import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/controllers/adjust_speed_text.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/domain/favorite_model/favorite_model.dart';
+import 'package:musicvoc/domain/mostly_played_model/mostly_played_model.dart';
 import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
 import 'package:musicvoc/domain/songs_model/songs_model.dart';
 import 'package:musicvoc/presentation/now_playing/playing_screen_functions.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 
-// ignore: must_be_immutable
-class ScreenPlaying extends StatelessWidget {
-  ScreenPlaying({
+class ScreenPlaying extends StatefulWidget {
+  const ScreenPlaying({
     super.key,
   });
 
+  @override
+  State<ScreenPlaying> createState() => _ScreenPlayingState();
+}
+
+class _ScreenPlayingState extends State<ScreenPlaying> {
   final player = AssetsAudioPlayer.withId('0');
+
   bool isRepeat = false;
 
   final songSpeedTextController = Get.put(
@@ -243,6 +250,19 @@ class ScreenPlaying extends StatelessWidget {
                                         recentlyPlayedSong,
                                       ),
                                     );
+                                final mostlyPlayedSong = MostlyPlayedModel(
+                                  title: currentSongDetails.title!,
+                                  artist: currentSongDetails.artist!,
+                                  songUri: player
+                                      .current.valueOrNull!.audio.audio.path,
+                                  id: int.parse(
+                                      currentSongDetails.id.toString()),
+                                );
+                                context.read<MostlyPlayedBloc>().add(
+                                      MostlyPlayedEvent.addMostlyPlayed(
+                                        mostlyPlayedSong,
+                                      ),
+                                    );
                                 await player.previous();
                                 if (isPlaying == false) {
                                   player.pause();
@@ -285,6 +305,19 @@ class ScreenPlaying extends StatelessWidget {
                                 context.read<RecentlyPlayedBloc>().add(
                                       RecentlyPlayedEvent.addRecentlyPlayed(
                                         recentlyPlayedSong,
+                                      ),
+                                    );
+                                final mostlyPlayedSong = MostlyPlayedModel(
+                                  title: currentSongDetails.title!,
+                                  artist: currentSongDetails.artist!,
+                                  songUri: player
+                                      .current.valueOrNull!.audio.audio.path,
+                                  id: int.parse(
+                                      currentSongDetails.id.toString()),
+                                );
+                                context.read<MostlyPlayedBloc>().add(
+                                      MostlyPlayedEvent.addMostlyPlayed(
+                                        mostlyPlayedSong,
                                       ),
                                     );
                                 await player.next();

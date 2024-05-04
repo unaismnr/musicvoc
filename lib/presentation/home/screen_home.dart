@@ -37,7 +37,9 @@ class ScreenHome extends StatelessWidget {
                       Get.to(
                         () => const RecentlyPlayed(),
                         transition: kTransitionRightToLeft,
-                        duration: const Duration(),
+                        duration: const Duration(
+                          milliseconds: 100,
+                        ),
                       );
                     },
                     title: 'RECENTLY \n PLAYED'),
@@ -46,7 +48,9 @@ class ScreenHome extends StatelessWidget {
                       Get.to(
                         () => const MostlyPlayed(),
                         transition: kTransitionRightToLeft,
-                        duration: const Duration(),
+                        duration: const Duration(
+                          milliseconds: 100,
+                        ),
                       );
                     },
                     title: 'MOSTLY \n PLAYED'),
@@ -64,7 +68,9 @@ class ScreenHome extends StatelessWidget {
                       Get.to(
                         () => const Favorites(),
                         transition: kTransitionRightToLeft,
-                        duration: const Duration(),
+                        duration: const Duration(
+                          milliseconds: 100,
+                        ),
                       );
                     },
                     title: 'FAVORITES'),
@@ -73,7 +79,9 @@ class ScreenHome extends StatelessWidget {
                       Get.to(
                         () => const PlaylistScreen(),
                         transition: kTransitionRightToLeft,
-                        duration: const Duration(),
+                        duration: const Duration(
+                          milliseconds: 100,
+                        ),
                       );
                     },
                     title: 'PLAYLIST'),
@@ -117,7 +125,9 @@ class ScreenHome extends StatelessWidget {
             Get.to(
               () => ScreenSearch(),
               transition: kTransitionRightToLeft,
-              duration: const Duration(),
+              duration: const Duration(
+                milliseconds: 100,
+              ),
             );
           },
           icon: Icon(
@@ -130,7 +140,9 @@ class ScreenHome extends StatelessWidget {
             Get.to(
               () => ScreenSettings(),
               transition: kTransitionRightToLeft,
-              duration: const Duration(),
+              duration: const Duration(
+                milliseconds: 100,
+              ),
             );
           },
           icon: Icon(

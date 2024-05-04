@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -7,6 +9,8 @@ import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/presentation/settings/about.dart';
 import 'package:musicvoc/presentation/settings/privacy_policy.dart';
 import 'package:musicvoc/presentation/settings/terms_and_conditions.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ScreenSettings extends StatelessWidget {
   ScreenSettings({super.key});
@@ -30,7 +34,7 @@ class ScreenSettings extends StatelessWidget {
     },
     {
       'title': 'Contact',
-      'icon': Icons.mail,
+      'icon': Icons.mail_outline,
     }
   ];
 
@@ -129,6 +133,12 @@ class ScreenSettings extends StatelessWidget {
                                 transition: kTransitionRightToLeft,
                                 duration: const Duration(),
                               );
+                            } else if (pagesList[index]['title'] ==
+                                'Share App') {
+                              Share.share(
+                                  'https://github.com/unaismnr/musicvoc');
+                            } else if (pagesList[index]['title'] == 'Contact') {
+                              emailContact();
                             }
                           },
                         ),
@@ -147,5 +157,14 @@ class ScreenSettings extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> emailContact() async {
+    if (await launchUrl(
+      Uri.parse('mailto:contact@netecart.com'),
+    )) {
+      log('Could not launch email');
+      // throw Exception('Could not launch email');
+    }
   }
 }
