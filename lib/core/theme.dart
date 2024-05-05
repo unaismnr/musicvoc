@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:musicvoc/core/const_colors.dart';
 
 class MyThemes {
@@ -18,15 +17,15 @@ class MyThemes {
       backgroundColor: Colors.grey.shade100,
     ),
     dividerColor: const Color.fromARGB(255, 218, 218, 218),
-    textTheme: GoogleFonts.latoTextTheme().apply().copyWith(
-          bodyLarge: const TextStyle(
-            color: Colors.black,
-          ),
-          bodyMedium: const TextStyle(
-            color: Colors.grey,
-          ),
-        ),
-    fontFamily: GoogleFonts.lato().fontFamily,
+    textTheme: const TextTheme(
+      bodyLarge: TextStyle(
+        color: Colors.black,
+      ),
+      bodyMedium: TextStyle(
+        color: Colors.grey,
+      ),
+    ),
+    fontFamily: 'Lato',
     cardColor: Colors.grey,
   );
 
@@ -45,15 +44,15 @@ class MyThemes {
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.grey.shade900,
     ),
-    textTheme: GoogleFonts.latoTextTheme().apply().copyWith(
-          bodyLarge: const TextStyle(
-            color: Colors.white,
-          ),
-          bodyMedium: const TextStyle(
-            color: Colors.grey,
-          ),
-        ),
-    fontFamily: GoogleFonts.lato().fontFamily,
+    textTheme: const TextTheme(
+      bodyLarge: TextStyle(
+        color: Colors.white,
+      ),
+      bodyMedium: TextStyle(
+        color: Colors.grey,
+      ),
+    ),
+    fontFamily: 'Lato',
     cardColor: Colors.black,
   );
 }
