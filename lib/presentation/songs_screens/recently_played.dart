@@ -144,7 +144,7 @@ void playerOnTap(
             artist: item.artist,
             id: item.id.toString(),
             image: const MetasImage.asset(
-              'assets/musicvocnotification.png',
+              'assets/musicvoc.jpg',
             ),
           )),
     );
