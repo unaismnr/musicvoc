@@ -70,7 +70,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/musicvoc.jpg" 
+  image_path: "assets/musicvoc-logo.jpg" 
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

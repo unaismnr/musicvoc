@@ -12,26 +12,4 @@ class NavigationHelper {
       ),
     );
   }
-
-  //PushRightToLeft
-  static void pushBottomToTop(BuildContext context, Widget page) {
-    Navigator.of(context).push(
-      PageTransition(
-        child: page,
-        type: PageTransitionType.bottomToTop,
-        duration: const Duration(milliseconds: 1),
-      ),
-    );
-  }
-
-  //PushReplacemenRightToLeft
-  static void pushReplacement(BuildContext context, Widget page) {
-    Navigator.of(context).pushReplacement(
-      PageTransition(
-        child: page,
-        type: PageTransitionType.rightToLeft,
-        duration: const Duration(milliseconds: 1),
-      ),
-    );
-  }
 }

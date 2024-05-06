@@ -12,7 +12,6 @@ import 'package:musicvoc/domain/songs_model/songs_model.dart';
 import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
 import 'package:musicvoc/presentation/common/navigation_helper.dart';
 import 'package:musicvoc/presentation/common/songs_list_widget.dart';
-import 'package:musicvoc/presentation/now_playing/screen_playing.dart';
 import 'package:musicvoc/presentation/playlist/add_songs_toPlaylist.dart';
 import 'package:musicvoc/services/database/playlist_db.dart';
 
@@ -91,10 +90,6 @@ class PlaylistFolderSongs extends StatelessWidget {
                                           'Song Deleted from ${item.playlistName}');
                                     },
                                     () {
-                                      NavigationHelper.pushBottomToTop(
-                                        context,
-                                        const ScreenPlaying(),
-                                      );
                                       playerOnTap(
                                         item.playlistSongs,
                                         convertedAudios,
@@ -184,7 +179,7 @@ class PlaylistFolderSongs extends StatelessWidget {
               artist: item.artist,
               id: item.id.toString(),
               image: const MetasImage.asset(
-                'assets/musicvoc.jpg',
+                'assets/musicvoc-logo.jpg',
               ),
             )),
       );

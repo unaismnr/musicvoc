@@ -8,8 +8,6 @@ import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/domain/mostly_played_model/mostly_played_model.dart';
 import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
 import 'package:musicvoc/presentation/common/custom_bottom_sheet_on_more.dart';
-import 'package:musicvoc/presentation/common/navigation_helper.dart';
-import 'package:musicvoc/presentation/now_playing/screen_playing.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 
@@ -102,10 +100,6 @@ class AllSongs extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                  NavigationHelper.pushBottomToTop(
-                    context,
-                    const ScreenPlaying(),
-                  );
                   playerOnTap(
                     state.allSongs,
                     convertedAudios,
@@ -168,7 +162,7 @@ void playerOnTap(
             artist: item.artist,
             id: item.id.toString(),
             image: const MetasImage.asset(
-              'assets/musicvoc.jpg',
+              'assets/musicvoc-logo.jpg',
             ),
           )),
     );

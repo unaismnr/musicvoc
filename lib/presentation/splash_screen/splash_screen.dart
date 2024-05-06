@@ -61,7 +61,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
           child: Image.asset(
             height: 300.h,
             width: 150.w,
-            'assets/musicvocsplashlogo.png',
+            'assets/musicvoc-logo-splash.png',
           ),
         ),
       ),

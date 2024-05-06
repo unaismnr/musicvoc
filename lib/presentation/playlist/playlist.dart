@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:musicvoc/application/playlist_bloc/playlist_bloc.dart';
 import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/domain/playlist_song_model/playlist_song_model.dart';
+import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
 import 'package:musicvoc/presentation/common/navigation_helper.dart';
 import 'package:musicvoc/presentation/playlist/add_edit_playlist.dart';
 import 'package:musicvoc/presentation/playlist/playlist_folder_songs.dart';
@@ -189,20 +190,24 @@ class PlaylistScreen extends StatelessWidget {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        elevation: 0,
-        child: Icon(
-          Icons.add,
-          color: Theme.of(context).iconTheme.color,
-          size: 30,
+      bottomSheet: CustomBottomMusic(context: context),
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(bottom: 50.h, right: 10.w),
+        child: FloatingActionButton(
+          backgroundColor: Theme.of(context).colorScheme.background,
+          elevation: 0,
+          child: Icon(
+            Icons.add,
+            color: Theme.of(context).iconTheme.color,
+            size: 30,
+          ),
+          onPressed: () {
+            NavigationHelper.pushRightToLeft(
+              context,
+              AddEditPlaylist(),
+            );
+          },
         ),
-        onPressed: () {
-          NavigationHelper.pushRightToLeft(
-            context,
-            AddEditPlaylist(),
-          );
-        },
       ),
     );
   }

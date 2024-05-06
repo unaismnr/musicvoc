@@ -10,9 +10,7 @@ import 'package:musicvoc/domain/favorite_model/favorite_model.dart';
 import 'package:musicvoc/domain/mostly_played_model/mostly_played_model.dart';
 import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
 import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
-import 'package:musicvoc/presentation/common/navigation_helper.dart';
 import 'package:musicvoc/presentation/common/songs_list_widget.dart';
-import 'package:musicvoc/presentation/now_playing/screen_playing.dart';
 
 class Favorites extends StatelessWidget {
   const Favorites({super.key});
@@ -89,10 +87,6 @@ Widget favoriteSongsList() {
                         toastMessege(context, 'Deleted From Favorite');
                       },
                       () {
-                        NavigationHelper.pushBottomToTop(
-                          context,
-                          const ScreenPlaying(),
-                        );
                         playerOnTap(
                           state.favoriteSongs,
                           convertedAudios,
@@ -151,7 +145,7 @@ void playerOnTap(
             artist: item.artist,
             id: item.id.toString(),
             image: const MetasImage.asset(
-              'assets/musicvoc.jpg',
+              'assets/musicvoc-logo.jpg',
             ),
           )),
     );
