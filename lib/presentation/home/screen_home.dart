@@ -1,6 +1,8 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:musicvoc/controllers/search_controller.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
@@ -12,11 +14,13 @@ import 'package:musicvoc/presentation/songs_screens/all_songs.dart';
 import 'package:musicvoc/presentation/songs_screens/favorites.dart';
 import 'package:musicvoc/presentation/songs_screens/mostly_played.dart';
 import 'package:musicvoc/presentation/songs_screens/recently_played.dart';
+import 'package:page_transition/page_transition.dart';
 
 class ScreenHome extends StatelessWidget {
   ScreenHome({super.key});
 
   final player = AssetsAudioPlayer.withId('0');
+  final searchController = Get.put(SearchQueryController());
 
   @override
   Widget build(BuildContext context) {
@@ -105,10 +109,17 @@ class ScreenHome extends StatelessWidget {
       actions: [
         IconButton(
           onPressed: () {
-            NavigationHelper.pushRightToLeft(
-              context,
-              ScreenSearch(),
-            );
+            Navigator.of(context)
+                .push(
+                  PageTransition(
+                    child: ScreenSearch(),
+                    type: PageTransitionType.rightToLeft,
+                    duration: const Duration(milliseconds: 1),
+                  ),
+                )
+                .then(
+                  (value) => searchController.search('', []),
+                );
           },
           icon: const Icon(
             Icons.search,

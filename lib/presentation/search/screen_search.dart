@@ -135,6 +135,7 @@ void playerOnTap(
   List<SongModel> allSongs,
   List<Audio> convertedAudios,
 ) {
+  convertedAudios.clear();
   for (var item in allSongs) {
     convertedAudios.add(
       Audio.file(item.uri!,

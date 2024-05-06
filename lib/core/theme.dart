@@ -27,6 +27,9 @@ class MyThemes {
     ),
     fontFamily: 'Lato',
     cardColor: Colors.grey,
+    bottomSheetTheme: BottomSheetThemeData(
+      shape: Border.all(color: Colors.transparent),
+    ),
   );
 
   static final darkMode = ThemeData(
@@ -54,5 +57,10 @@ class MyThemes {
     ),
     fontFamily: 'Lato',
     cardColor: Colors.black,
+    bottomSheetTheme: BottomSheetThemeData(
+      shape: Border.all(
+        color: Colors.transparent,
+      ),
+    ),
   );
 }

@@ -25,7 +25,7 @@ class AllSongs extends StatelessWidget {
       builder: (context, state) {
         if (state.allSongs.isEmpty) {
           return const Center(
-            child: Text('Loading'),
+            child: Text('No Songs'),
           );
         } else {
           return ListView.builder(
