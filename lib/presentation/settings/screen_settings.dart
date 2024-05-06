@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:musicvoc/controllers/theme_change_controller.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
+import 'package:musicvoc/presentation/common/navigation_helper.dart';
 import 'package:musicvoc/presentation/settings/about.dart';
 import 'package:musicvoc/presentation/settings/privacy_policy.dart';
 import 'package:musicvoc/presentation/settings/terms_and_conditions.dart';
@@ -115,23 +116,20 @@ class ScreenSettings extends StatelessWidget {
                           ),
                           onTap: () {
                             if (pagesList[index]['title'] == 'Privacy Policy') {
-                              Get.to(
-                                () => const ScreenPrivacyPolicy(),
-                                transition: kTransitionRightToLeft,
-                                duration: const Duration(),
+                              NavigationHelper.pushRightToLeft(
+                                context,
+                                const ScreenPrivacyPolicy(),
                               );
                             } else if (pagesList[index]['title'] ==
                                 'Terms & Conditions') {
-                              Get.to(
-                                () => const ScreenTermsAndConditions(),
-                                transition: kTransitionRightToLeft,
-                                duration: const Duration(),
+                              NavigationHelper.pushRightToLeft(
+                                context,
+                                const ScreenTermsAndConditions(),
                               );
                             } else if (pagesList[index]['title'] == 'About') {
-                              Get.to(
-                                () => const ScreenAbout(),
-                                transition: kTransitionRightToLeft,
-                                duration: const Duration(),
+                              NavigationHelper.pushRightToLeft(
+                                context,
+                                const ScreenAbout(),
                               );
                             } else if (pagesList[index]['title'] ==
                                 'Share App') {

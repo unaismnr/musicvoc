@@ -1,12 +1,10 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:musicvoc/application/favorite_songs_bloc/favorite_songs_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
+import 'package:musicvoc/presentation/common/navigation_helper.dart';
 import 'package:musicvoc/presentation/playlist/playlist.dart';
 import 'package:musicvoc/presentation/search/screen_search.dart';
 import 'package:musicvoc/presentation/settings/screen_settings.dart';
@@ -34,23 +32,17 @@ class ScreenHome extends StatelessWidget {
               children: [
                 CustomHomeButtons(
                     onTap: () {
-                      Get.to(
-                        () => const RecentlyPlayed(),
-                        transition: kTransitionRightToLeft,
-                        duration: const Duration(
-                          milliseconds: 100,
-                        ),
+                      NavigationHelper.pushRightToLeft(
+                        context,
+                        const RecentlyPlayed(),
                       );
                     },
                     title: 'RECENTLY \n PLAYED'),
                 CustomHomeButtons(
                     onTap: () {
-                      Get.to(
-                        () => const MostlyPlayed(),
-                        transition: kTransitionRightToLeft,
-                        duration: const Duration(
-                          milliseconds: 100,
-                        ),
+                      NavigationHelper.pushRightToLeft(
+                        context,
+                        const MostlyPlayed(),
                       );
                     },
                     title: 'MOSTLY \n PLAYED'),
@@ -62,26 +54,17 @@ class ScreenHome extends StatelessWidget {
               children: [
                 CustomHomeButtons(
                     onTap: () {
-                      context.read<FavoriteSongsBloc>().add(
-                            const FavoriteSongsEvent.getFavorite(),
-                          );
-                      Get.to(
-                        () => const Favorites(),
-                        transition: kTransitionRightToLeft,
-                        duration: const Duration(
-                          milliseconds: 100,
-                        ),
+                      NavigationHelper.pushRightToLeft(
+                        context,
+                        const Favorites(),
                       );
                     },
                     title: 'FAVORITES'),
                 CustomHomeButtons(
                     onTap: () {
-                      Get.to(
-                        () => const PlaylistScreen(),
-                        transition: kTransitionRightToLeft,
-                        duration: const Duration(
-                          milliseconds: 100,
-                        ),
+                      NavigationHelper.pushRightToLeft(
+                        context,
+                        const PlaylistScreen(),
                       );
                     },
                     title: 'PLAYLIST'),
@@ -122,12 +105,9 @@ class ScreenHome extends StatelessWidget {
       actions: [
         IconButton(
           onPressed: () {
-            Get.to(
-              () => ScreenSearch(),
-              transition: kTransitionRightToLeft,
-              duration: const Duration(
-                milliseconds: 100,
-              ),
+            NavigationHelper.pushRightToLeft(
+              context,
+              ScreenSearch(),
             );
           },
           icon: const Icon(
@@ -137,12 +117,9 @@ class ScreenHome extends StatelessWidget {
         ),
         IconButton(
           onPressed: () {
-            Get.to(
-              () => ScreenSettings(),
-              transition: kTransitionRightToLeft,
-              duration: const Duration(
-                milliseconds: 100,
-              ),
+            NavigationHelper.pushRightToLeft(
+              context,
+              ScreenSettings(),
             );
           },
           icon: const Icon(

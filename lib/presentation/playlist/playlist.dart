@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:musicvoc/application/playlist_bloc/playlist_bloc.dart';
 import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/domain/playlist_song_model/playlist_song_model.dart';
+import 'package:musicvoc/presentation/common/navigation_helper.dart';
 import 'package:musicvoc/presentation/playlist/add_edit_playlist.dart';
 import 'package:musicvoc/presentation/playlist/playlist_folder_songs.dart';
 
@@ -80,12 +80,12 @@ class PlaylistScreen extends StatelessWidget {
                               leading: const Icon(Icons.edit),
                               title: const Text("Edit Playlist Name"),
                               onTap: () {
-                                Get.back();
-                                Get.to(
-                                  () => AddEditPlaylist(
-                                      initialPlaylistName:
-                                          playlist.playlistName),
-                                  duration: const Duration(),
+                                Navigator.pop(context);
+                                NavigationHelper.pushRightToLeft(
+                                  context,
+                                  AddEditPlaylist(
+                                    initialPlaylistName: playlist.playlistName,
+                                  ),
                                 );
                               },
                             ),
@@ -93,7 +93,7 @@ class PlaylistScreen extends StatelessWidget {
                               leading: const Icon(Icons.delete),
                               title: const Text("Delete Playlist"),
                               onTap: () {
-                                Get.back();
+                                Navigator.pop(context);
                                 showDialog(
                                   context: context,
                                   builder: (context) => AlertDialog(
@@ -115,7 +115,7 @@ class PlaylistScreen extends StatelessWidget {
                                       children: [
                                         TextButton(
                                           onPressed: () {
-                                            Get.back();
+                                            Navigator.pop(context);
                                           },
                                           child: const Text(
                                             'Close',
@@ -148,7 +148,7 @@ class PlaylistScreen extends StatelessWidget {
 
                                             toastMessege(context,
                                                 '${playlist.playlistName} Deleted');
-                                            Get.back();
+                                            Navigator.pop(context);
                                           },
                                           child: const Text(
                                             'Delete',
@@ -176,12 +176,11 @@ class PlaylistScreen extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                  Get.to(
-                    () => PlaylistFolderSongs(
+                  NavigationHelper.pushRightToLeft(
+                    context,
+                    PlaylistFolderSongs(
                       title: playlist.playlistName,
                     ),
-                    transition: kTransitionRightToLeft,
-                    duration: const Duration(milliseconds: 150),
                   );
                 },
               );
@@ -199,9 +198,9 @@ class PlaylistScreen extends StatelessWidget {
           size: 30,
         ),
         onPressed: () {
-          Get.to(
-            () => AddEditPlaylist(),
-            duration: const Duration(),
+          NavigationHelper.pushRightToLeft(
+            context,
+            AddEditPlaylist(),
           );
         },
       ),

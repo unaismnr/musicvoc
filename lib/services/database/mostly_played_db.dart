@@ -19,7 +19,9 @@ class MostlyPlayedDb {
     await openBox();
     final List<MostlyPlayedModel> songs = mostlyPlayedDb.values.toList();
     songs.sort((a, b) => b.playCount.compareTo(a.playCount));
-    return songs.take(10).toList();
+    final List<MostlyPlayedModel> filteredSongs =
+        songs.where((song) => song.playCount >= 5).toList();
+    return filteredSongs.take(10).toList();
   }
 
   Future<void> addMostlyPlayed(MostlyPlayedModel song) async {

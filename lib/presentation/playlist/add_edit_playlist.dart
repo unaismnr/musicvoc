@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:musicvoc/application/playlist_bloc/playlist_bloc.dart';
 import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/services/database/playlist_db.dart';
@@ -44,7 +43,7 @@ class AddEditPlaylist extends StatelessWidget {
                         ? 'Playlist $name Created'
                         : 'Playlist $name Edited',
                   );
-                  Get.back();
+                  Navigator.pop(context);
                 }
               },
               icon: const Icon(

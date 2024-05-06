@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:musicvoc/application/all_songs_bloc/all_songs_bloc.dart';
-import 'package:musicvoc/application/favorite_songs_bloc/favorite_songs_bloc.dart';
 import 'package:musicvoc/application/mostly_played_bloc/mostly_played_bloc.dart';
 import 'package:musicvoc/application/playlist_bloc/playlist_bloc.dart';
 import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
-import 'package:musicvoc/core/other_consts.dart';
-import 'package:musicvoc/domain/favorite_model/favorite_model.dart';
 import 'package:musicvoc/domain/mostly_played_model/mostly_played_model.dart';
 import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
-import 'package:musicvoc/domain/songs_model/songs_model.dart';
-import 'package:musicvoc/presentation/now_playing/playing_screen_functions.dart';
+import 'package:musicvoc/presentation/common/custom_bottom_sheet_on_more.dart';
+import 'package:musicvoc/presentation/common/navigation_helper.dart';
 import 'package:musicvoc/presentation/now_playing/screen_playing.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
@@ -100,19 +95,16 @@ class AllSongs extends StatelessWidget {
                     context.read<PlaylistBloc>().add(
                           const PlaylistEvent.getPlaylist(),
                         );
-                    customBottomSheet(context, songs);
+                    customBottomSheetOnMoreIcon(context, songs);
                   },
                   icon: const Icon(
                     Icons.more_vert,
                   ),
                 ),
                 onTap: () {
-                  Get.to(
-                    () => const ScreenPlaying(),
-                    transition: kTransitionRightToLeft,
-                    duration: const Duration(
-                      milliseconds: 100,
-                    ),
+                  NavigationHelper.pushBottomToTop(
+                    context,
+                    const ScreenPlaying(),
                   );
                   playerOnTap(
                     state.allSongs,
@@ -160,55 +152,6 @@ class AllSongs extends StatelessWidget {
           );
         }
       },
-    );
-  }
-
-  Future<dynamic> customBottomSheet(BuildContext context, SongModel songs) {
-    return showModalBottomSheet(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      context: context,
-      builder: (context) => SizedBox(
-        height: 130.h,
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          children: [
-            kHeight10,
-            ListTile(
-              leading: const Icon(Icons.favorite),
-              title: const Text("Add to Favorite"),
-              onTap: () {
-                final favSongs = FavoriteModel(
-                  title: songs.title,
-                  artist: songs.artist!,
-                  songUri: songs.uri!,
-                  id: int.parse(songs.id.toString()),
-                  time: DateTime.now(),
-                );
-                context
-                    .read<FavoriteSongsBloc>()
-                    .add(FavoriteSongsEvent.addFavorite(favSongs));
-
-                toastMessege(context, 'Added to Favorite');
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.playlist_add),
-              title: const Text("Add to Playlist"),
-              onTap: () {
-                Navigator.pop(context);
-                final songsModel = SongsModel(
-                    title: songs.title,
-                    artist: songs.artist!,
-                    songUri: songs.uri!,
-                    id: int.parse(songs.id.toString()),
-                    time: DateTime.now());
-                PlayingScreenFunctions.customBottomSheet(context, songsModel);
-              },
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

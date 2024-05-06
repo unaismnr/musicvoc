@@ -5,13 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:musicvoc/application/all_songs_bloc/all_songs_bloc.dart';
-import 'package:musicvoc/application/favorite_songs_bloc/favorite_songs_bloc.dart';
+import 'package:musicvoc/application/playlist_bloc/playlist_bloc.dart';
 import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/controllers/search_controller.dart';
 import 'package:musicvoc/core/const_colors.dart';
-import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
 import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
+import 'package:musicvoc/presentation/common/custom_bottom_sheet_on_more.dart';
+import 'package:musicvoc/presentation/common/navigation_helper.dart';
 import 'package:musicvoc/presentation/common/songs_list_widget.dart';
 import 'package:musicvoc/presentation/now_playing/screen_playing.dart';
 import 'package:on_audio_query/on_audio_query.dart';
@@ -73,21 +74,18 @@ class ScreenSearch extends StatelessWidget {
                                         .textTheme
                                         .bodyLarge!
                                         .color!,
-                                true,
+                                false,
                                 () {
-                                  context.read<FavoriteSongsBloc>().add(
-                                        const FavoriteSongsEvent.getFavorite(),
+                                  context.read<PlaylistBloc>().add(
+                                        const PlaylistEvent.getPlaylist(),
                                       );
-                                  toastMessege(
-                                      context, 'Deleted From Favorite');
+                                  customBottomSheetOnMoreIcon(
+                                      context, searchSongs);
                                 },
                                 () {
-                                  Get.to(
-                                    () => const ScreenPlaying(),
-                                    transition: kTransitionRightToLeft,
-                                    duration: const Duration(
-                                      milliseconds: 100,
-                                    ),
+                                  NavigationHelper.pushBottomToTop(
+                                    context,
+                                    const ScreenPlaying(),
                                   );
                                   playerOnTap(
                                     searchResults,

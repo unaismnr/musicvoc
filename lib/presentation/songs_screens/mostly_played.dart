@@ -1,7 +1,6 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:musicvoc/application/mostly_played_bloc/mostly_played_bloc.dart';
 import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
@@ -9,6 +8,7 @@ import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/domain/mostly_played_model/mostly_played_model.dart';
 import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
 import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
+import 'package:musicvoc/presentation/common/navigation_helper.dart';
 import 'package:musicvoc/presentation/common/songs_list_widget.dart';
 import 'package:musicvoc/presentation/now_playing/screen_playing.dart';
 
@@ -87,12 +87,9 @@ Widget mostlyPlayedSongsList() {
                         toastMessege(context, 'Deleted From MostlyPlayed');
                       },
                       () {
-                        Get.to(
-                          () => const ScreenPlaying(),
-                          transition: kTransitionRightToLeft,
-                          duration: const Duration(
-                            milliseconds: 100,
-                          ),
+                        NavigationHelper.pushBottomToTop(
+                          context,
+                          const ScreenPlaying(),
                         );
                         playerOnTap(
                           state.mostlyPlayed,

@@ -48,16 +48,7 @@ class ScreenTermsAndConditions extends StatelessWidget {
               ),
               sizedBoxHeight,
               Text(
-                '3. Intellectual Property:',
-                style: boldTextStyle,
-              ),
-              Text(
-                'All content within the app, including music files and user-generated content, remains the property of the app developer. Users may not reproduce, distribute, or modify any content without prior permission.',
-                style: regularTextStyle,
-              ),
-              sizedBoxHeight,
-              Text(
-                '4. Liability:',
+                '3. Liability:',
                 style: boldTextStyle,
               ),
               Text(
@@ -66,7 +57,7 @@ class ScreenTermsAndConditions extends StatelessWidget {
               ),
               sizedBoxHeight,
               Text(
-                '5. Termination:',
+                '4. Termination:',
                 style: boldTextStyle,
               ),
               Text(
@@ -75,16 +66,16 @@ class ScreenTermsAndConditions extends StatelessWidget {
               ),
               sizedBoxHeight,
               Text(
-                '6. Governing Law:',
+                '5. Governing Law:',
                 style: boldTextStyle,
               ),
               Text(
-                'These terms and conditions shall be governed by and construed in accordance with the laws of [Your Country/State].',
+                'These terms and conditions shall be governed by and construed in accordance with the laws of Your Country.',
                 style: regularTextStyle,
               ),
               sizedBoxHeight,
               Text(
-                '7. Changes to Terms:',
+                '6. Changes to Terms:',
                 style: boldTextStyle,
               ),
               Text(
