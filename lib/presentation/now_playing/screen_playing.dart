@@ -1,8 +1,8 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:musicvoc/application/favorite_songs_bloc/favorite_songs_bloc.dart';
 import 'package:musicvoc/application/loop_and_shuffle_bloc/loop_and_shuffle_bloc.dart';
 import 'package:musicvoc/application/mostly_played_bloc/mostly_played_bloc.dart';
@@ -18,6 +18,7 @@ import 'package:musicvoc/domain/songs_model/songs_model.dart';
 import 'package:musicvoc/presentation/now_playing/playing_screen_functions.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:provider/provider.dart';
 
 class ScreenPlaying extends StatefulWidget {
   const ScreenPlaying({
@@ -32,10 +33,6 @@ class _ScreenPlayingState extends State<ScreenPlaying> {
   final player = AssetsAudioPlayer.withId('0');
 
   bool isRepeat = false;
-
-  final songSpeedTextController = Get.put(
-    AdjustSpeedText(),
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -192,15 +189,16 @@ class _ScreenPlayingState extends State<ScreenPlaying> {
                     onPressed: () {
                       PlayingScreenFunctions().showSpeedDialog(context);
                     },
-                    child: Obx(
-                      () => Text(
-                        '${songSpeedTextController.speed.value}x',
+                    child: Consumer<AdjustSpeedTextController>(
+                        builder: (context, speedCount, _) {
+                      return Text(
+                        '${speedCount.speed}x',
                         style: TextStyle(
                           color: Theme.of(context).iconTheme.color,
                           fontWeight: FontWeight.w600,
                         ),
-                      ),
-                    ),
+                      );
+                    }),
                   ),
 
                   //Song Progress Bar

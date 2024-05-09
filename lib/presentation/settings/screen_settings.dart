@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:musicvoc/controllers/theme_change_controller.dart';
 import 'package:musicvoc/core/const_colors.dart';
 import 'package:musicvoc/core/other_consts.dart';
@@ -8,6 +7,7 @@ import 'package:musicvoc/presentation/common/navigation_helper.dart';
 import 'package:musicvoc/presentation/settings/about.dart';
 import 'package:musicvoc/presentation/settings/privacy_policy.dart';
 import 'package:musicvoc/presentation/settings/terms_and_conditions.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -37,10 +37,9 @@ class ScreenSettings extends StatelessWidget {
     }
   ];
 
-  final themeChangeController = Get.put(ThemeChangeController());
-
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeChangeController>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
@@ -75,14 +74,12 @@ class ScreenSettings extends StatelessWidget {
                         color: Theme.of(context).textTheme.bodyLarge!.color,
                       ),
                     ),
-                    trailing: Obx(
-                      () => Switch(
-                          activeTrackColor: kMainBlueColor,
-                          value: themeChangeController.isDarkTheme.value,
-                          onChanged: (value) {
-                            themeChangeController.changeTheme();
-                          }),
-                    ),
+                    trailing: Switch(
+                        activeTrackColor: kMainBlueColor,
+                        value: themeProvider.isDarkTheme,
+                        onChanged: (value) {
+                          themeProvider.changeTheme();
+                        }),
                   ),
                 ),
               ),

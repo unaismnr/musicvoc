@@ -1,23 +1,55 @@
-import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:musicvoc/services/audio_service/get_audios_repo.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-class SearchQueryController extends GetxController {
-  RxList<SongModel> searchResults = RxList<SongModel>();
+class SearchQueryController extends ChangeNotifier {
+  List<SongModel>? _allSongs;
+  List<SongModel>? _displayedSongs;
 
-  void setAllSongs(List<SongModel> songs) {
-    searchResults.addAll(songs);
+  List<SongModel>? get displayedProducts => _displayedSongs;
+
+  SearchQueryController() {
+    fetchSongs();
   }
 
-  void search(String quary, List<SongModel> allSongs) {
-    searchResults.clear();
-    if (quary.isEmpty) {
-      return;
+  Future<void> fetchSongs() async {
+    _allSongs = await GetAudiosRepo.getAudios();
+    _displayedSongs = _allSongs;
+    notifyListeners();
+  }
+
+  void searchSongs(String query) {
+    if (query.isEmpty) {
+      _displayedSongs = _allSongs;
     } else {
-      searchResults.addAll(allSongs.where(
-        (song) => song.title.toLowerCase().contains(
-              quary.toLowerCase(),
-            ),
-      ));
+      _displayedSongs = _allSongs!
+          .where((song) => song.title.toLowerCase().contains(
+                query.toLowerCase(),
+              ))
+          .toList();
     }
+    notifyListeners();
   }
 }
+
+// class SearchQueryController extends GetxController {
+//   RxList<SongModel> searchResults = RxList<SongModel>();
+
+//   void setAllSongs(List<SongModel> songs) {
+//     searchResults.addAll(songs);
+//   }
+
+//   void search(String query, List<SongModel> allSongs) {
+//     searchResults.clear();
+//     if (query.isEmpty) {
+//       searchResults.value = allSongs.obs;
+//     } else {
+//       searchResults.value = allSongs
+//           .where((song) => song.title.toLowerCase().contains(
+//                 query.toLowerCase(),
+//               ))
+//           .toList()
+//           .obs;
+//     }
+//   }
+// }

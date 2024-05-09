@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:musicvoc/application/all_songs_bloc/all_songs_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
-import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/presentation/home/screen_home.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:page_transition/page_transition.dart';
 
 class ScreenSplash extends StatefulWidget {
   const ScreenSplash({super.key});
@@ -20,30 +18,25 @@ class _ScreenSplashState extends State<ScreenSplash> {
   void initState() {
     BlocProvider.of<AllSongsBloc>(context)
         .add(const AllSongsEvent.fetchSongs());
+    _goToHome();
     super.initState();
-    _loadThemePreference();
   }
 
   Future<void> _goToHome() async {
     await Future.delayed(const Duration(seconds: 2));
-    Get.offAll(
-      () => ScreenHome(),
-      transition: kTransitionRightToLeft,
-      duration: const Duration(),
-    );
-  }
-
-  Future<void> _loadThemePreference() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool isDarkTheme = prefs.getBool('isDarkTheme') ?? false;
-    Get.changeThemeMode(
-      isDarkTheme ? ThemeMode.light : ThemeMode.dark,
-    );
+    if (mounted) {
+      Navigator.of(context).pushReplacement(
+        PageTransition(
+          child: ScreenHome(),
+          type: PageTransitionType.rightToLeft,
+          duration: const Duration(),
+        ),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    _goToHome();
     return SafeArea(
       child: Container(
         height: MediaQuery.of(context).size.height,

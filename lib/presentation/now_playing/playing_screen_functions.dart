@@ -2,7 +2,6 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:musicvoc/application/adjust_volume_bloc/adjust_volume_bloc.dart';
 import 'package:musicvoc/application/playlist_bloc/playlist_bloc.dart';
 import 'package:musicvoc/controllers/adjust_speed_text.dart';
@@ -11,13 +10,11 @@ import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/domain/songs_model/songs_model.dart';
 import 'package:musicvoc/presentation/playlist/add_edit_playlist.dart';
 import 'package:musicvoc/services/database/playlist_db.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
 class PlayingScreenFunctions {
   final player = AssetsAudioPlayer.withId('0');
-
-  final songSpeedTextController = Get.put(
-    AdjustSpeedText(),
-  );
 
   //SongSpeed
   void showSpeedDialog(BuildContext context) {
@@ -54,16 +51,20 @@ class PlayingScreenFunctions {
   }
 
   Widget speedOnTapTile(BuildContext context, double newSpeed) {
+    final speedProvider = Provider.of<AdjustSpeedTextController>(
+      context,
+      listen: false,
+    );
     return TextButton(
       onPressed: () {
         player.setPlaySpeed(newSpeed);
-        songSpeedTextController.speed.value = newSpeed;
-        Get.back();
+        speedProvider.changeText(newSpeed);
+        Navigator.pop(context);
       },
       child: Text(
         '${newSpeed}x',
         style: TextStyle(
-          color: songSpeedTextController.speed.value == newSpeed
+          color: speedProvider.speed == newSpeed
               ? kSelectedTextColor
               : Theme.of(context).textTheme.bodyLarge!.color,
           fontSize: 15.sp,
@@ -161,10 +162,12 @@ class PlayingScreenFunctions {
                   BottomSheetCustomRow(
                       title: 'New',
                       iconOnPress: () {
-                        Get.to(
-                          () => AddEditPlaylist(),
-                          transition: kTransitionRightToLeft,
-                          duration: const Duration(),
+                        Navigator.of(context).push(
+                          PageTransition(
+                            child: AddEditPlaylist(),
+                            type: PageTransitionType.rightToLeft,
+                            duration: const Duration(),
+                          ),
                         );
                       }),
                   BlocBuilder<PlaylistBloc, PlaylistState>(
@@ -184,7 +187,7 @@ class PlayingScreenFunctions {
                                   PlaylistDb.instance
                                       .refreshPlaylistFolderSongs(
                                           playlist.playlistName);
-                                  Get.back();
+                                  Navigator.pop(context);
                                   toastMessege(context, 'Added Successfully');
                                 });
                           },

@@ -2,13 +2,12 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/core/const_colors.dart';
-import 'package:musicvoc/core/other_consts.dart';
 import 'package:musicvoc/domain/recently_played_model/recently_played_model.dart';
 import 'package:musicvoc/presentation/now_playing/screen_playing.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:page_transition/page_transition.dart';
 
 class CustomBottomMusic extends StatelessWidget {
   final BuildContext context;
@@ -24,11 +23,12 @@ class CustomBottomMusic extends StatelessWidget {
         color: Theme.of(context).colorScheme.background,
       ),
       child: InkWell(
-        onTap: () => Get.to(
-          () => const ScreenPlaying(),
-          transition: kTransitionDownToUp,
-          duration: const Duration(
-            milliseconds: 100,
+        onTap: () => Navigator.push(
+          context,
+          PageTransition(
+            child: const ScreenPlaying(),
+            type: PageTransitionType.bottomToTop,
+            duration: const Duration(milliseconds: 1),
           ),
         ),
         child: PlayerBuilder.current(

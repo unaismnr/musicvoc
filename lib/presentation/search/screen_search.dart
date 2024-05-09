@@ -1,10 +1,7 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:musicvoc/application/all_songs_bloc/all_songs_bloc.dart';
 import 'package:musicvoc/application/playlist_bloc/playlist_bloc.dart';
 import 'package:musicvoc/application/recently_played_bloc/recently_played_bloc.dart';
 import 'package:musicvoc/controllers/search_controller.dart';
@@ -14,23 +11,22 @@ import 'package:musicvoc/presentation/common/custom_bottom_music.dart';
 import 'package:musicvoc/presentation/common/custom_bottom_sheet_on_more.dart';
 import 'package:musicvoc/presentation/common/songs_list_widget.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:provider/provider.dart';
 
 class ScreenSearch extends StatelessWidget {
   ScreenSearch({super.key});
 
   final player = AssetsAudioPlayer.withId('0');
   final List<Audio> convertedAudios = [];
-  final searchController = Get.put(SearchQueryController());
 
   @override
   Widget build(BuildContext context) {
-    final allSongs = context.watch<AllSongsBloc>().state.allSongs;
-    searchController.setAllSongs(allSongs);
     return Scaffold(
       appBar: AppBar(
         title: CupertinoSearchTextField(
           onChanged: (query) {
-            searchController.search(query, allSongs);
+            Provider.of<SearchQueryController>(context, listen: false)
+                .searchSongs(query);
           },
           prefixIcon: const SizedBox(),
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -42,17 +38,22 @@ class ScreenSearch extends StatelessWidget {
           SizedBox(height: 5.h),
           Expanded(
             child: SongsListStaticWidgets.container(
-              Obx(() {
-                final searchResults = searchController.searchResults;
-                if (searchResults.isEmpty) {
+              Consumer<SearchQueryController>(
+                  builder: (context, searchData, _) {
+                final displayedProducts = searchData.displayedProducts;
+                if (displayedProducts == null) {
                   return const Center(
-                    child: Text('No Reusults'),
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (displayedProducts.isEmpty) {
+                  return const Center(
+                    child: Text('Nothing Found'),
                   );
                 } else {
                   return ListView.builder(
-                      itemCount: searchResults.length,
+                      itemCount: displayedProducts.length,
                       itemBuilder: (context, index) {
-                        final searchSongs = searchResults[index];
+                        final searchSongs = displayedProducts[index];
 
                         return PlayerBuilder.isPlaying(
                             player: player,
@@ -82,7 +83,7 @@ class ScreenSearch extends StatelessWidget {
                                 },
                                 () {
                                   playerOnTap(
-                                    searchResults,
+                                    displayedProducts,
                                     convertedAudios,
                                   );
                                   player.open(

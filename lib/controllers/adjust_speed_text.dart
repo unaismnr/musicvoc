@@ -1,9 +1,9 @@
-import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 
-class AdjustSpeedText extends GetxController {
-  var speed = 1.0.obs;
-
+class AdjustSpeedTextController extends ChangeNotifier {
+  var speed = 1.0;
   void changeText(var text) {
-    speed.value = text;
+    speed = text;
+    notifyListeners();
   }
 }
