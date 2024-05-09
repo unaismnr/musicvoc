@@ -179,7 +179,7 @@ class PlaylistFolderSongs extends StatelessWidget {
               artist: item.artist,
               id: item.id.toString(),
               image: const MetasImage.asset(
-                'assets/musicvoc-logo.jpg',
+                'assets/musicvoc-logo-play.jpg',
               ),
             )),
       );
