@@ -5,7 +5,7 @@
 - Technology: **Flutter with Dart**.
 - State Management: **Bloc and Provider**.
 - Local Storage: **Hive and Shared Preferences**.
-- Used Packages: flutter_screenutil, provider, audio_video_progress_bar, permission_handler, assets_audio_player, on_audio_query, bloc, flutter_bloc, freezed_annotation, hive, hive_flutter, flutter_styled_toast, shared_preferences, share_plus, collection, url_launcher, page_transition, freezed, build_runner, hive_generator and flutter_launcher_icons.
+- Used Packages: flutter_screenutil, bloc, flutter_bloc, freezed_annotation provider, assets_audio_player, audio_video_progress_bar, permission_handler, on_audio_query, hive, hive_flutter, flutter_styled_toast, shared_preferences, share_plus, collection, url_launcher, page_transition, freezed, build_runner, hive_generator and flutter_launcher_icons.
 - Version Control: **Git and GitHub**.
 
 <h3 align="left">Features</h3>
