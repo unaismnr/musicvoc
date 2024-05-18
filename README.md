@@ -41,6 +41,12 @@
   
 ![musicvocscreenshot5](https://github.com/unaismnr/musicvoc/assets/160374686/1241e3e8-ac8c-4349-a4a0-aaa1a2201f74)
 
+- Enjoy song playback in the background.
+- You can also see the currently playing song in the notification bar.
+- From the notification bar, you can manage play/pause and skip to the next/previous track.
+  
+![musicvocscreenshot8](https://github.com/unaismnr/musicvoc/assets/160374686/a4b1e93c-9e54-406c-8bfd-4a74ee58bd00)
+
 - Share and contact options.
 
 ![musicvocscreenshot6](https://github.com/unaismnr/musicvoc/assets/160374686/ab5f5c43-2e64-4bbc-9d8b-b308f9994a9b)
