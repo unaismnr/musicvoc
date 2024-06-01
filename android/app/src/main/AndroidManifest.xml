@@ -17,7 +17,7 @@ package="com.netecart.musicvoc">
         android:enableOnBackInvokedCallback="true">
         
         <activity
-            android:name=".MainActivity"
+            android:name="com.netecart.musicvoc.MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"

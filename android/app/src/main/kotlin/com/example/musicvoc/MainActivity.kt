@@ -1,4 +1,4 @@
-package com.example.musicvoc
+package com.netecart.musicvoc
 
 import io.flutter.embedding.android.FlutterActivity
 
