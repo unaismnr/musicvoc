@@ -146,7 +146,7 @@ class PlaylistFolderSongs extends StatelessWidget {
       floatingActionButton: Padding(
         padding: EdgeInsets.only(bottom: 50.h, right: 10.w),
         child: FloatingActionButton(
-          backgroundColor: Theme.of(context).colorScheme.background,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           elevation: 0,
           child: Icon(
             Icons.add,

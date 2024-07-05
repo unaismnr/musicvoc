@@ -49,7 +49,7 @@ class PlaylistScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(5.0),
                     child: CircleAvatar(
                       radius: 23,
-                      backgroundColor: Theme.of(context).colorScheme.background,
+                      backgroundColor: Theme.of(context).colorScheme.surface,
                       child: Center(
                         child: Icon(
                           Icons.music_note,
@@ -194,7 +194,7 @@ class PlaylistScreen extends StatelessWidget {
       floatingActionButton: Padding(
         padding: EdgeInsets.only(bottom: 50.h, right: 10.w),
         child: FloatingActionButton(
-          backgroundColor: Theme.of(context).colorScheme.background,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           elevation: 0,
           child: Icon(
             Icons.add,

@@ -20,7 +20,7 @@ class CustomBottomMusic extends StatelessWidget {
     return Container(
       height: 50.h,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
+        color: Theme.of(context).colorScheme.surface,
       ),
       child: InkWell(
         onTap: () => Navigator.push(

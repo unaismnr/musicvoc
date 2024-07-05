@@ -6,7 +6,7 @@ class MyThemes {
     scaffoldBackgroundColor: Colors.grey.shade100,
     brightness: Brightness.light,
     colorScheme: ColorScheme.light(
-      background: Colors.grey.shade200,
+      surface: Colors.grey.shade200,
       primary: Colors.grey.shade700,
       secondary: Colors.grey.shade300,
     ),
@@ -36,7 +36,7 @@ class MyThemes {
     scaffoldBackgroundColor: Colors.grey.shade900,
     brightness: Brightness.dark,
     colorScheme: ColorScheme.dark(
-      background: Colors.grey.withOpacity(0.2),
+      surface: Colors.grey.withOpacity(0.2),
       primary: Colors.grey,
       secondary: Colors.grey.shade800,
     ),

@@ -62,7 +62,7 @@ class AddEditPlaylist extends StatelessWidget {
             Container(
               height: 120.h,
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.background,
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(10.w),
               ),
               child: Padding(

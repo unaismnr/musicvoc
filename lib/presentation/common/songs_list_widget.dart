@@ -13,7 +13,7 @@ class SongsListStaticWidgets {
             topLeft: Radius.circular(20.w),
             topRight: Radius.circular(20.w),
           ),
-          color: Theme.of(context).colorScheme.background,
+          color: Theme.of(context).colorScheme.surface,
         ),
         child: child,
       );
